@@ -1,0 +1,19 @@
+# ninja log v6
+2	98	7905369289994907	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_9345438667183768884.dir/main.c.json	29064d005d84afd8
+99	169	7905369290968434	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_10453640462813471181.dir/stm32f1xx_hal_msp.c.json	d4d9f6b9bde6fafd
+170	254	7905369291672317	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_4418158440502777020.dir/stm32f1xx_it.c.json	7c0e863b1cc4a865
+254	353	7905369292511850	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_6596634332695065529.dir/system_stm32f1xx.c.json	5fa7b7b1ea1086ca
+354	473	7905369293516411	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_7194546058173733607.dir/stm32f1xx_hal.c.json	6c88697b4ef6e933
+474	563	7905369294712584	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_1481171258091028686.dir/stm32f1xx_hal_cortex.c.json	30ec92b715047ece
+563	637	7905369295604801	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_9418967261776065146.dir/stm32f1xx_hal_dma.c.json	c2c87958c38a8bf7
+637	713	7905369296340778	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_1434973802458417369.dir/stm32f1xx_hal_exti.c.json	9cb15cd05244df89
+713	777	7905369297108925	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_8522399284413268622.dir/stm32f1xx_hal_flash.c.json	521a309dc662078f
+778	855	7905369297748577	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_11304044701803077465.dir/stm32f1xx_hal_flash_ex.c.json	3190541dff1c3a7e
+855	925	7905369298523677	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_9298500936648078987.dir/stm32f1xx_hal_gpio.c.json	18b7bc4f3d3ef3e9
+925	1050	7905369299229562	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_2667170478243439264.dir/stm32f1xx_hal_gpio_ex.c.json	dabeac33f76f202b
+1050	1134	7905369300477331	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_2852924911590601199.dir/stm32f1xx_hal_i2c.c.json	f50f6db182bf55ce
+1135	1215	7905369301326753	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_8094086371011482870.dir/stm32f1xx_hal_pwr.c.json	76930f3fbb541a8a
+1215	1280	7905369302120842	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_5763740417511805307.dir/stm32f1xx_hal_rcc.c.json	4fc4a2a79a2ae830
+1280	1369	7905369302773386	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_4156421304941073795.dir/stm32f1xx_hal_rcc_ex.c.json	7b4be0ed1a5d9a7b
+1369	1438	7905369303669700	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_5720565668393245443.dir/stm32f1xx_hal_usart.c.json	47f2e81961577b5c
+1438	1497	7905369304352645	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/compile_commands.json	ec0653e1e08e6419
