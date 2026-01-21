@@ -31,6 +31,11 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define I2C_EXPANDER16_ADDR 0x21U /* Адрес 16-портового расширителя (A0=1, A1=0, A2=0) */
+#define I2C_EXPANDER8_ADDR  0x20U /* Адрес 8-портового расширителя (A0=0, A1=0, A2=0) */
+
+#define I2C_EXPANDER16_RX_SIZE 2U /* Два байта: p0..p7 и p8..p15 */
+#define I2C_EXPANDER8_RX_SIZE  1U /* Один байт: p0..p7 */
 
 /* USER CODE END PD */
 
@@ -45,6 +50,49 @@ I2C_HandleTypeDef hi2c1;
 USART_HandleTypeDef husart2;
 
 /* USER CODE BEGIN PV */
+typedef struct
+{
+  GPIO_TypeDef *port;
+  uint16_t pin;
+} ExpanderPinMap;
+
+static const ExpanderPinMap expander16_map[16] =
+{
+  {OE_RELE_GPIO_Port, OE_RELE_Pin},             /* p0 = OE_RELE */
+  {Rele_5_GPIO_Port, Rele_5_Pin},               /* p1 = RELE_5 */
+  {PWR_KTV_BUF_GPIO_Port, PWR_KTV_BUF_Pin},     /* p2 = PWR_KTV */
+  {NULL, 0U},                                   /* p3 = не используется */
+  {NULL, 0U},                                   /* p4 = не используется */
+  {Rele_4_GPIO_Port, Rele_4_Pin},               /* p5 = RELE_4 */
+  {NULL, 0U},                                   /* p6 = не используется */
+  {Rele_3_GPIO_Port, Rele_3_Pin},               /* p7 = RELE_3 */
+  {NULL, 0U},                                   /* p8 = не используется */
+  {SD_SW_GPIO_Port, SD_SW_Pin},                 /* p9 = SD_SW */
+  {NULL, 0U},                                   /* p10 = не используется */
+  {Rele_1_GPIO_Port, Rele_1_Pin},               /* p11 = RELE_1 */
+  {NULL, 0U},                                   /* p12 = не используется */
+  {Rele_2_GPIO_Port, Rele_2_Pin},               /* p13 = RELE_2 */
+  {DISP_LIGHT_BUF_GPIO_Port, DISP_LIGHT_BUF_Pin}, /* p14 = DISP_LIGHT_EN */
+  {NULL, 0U}                                    /* p15 = не используется */
+};
+
+static const ExpanderPinMap expander8_map[8] =
+{
+  {NULL, 0U},                                   /* p0 = не используется */
+  {NULL, 0U},                                   /* p1 = не используется */
+  {NULL, 0U},                                   /* p2 = не используется */
+  {NULL, 0U},                                   /* p3 = не используется */
+  {MUX_SEL_GPIO_Port, MUX_SEL_Pin},             /* p4 = MUX_SEL */
+  {NULL, 0U},                                   /* p5 = не используется */
+  {NULL, 0U},                                   /* p6 = не используется */
+  {NULL, 0U}                                    /* p7 = не используется */
+};
+
+static uint8_t i2c_rx_buffer[I2C_EXPANDER16_RX_SIZE];
+static uint8_t i2c_tx_buffer[I2C_EXPANDER16_RX_SIZE];
+static uint16_t expander16_state = 0U;
+static uint8_t expander8_state = 0U;
+static uint8_t active_i2c_address = 0U;
 
 /* USER CODE END PV */
 
@@ -59,6 +107,59 @@ static void MX_USART2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+static uint8_t active_rx_size = 0U;
+
+static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_PinState state)
+{
+  if (map[index].port != NULL)
+  {
+    HAL_GPIO_WritePin(map[index].port, map[index].pin, state);
+  }
+}
+
+static void ApplyExpander16State(uint16_t value)
+{
+  uint8_t oe_enabled = (value & 0x0001U) ? 1U : 0U;
+  uint16_t masked_value = value;
+
+  /* Остальные пины могут быть в 1 только при OE_RELE=1 */
+  if (oe_enabled == 0U)
+  {
+    masked_value &= 0x0001U;
+  }
+
+  for (uint8_t i = 0U; i < 16U; i++)
+  {
+    GPIO_PinState state = (masked_value & (1U << i)) ? GPIO_PIN_SET : GPIO_PIN_RESET;
+    Expander_WritePin(expander16_map, i, state);
+  }
+
+  expander16_state = masked_value;
+}
+
+static void ApplyExpander8State(uint8_t value)
+{
+  for (uint8_t i = 0U; i < 8U; i++)
+  {
+    GPIO_PinState state = (value & (1U << i)) ? GPIO_PIN_SET : GPIO_PIN_RESET;
+    Expander_WritePin(expander8_map, i, state);
+  }
+
+  expander8_state = value;
+}
+
+static void PrepareExpanderTx(uint8_t address)
+{
+  if (address == I2C_EXPANDER16_ADDR)
+  {
+    i2c_tx_buffer[0] = (uint8_t)(expander16_state & 0x00FFU);
+    i2c_tx_buffer[1] = (uint8_t)((expander16_state >> 8) & 0x00FFU);
+  }
+  else if (address == I2C_EXPANDER8_ADDR)
+  {
+    i2c_tx_buffer[0] = expander8_state;
+  }
+}
 
 /* USER CODE END 0 */
 
@@ -94,6 +195,9 @@ int main(void)
   MX_I2C1_Init();
   MX_USART2_Init();
   /* USER CODE BEGIN 2 */
+  HAL_I2C_EnableListen_IT(&hi2c1);
+  ApplyExpander16State(0U);
+  ApplyExpander8State(0U);
 
   /* USER CODE END 2 */
 
@@ -165,10 +269,10 @@ static void MX_I2C1_Init(void)
   hi2c1.Instance = I2C1;
   hi2c1.Init.ClockSpeed = 100000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.OwnAddress1 = I2C_EXPANDER16_ADDR;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_ENABLE;
+  hi2c1.Init.OwnAddress2 = I2C_EXPANDER8_ADDR;
   hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
   hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
   if (HAL_I2C_Init(&hi2c1) != HAL_OK)
@@ -317,6 +421,87 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_I2C_AddrCallback(I2C_HandleTypeDef *hi2c, uint8_t TransferDirection, uint16_t AddrMatchCode)
+{
+  if (hi2c->Instance != I2C1)
+  {
+    return;
+  }
+
+  active_i2c_address = (uint8_t)AddrMatchCode;
+
+  if (TransferDirection == I2C_DIRECTION_TRANSMIT)
+  {
+    PrepareExpanderTx(active_i2c_address);
+    if (active_i2c_address == I2C_EXPANDER16_ADDR)
+    {
+      HAL_I2C_Slave_Seq_Transmit_IT(hi2c, i2c_tx_buffer, I2C_EXPANDER16_RX_SIZE, I2C_FIRST_AND_LAST_FRAME);
+    }
+    else if (active_i2c_address == I2C_EXPANDER8_ADDR)
+    {
+      HAL_I2C_Slave_Seq_Transmit_IT(hi2c, i2c_tx_buffer, I2C_EXPANDER8_RX_SIZE, I2C_FIRST_AND_LAST_FRAME);
+    }
+    else
+    {
+      HAL_I2C_EnableListen_IT(hi2c);
+    }
+  }
+  else
+  {
+    if (active_i2c_address == I2C_EXPANDER16_ADDR)
+    {
+      active_rx_size = I2C_EXPANDER16_RX_SIZE;
+      HAL_I2C_Slave_Seq_Receive_IT(hi2c, i2c_rx_buffer, active_rx_size, I2C_FIRST_AND_LAST_FRAME);
+    }
+    else if (active_i2c_address == I2C_EXPANDER8_ADDR)
+    {
+      active_rx_size = I2C_EXPANDER8_RX_SIZE;
+      HAL_I2C_Slave_Seq_Receive_IT(hi2c, i2c_rx_buffer, active_rx_size, I2C_FIRST_AND_LAST_FRAME);
+    }
+    else
+    {
+      HAL_I2C_EnableListen_IT(hi2c);
+    }
+  }
+}
+
+void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+  if (hi2c->Instance != I2C1)
+  {
+    return;
+  }
+
+  if (active_i2c_address == I2C_EXPANDER16_ADDR)
+  {
+    uint16_t value = i2c_rx_buffer[0];
+    if (active_rx_size > 1U)
+    {
+      value |= (uint16_t)(i2c_rx_buffer[1] << 8);
+    }
+    ApplyExpander16State(value);
+  }
+  else if (active_i2c_address == I2C_EXPANDER8_ADDR)
+  {
+    ApplyExpander8State(i2c_rx_buffer[0]);
+  }
+}
+
+void HAL_I2C_ListenCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+  if (hi2c->Instance == I2C1)
+  {
+    HAL_I2C_EnableListen_IT(hi2c);
+  }
+}
+
+void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
+{
+  if (hi2c->Instance == I2C1)
+  {
+    HAL_I2C_EnableListen_IT(hi2c);
+  }
+}
 
 /* USER CODE END 4 */
 
