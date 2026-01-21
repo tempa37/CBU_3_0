@@ -57,6 +57,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define MUX_SEL_Pin GPIO_PIN_13
+#define MUX_SEL_GPIO_Port GPIOC
 #define DOOR_Pin GPIO_PIN_15
 #define DOOR_GPIO_Port GPIOC
 #define Optron1_2_Pin GPIO_PIN_0
