@@ -430,7 +430,7 @@ void HAL_I2C_AddrCallback(I2C_HandleTypeDef *hi2c, uint8_t TransferDirection, ui
 
   active_i2c_address = (uint8_t)AddrMatchCode;
 
-  if (TransferDirection == I2C_DIRECTION_TRANSMIT)
+  if (TransferDirection == I2C_DIRECTION_RECEIVE)
   {
     PrepareExpanderTx(active_i2c_address);
     if (active_i2c_address == I2C_EXPANDER16_ADDR)
