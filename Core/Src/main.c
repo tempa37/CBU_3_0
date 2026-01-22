@@ -39,6 +39,7 @@
 
 #define I2C_EXPANDER16_RX_SIZE 2U /* Два байта: p0..p7 и p8..p15 */
 #define I2C_EXPANDER8_RX_SIZE  1U /* Один байт: p0..p7 */
+#define EXPANDER16_INPUT_MASK (1U << 9) /* p9 = SD_SW */
 
 /* USER CODE END PD */
 
@@ -125,8 +126,9 @@ static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_Pin
 
 static void ApplyExpander16State(uint16_t value)
 {
+  uint16_t writable_value = value & ~EXPANDER16_INPUT_MASK;
   uint8_t oe_enabled = (value & 0x0001U) ? 1U : 0U;
-  uint16_t masked_value = value;
+  uint16_t masked_value = writable_value;
 
   /* Остальные пины могут быть в 1 только при OE_RELE=1 */
   if (oe_enabled == 0U)
@@ -136,6 +138,10 @@ static void ApplyExpander16State(uint16_t value)
 
   for (uint8_t i = 0U; i < 16U; i++)
   {
+    if ((EXPANDER16_INPUT_MASK & (1U << i)) != 0U)
+    {
+      continue;
+    }
     GPIO_PinState state = (masked_value & (1U << i)) ? GPIO_PIN_SET : GPIO_PIN_RESET;
     Expander_WritePin(expander16_map, i, state);
   }
@@ -158,8 +164,17 @@ static void PrepareExpanderTx(uint8_t address)
 {
   if (address == I2C_EXPANDER16_ADDR)
   {
-    i2c_tx_buffer[0] = (uint8_t)(expander16_state & 0x00FFU);
-    i2c_tx_buffer[1] = (uint8_t)((expander16_state >> 8) & 0x00FFU);
+    uint16_t value = expander16_state;
+    if (HAL_GPIO_ReadPin(SD_SW_GPIO_Port, SD_SW_Pin) == GPIO_PIN_SET)
+    {
+      value |= EXPANDER16_INPUT_MASK;
+    }
+    else
+    {
+      value &= (uint16_t)~EXPANDER16_INPUT_MASK;
+    }
+    i2c_tx_buffer[0] = (uint8_t)(value & 0x00FFU);
+    i2c_tx_buffer[1] = (uint8_t)((value >> 8) & 0x00FFU);
   }
   else if (address == I2C_EXPANDER8_ADDR)
   {
