@@ -98,6 +98,7 @@ static uint8_t i2c_tx_buffer[I2C_EXPANDER16_RX_SIZE];
 static uint16_t expander16_state = 0U;
 static uint8_t expander8_state = 0U;
 static uint8_t active_i2c_address = 0U;
+static const uint16_t expander16_input_mask = (1U << 9); /* p9 = SD_SW (input) */
 
 /* USER CODE END PV */
 
@@ -133,11 +134,15 @@ static void ApplyExpander16State(uint16_t value)
   {
     masked_value &= 0x0001U;
   }
+  masked_value &= (uint16_t)(~expander16_input_mask);
 
   for (uint8_t i = 0U; i < 16U; i++)
   {
-    GPIO_PinState state = (masked_value & (1U << i)) ? GPIO_PIN_SET : GPIO_PIN_RESET;
-    Expander_WritePin(expander16_map, i, state);
+    if ((expander16_input_mask & (1U << i)) == 0U)
+    {
+      GPIO_PinState state = (masked_value & (1U << i)) ? GPIO_PIN_SET : GPIO_PIN_RESET;
+      Expander_WritePin(expander16_map, i, state);
+    }
   }
 
   expander16_state = masked_value;
@@ -158,6 +163,14 @@ static void PrepareExpanderTx(uint8_t address)
 {
   if (address == I2C_EXPANDER16_ADDR)
   {
+    uint16_t input_value = 0U;
+
+    if ((expander16_input_mask & (1U << 9)) != 0U)
+    {
+      input_value |= (HAL_GPIO_ReadPin(SD_SW_GPIO_Port, SD_SW_Pin) == GPIO_PIN_SET) ? (1U << 9) : 0U;
+    }
+
+    expander16_state = (expander16_state & ~expander16_input_mask) | (input_value & expander16_input_mask);
     i2c_tx_buffer[0] = (uint8_t)(expander16_state & 0x00FFU);
     i2c_tx_buffer[1] = (uint8_t)((expander16_state >> 8) & 0x00FFU);
   }
