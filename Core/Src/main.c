@@ -31,8 +31,11 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define I2C_EXPANDER16_ADDR 0x21U /* Адрес 16-портового расширителя (A0=1, A1=0, A2=0) */
-#define I2C_EXPANDER8_ADDR  0x20U /* Адрес 8-портового расширителя (A0=0, A1=0, A2=0) */
+//#define I2C_EXPANDER16_ADDR 0x21U /* Адрес 16-портового расширителя (A0=1, A1=0, A2=0) */
+//#define I2C_EXPANDER8_ADDR  0x20U /* Адрес 8-портового расширителя (A0=0, A1=0, A2=0) */
+
+#define I2C_EXPANDER16_ADDR (0x21U << 1) /* Адрес 16-портового расширителя (A0=1, A1=0, A2=0) */
+#define I2C_EXPANDER8_ADDR  (0x20U << 1)  /* Адрес 8-портового расширителя (A0=0, A1=0, A2=0) */
 
 #define I2C_EXPANDER16_RX_SIZE 2U /* Два байта: p0..p7 и p8..p15 */
 #define I2C_EXPANDER8_RX_SIZE  1U /* Один байт: p0..p7 */
@@ -273,10 +276,16 @@ static void MX_I2C1_Init(void)
   hi2c1.Instance = I2C1;
   hi2c1.Init.ClockSpeed = 100000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c1.Init.OwnAddress1 = 0;
+  
+  hi2c1.Init.OwnAddress1 = I2C_EXPANDER8_ADDR;
+  //hi2c1.Init.OwnAddress1     = (I2C_EXPANDER8_ADDR  << 1);   // 0x20 -> 0x40 на шине
+  
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_ENABLE;
+  
+  hi2c1.Init.OwnAddress2 = I2C_EXPANDER16_ADDR;
+  //hi2c1.Init.OwnAddress2     = (I2C_EXPANDER16_ADDR << 1);   // 0x21 -> 0x42 на шине
+  
   hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
   hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
   if (HAL_I2C_Init(&hi2c1) != HAL_OK)
