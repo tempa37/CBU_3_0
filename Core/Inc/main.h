@@ -99,6 +99,9 @@ void Error_Handler(void);
 #define PWR_KTV_BUF_GPIO_Port GPIOB
 #define PCF_INT_Pin GPIO_PIN_5
 #define PCF_INT_GPIO_Port GPIOB
+#define SD_SW_Pin GPIO_PIN_8
+#define SD_SW_GPIO_Port GPIOB
+#define SD_SW_EXTI_IRQn EXTI9_5_IRQn
 #define ON_3_3V_Pin GPIO_PIN_9
 #define ON_3_3V_GPIO_Port GPIOB
 
