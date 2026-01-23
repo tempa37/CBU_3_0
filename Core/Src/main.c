@@ -129,8 +129,8 @@ static void ApplyExpander16State(uint16_t value)
   uint8_t oe_enabled = (value & 0x0001U) ? 1U : 0U;
   uint16_t masked_value = value;
 
-  /* Остальные пины могут быть в 1 только при OE_RELE=1 */
-  if (oe_enabled == 0U)
+  /* Остальные пины могут быть в 1 только при OE_RELE=0 */
+  if (oe_enabled == 1U)
   {
     masked_value &= 0x0001U;
   }
@@ -171,6 +171,7 @@ static void PrepareExpanderTx(uint8_t address)
     }
 
     expander16_state = (expander16_state & ~expander16_input_mask) | (input_value & expander16_input_mask);
+    //expander16_state = 0xF0F0;
     i2c_tx_buffer[0] = (uint8_t)(expander16_state & 0x00FFU);
     i2c_tx_buffer[1] = (uint8_t)((expander16_state >> 8) & 0x00FFU);
   }
@@ -289,16 +290,10 @@ static void MX_I2C1_Init(void)
   hi2c1.Instance = I2C1;
   hi2c1.Init.ClockSpeed = 100000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  
-  hi2c1.Init.OwnAddress1 = I2C_EXPANDER8_ADDR;
-  //hi2c1.Init.OwnAddress1     = (I2C_EXPANDER8_ADDR  << 1);   // 0x20 -> 0x40 на шине
-  
+  hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_ENABLE;
-  
-  hi2c1.Init.OwnAddress2 = I2C_EXPANDER16_ADDR;
-  //hi2c1.Init.OwnAddress2     = (I2C_EXPANDER16_ADDR << 1);   // 0x21 -> 0x42 на шине
-  
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
   hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
   hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
   if (HAL_I2C_Init(&hi2c1) != HAL_OK)
@@ -451,9 +446,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : On_BKK_k1_Pin On_BKK_k2_Pin error_sv_Pin Optron2_2_Pin
-                           Optron2_1_Pin SD_SW_Pin */
+                           Optron2_1_Pin */
   GPIO_InitStruct.Pin = On_BKK_k1_Pin|On_BKK_k2_Pin|error_sv_Pin|Optron2_2_Pin
-                          |Optron2_1_Pin|SD_SW_Pin;
+                          |Optron2_1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -491,6 +486,16 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB8 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

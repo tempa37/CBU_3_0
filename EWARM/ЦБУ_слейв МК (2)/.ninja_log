@@ -1,84 +1,25 @@
 # ninja log v6
+9	273	7907118522841379	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	9a8c00aafa8a9d9a
 239	413	7907115274065277	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_cortex.o	4824843bfbdf602a
-10	230	7907115271772907	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	9a8c00aafa8a9d9a
+13	238	7907115271802809	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/CMSIS_6603591812247902717.dir/system_stm32f1xx.o	36c6be456a5cb0a2
 818	1558	7907115279854921	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_tim.o	c73c44b034b36f8b
 231	425	7907115273985539	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal.o	a843cc8436e4a230
-13	238	7907115271802809	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/CMSIS_6603591812247902717.dir/system_stm32f1xx.o	36c6be456a5cb0a2
-1624	1631	7907115287920518	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).hex	c167ae6b0e515a79
-1558	1623	7907115287260136	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
+296	305	7908025183670976	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).hex	c167ae6b0e515a79
+231	294	7908025183023166	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
 289	484	7907115274560610	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_exti.o	46241178217595d8
-7	243	7907115271743055	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	774d4afea8b0a855
+6	257	7907118522801510	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	774d4afea8b0a855
 244	472	7907115274115114	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_dma.o	1f7104b32fd34257
+2	230	7908025180731127	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
 473	664	7907115276410842	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_gpio.o	74026b2f5cb4c2eb
-4	288	7907115271703139	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
 415	619	7907115275817836	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_flash.o	db43869909ce4ba9
-874	1296	7907115280414040	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_tim_ex.o	17b0c8fe81d3c175
 425	658	7907115275927464	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_flash_ex.o	c77b7193101267a6
-935	1281	7907115281021997	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_usart.o	f12edcbdf61fae60
+874	1296	7907115280414040	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_tim_ex.o	17b0c8fe81d3c175
 485	643	7907115276520470	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_gpio_ex.o	1cd86a788f8e9f56
+935	1281	7907115281021997	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_usart.o	f12edcbdf61fae60
 644	815	7907115278115138	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_pwr.o	f1b9559106dc955f
 665	872	7907115278314468	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_rcc_ex.o	9d3df17b2d4ee4ba
 659	934	7907115278264631	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_rcc.o	d935a06f2e122aa3
 1713	1727	7907062137631773	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/EWARM_18443280873093131863.dir/startup_stm32f103xb.o	22fb44dd136b05d5
 619	1431	7907115277865964	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_i2c.o	ac297f1ea1f824ca
-1558	1623	7907115287260136	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-3	186	7907115779922356	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-3	186	7907115779922356	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-187	248	7907115781759246	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-187	248	7907115781759246	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-187	248	7907115781759246	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-187	248	7907115781759246	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-249	258	7907115782387144	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).hex	c167ae6b0e515a79
-6	257	7907118522801510	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	774d4afea8b0a855
-6	257	7907118522801510	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	774d4afea8b0a855
-9	273	7907118522841379	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	9a8c00aafa8a9d9a
-9	273	7907118522841379	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	9a8c00aafa8a9d9a
-2	289	7907118522761639	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-2	289	7907118522761639	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-289	355	7907118525635457	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-289	355	7907118525635457	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-289	355	7907118525635457	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-289	355	7907118525635457	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-356	366	7907118526303307	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).hex	c167ae6b0e515a79
-3	163	7907119773700393	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-3	163	7907119773700393	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-164	224	7907119775317551	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-164	224	7907119775317551	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-164	224	7907119775317551	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-164	224	7907119775317551	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-225	235	7907119775925516	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).hex	c167ae6b0e515a79
-15	582	7907728019392249	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-15	582	7907728019392249	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-582	975	7907728025071188	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-582	975	7907728025071188	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-582	975	7907728025071188	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-582	975	7907728025071188	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-978	1023	7907728029017335	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).hex	c167ae6b0e515a79
-3	246	7907790596683589	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-3	246	7907790596683589	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-247	311	7907790599125125	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-247	311	7907790599125125	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-247	311	7907790599125125	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-247	311	7907790599125125	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-312	322	7907790599774448	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).hex	c167ae6b0e515a79
-4	382	7907848358637379	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-4	382	7907848358637379	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-383	550	7907848362427699	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-383	550	7907848362427699	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-383	550	7907848362427699	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-383	550	7907848362427699	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-551	604	7907848364102742	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).hex	c167ae6b0e515a79
-2	165	7907849548653956	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-2	165	7907849548653956	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-166	234	7907849550288486	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-166	234	7907849550288486	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-166	234	7907849550288486	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-166	234	7907849550288486	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-235	245	7907849550977950	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).hex	c167ae6b0e515a79
-5	290	7907857441616099	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-5	290	7907857441616099	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
-292	355	7907857444482064	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-292	355	7907857444482064	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-292	355	7907857444482064	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	4480169e916153c2
-292	355	7907857444482064	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
-356	366	7907857445119920	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).hex	c167ae6b0e515a79
+231	294	7908025183023166	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	4480169e916153c2
+2	12	7908025340240784	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	aca44051d32d8a71
