@@ -99,6 +99,9 @@ static uint16_t expander16_state = 0U;
 static uint8_t expander8_state = 0U;
 static uint8_t active_i2c_address = 0U;
 static const uint16_t expander16_input_mask = (1U << 9); /* p9 = SD_SW (input) */
+static GPIO_PinState sd_sw_last_state = GPIO_PIN_RESET;
+static GPIO_PinState sd_sw_return_state = GPIO_PIN_RESET;
+static uint8_t pcf_int_latched = 0U;
 
 /* USER CODE END PV */
 
@@ -181,6 +184,21 @@ static void PrepareExpanderTx(uint8_t address)
   }
 }
 
+static void SetPcfIntLevel(GPIO_PinState level)
+{
+  /* PCF_INT работает как open-drain: лог.1 = отпущен, лог.0 = тянем к земле. */
+  HAL_GPIO_WritePin(PCF_INT_GPIO_Port, PCF_INT_Pin, level);
+}
+
+static void ClearPcfIntLatch(void)
+{
+  if (pcf_int_latched != 0U)
+  {
+    pcf_int_latched = 0U;
+    SetPcfIntLevel(GPIO_PIN_SET);
+  }
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -219,6 +237,10 @@ int main(void)
   HAL_I2C_EnableListen_IT(&hi2c1);
   ApplyExpander16State(0U);
   ApplyExpander8State(0U);
+  sd_sw_last_state = HAL_GPIO_ReadPin(SD_SW_GPIO_Port, SD_SW_Pin);
+  sd_sw_return_state = sd_sw_last_state;
+  pcf_int_latched = 0U;
+  SetPcfIntLevel(GPIO_PIN_SET);
   HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
@@ -410,7 +432,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, Sv_kont_p_Pin|OE_RELE_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, Break_K_p_Pin|PCF_INT_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, Break_K_p_Pin, GPIO_PIN_RESET);
+  /* PCF_INT: open-drain, лог.1 = отпущен (HIGH), лог.0 = тянем к земле (LOW). */
+  HAL_GPIO_WritePin(GPIOB, PCF_INT_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, Rele_1_Pin|Rele_5_Pin|DISP_LIGHT_BUF_Pin|PWR_KTV_BUF_Pin
@@ -480,9 +504,16 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(KTV_ADR_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PWR_KTV_BUF_Pin PCF_INT_Pin */
-  GPIO_InitStruct.Pin = PWR_KTV_BUF_Pin|PCF_INT_Pin;
+  /*Configure GPIO pin : PWR_KTV_BUF_Pin */
+  GPIO_InitStruct.Pin = PWR_KTV_BUF_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PCF_INT_Pin (open-drain) */
+  GPIO_InitStruct.Pin = PCF_INT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -521,6 +552,11 @@ void HAL_I2C_AddrCallback(I2C_HandleTypeDef *hi2c, uint8_t TransferDirection, ui
   }
 
   active_i2c_address = (uint8_t)AddrMatchCode;
+
+  if (active_i2c_address == I2C_EXPANDER16_ADDR)
+  {
+    ClearPcfIntLatch();
+  }
 
   if (TransferDirection == I2C_DIRECTION_RECEIVE)
   {
@@ -595,6 +631,34 @@ void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
   {
     HAL_I2C_EnableListen_IT(hi2c);
   }
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if (GPIO_Pin != SD_SW_Pin)
+  {
+    return;
+  }
+
+  GPIO_PinState current_state = HAL_GPIO_ReadPin(SD_SW_GPIO_Port, SD_SW_Pin);
+  if (current_state == sd_sw_last_state)
+  {
+    return;
+  }
+
+  if (pcf_int_latched == 0U)
+  {
+    sd_sw_return_state = sd_sw_last_state;
+    pcf_int_latched = 1U;
+    SetPcfIntLevel(GPIO_PIN_RESET);
+  }
+  else if (current_state == sd_sw_return_state)
+  {
+    pcf_int_latched = 0U;
+    SetPcfIntLevel(GPIO_PIN_SET);
+  }
+
+  sd_sw_last_state = current_state;
 }
 
 /* USER CODE END 4 */
