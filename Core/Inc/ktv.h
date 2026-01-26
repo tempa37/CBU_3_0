@@ -32,6 +32,11 @@
 #define KTV_BOOTUP_INTERVAL     (5000U)
 #define KTV_TEST_INTERVAL       (5000U)
 
+/* Задержка до чтения профиля после стартового импульса (синхроимпульс). */
+#define SYNC_PULSE_OFFSET_IN_TICK  (75U)
+#define SYNC_PULSE_WIDTH_IN_TICK   (4U)
+#define TICK_NUM_TO_SYNC (SYNC_PULSE_OFFSET_IN_TICK + SYNC_PULSE_WIDTH_IN_TICK)
+
 /* Размер буфера для записи всей посылки КТВ. */
 #define KTV_BITMAP_SIZE (((KTV_NUM_MAX + 1U) * TICK_NUM_KTV) + TICK_NUM_KTV_START + 128U)
 

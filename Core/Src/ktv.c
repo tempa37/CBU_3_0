@@ -10,6 +10,7 @@ typedef enum
   ksStarted,  /* готов к началу опроса */
   ksWait,     /* пауза между опросами */
   ksStPulse,  /* стартовый импульс */
+  ksSync,     /* ожидание синхроимпульса */
   ksRead,     /* чтение последовательности */
   ksEnd,      /* чтение завершено */
   ksNoActive  /* на линии нет активности */
@@ -104,6 +105,13 @@ void Ktv_TickISR(void)
       {
         /* Возвращаем питание и начинаем чтение профиля. */
         HAL_GPIO_WritePin(PWR_KTV_BUF_GPIO_Port, PWR_KTV_BUF_Pin, GPIO_PIN_SET);
+        g_ktv.counter = (int32_t)TICK_NUM_TO_SYNC;
+        g_ktv.state = ksSync;
+      }
+      break;
+    case ksSync:
+      if (--g_ktv.counter <= 0)
+      {
         g_ktv.state = ksRead;
       }
       break;
