@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "ktv.h"
 
 /* USER CODE END Includes */
 
@@ -241,6 +242,7 @@ int main(void)
   sd_sw_return_state = sd_sw_last_state;
   pcf_int_latched = 0U;
   SetPcfIntLevel(GPIO_PIN_SET);
+  Ktv_Init();
   HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
@@ -251,6 +253,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    Ktv_Process();
   }
   /* USER CODE END 3 */
 }
@@ -538,7 +541,7 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if (htim->Instance == TIM2) {
-    //Ktv_TickISR(); 
+    Ktv_TickISR();
   }
 }
 
