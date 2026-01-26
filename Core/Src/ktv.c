@@ -44,6 +44,7 @@ static bool Ktv_ProcessProfile(void);
 
 void Ktv_Init(void)
 {
+  
   memset(&g_ktv, 0, sizeof(g_ktv));
   memset(&g_result, 0, sizeof(g_result));
 
@@ -52,6 +53,7 @@ void Ktv_Init(void)
 
   g_ktv.counter = (int32_t)(KTV_BOOTUP_INTERVAL / KTV_TICK_IN_MSEC);
   g_ktv.state = ksStart;
+  
 }
 
 static void Ktv_Start(void)
