@@ -103,6 +103,10 @@ static const uint16_t expander16_input_mask = (1U << 9); /* p9 = SD_SW (input) *
 static GPIO_PinState sd_sw_last_state = GPIO_PIN_RESET;
 static GPIO_PinState sd_sw_return_state = GPIO_PIN_RESET;
 static uint8_t pcf_int_latched = 0U;
+volatile GPIO_PinState door = GPIO_PIN_RESET;
+volatile GPIO_PinState error_sv = GPIO_PIN_RESET;
+volatile GPIO_PinState on_bkk_k1 = GPIO_PIN_RESET;
+volatile GPIO_PinState on_bkk_k2 = GPIO_PIN_RESET;
 
 /* USER CODE END PV */
 
@@ -637,6 +641,30 @@ void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
+  if (GPIO_Pin == DOOR_Pin)
+  {
+    door = HAL_GPIO_ReadPin(DOOR_GPIO_Port, DOOR_Pin);
+    return;
+  }
+
+  if (GPIO_Pin == error_sv_Pin)
+  {
+    error_sv = HAL_GPIO_ReadPin(error_sv_GPIO_Port, error_sv_Pin);
+    return;
+  }
+
+  if (GPIO_Pin == On_BKK_k1_Pin)
+  {
+    on_bkk_k1 = HAL_GPIO_ReadPin(On_BKK_k1_GPIO_Port, On_BKK_k1_Pin);
+    return;
+  }
+
+  if (GPIO_Pin == On_BKK_k2_Pin)
+  {
+    on_bkk_k2 = HAL_GPIO_ReadPin(On_BKK_k2_GPIO_Port, On_BKK_k2_Pin);
+    return;
+  }
+
   if (GPIO_Pin != SD_SW_Pin)
   {
     return;
