@@ -315,10 +315,10 @@ static void MX_I2C1_Init(void)
   hi2c1.Instance = I2C1;
   hi2c1.Init.ClockSpeed = 100000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c1.Init.OwnAddress1 = I2C_EXPANDER16_ADDR;
+  hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_ENABLE;
-  hi2c1.Init.OwnAddress2 = I2C_EXPANDER8_ADDR;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
   hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
   hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
   if (HAL_I2C_Init(&hi2c1) != HAL_OK)
@@ -435,9 +435,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, Sv_kont_p_Pin|OE_RELE_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, Break_K_p_Pin, GPIO_PIN_RESET);
-  /* PCF_INT: open-drain, лог.1 = отпущен (HIGH), лог.0 = тянем к земле (LOW). */
-  HAL_GPIO_WritePin(GPIOB, PCF_INT_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOB, Break_K_p_Pin|PCF_INT_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, Rele_1_Pin|Rele_5_Pin|DISP_LIGHT_BUF_Pin|PWR_KTV_BUF_Pin
@@ -465,12 +463,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Sv_kont_p_Pin Rele_2_Pin Rele_3_Pin Rele_4_Pin */
-  GPIO_InitStruct.Pin = Sv_kont_p_Pin|Rele_2_Pin|Rele_3_Pin|Rele_4_Pin;
+  /*Configure GPIO pin : Sv_kont_p_Pin */
+  GPIO_InitStruct.Pin = Sv_kont_p_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(Sv_kont_p_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : On_BKK_k1_Pin On_BKK_k2_Pin error_sv_Pin Optron2_2_Pin
                            Optron2_1_Pin */
@@ -494,6 +492,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : Rele_2_Pin Rele_3_Pin Rele_4_Pin */
+  GPIO_InitStruct.Pin = Rele_2_Pin|Rele_3_Pin|Rele_4_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pin : OE_RELE_Pin */
   GPIO_InitStruct.Pin = OE_RELE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -507,16 +512,9 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(KTV_ADR_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PWR_KTV_BUF_Pin */
-  GPIO_InitStruct.Pin = PWR_KTV_BUF_Pin;
+  /*Configure GPIO pins : PWR_KTV_BUF_Pin PCF_INT_Pin */
+  GPIO_InitStruct.Pin = PWR_KTV_BUF_Pin|PCF_INT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PCF_INT_Pin (open-drain) */
-  GPIO_InitStruct.Pin = PCF_INT_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
