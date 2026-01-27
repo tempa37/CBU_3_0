@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V9.70.1.475/W64 for ARM                  26/Jan/2026  18:03:15
+# IAR ELF Linker V9.70.1.475/W64 for ARM                  27/Jan/2026  12:58:16
 # Copyright 2007-2025 IAR Systems AB.
 #
 #    Output file  =
@@ -105,7 +105,7 @@ initialize by copy {  rw };
   .intvec            ro code   0x800'0000          4    0xec  startup_stm32f103xb.o [3]
                              - 0x800'00ec               0xec
 
-"P1":                                                 0x3a8e
+"P1":                                                 0x3afa
   .text              ro code   0x800'00ec          4  0x1484  stm32f1xx_hal_i2c.o [4]
   .text              ro code   0x800'1570          4   0x170  stm32f1xx_hal_msp.o [2]
   .text              ro code   0x800'16e0          4   0x64c  stm32f1xx_hal_rcc.o [4]
@@ -113,82 +113,52 @@ initialize by copy {  rw };
   .text              ro code   0x800'1d2e          2     0x2  stm32f1xx_hal_i2c.o [4]
   .text              ro code   0x800'1d30          2     0x2  stm32f1xx_hal_i2c.o [4]
   .text              ro code   0x800'1d32          2     0x2  stm32f1xx_hal_i2c.o [4]
-  .text              ro code   0x800'1d34          4   0x6d8  main.o [2]
-  .text              ro code   0x800'240c          2     0x2  stm32f1xx_hal_i2c.o [4]
-  .text              ro code   0x800'240e          2    0x2a  copy_init3.o [6]
-  .text              ro code   0x800'2438          4    0xd6  stm32f1xx_hal_dma.o [4]
-  .text              ro code   0x800'250e          2     0x2  stm32f1xx_hal_i2c.o [4]
-  .text              ro code   0x800'2510          4    0x66  ABImemset.o [6]
-  .rodata            const     0x800'2576          2     0x2  main.o [2]
-  .text              ro code   0x800'2578          4   0x2b4  stm32f1xx_hal_gpio.o [4]
-  .text              ro code   0x800'282c          4   0x154  stm32f1xx_hal_cortex.o [4]
-  .text              ro code   0x800'2980          4     0xc  stm32f1xx_hal.o [4]
-  .text              ro code   0x800'298c          4    0x4c  stm32f1xx_hal.o [4]
-  .text              ro code   0x800'29d8          4    0x24  stm32f1xx_hal.o [4]
-  .text              ro code   0x800'29fc          4   0x544  ktv.o [2]
-  .text              ro code   0x800'2f40          4   0x410  stm32f1xx_hal_tim.o [4]
-  .text              ro code   0x800'3350          4    0x80  stm32f1xx_hal_tim_ex.o [4]
-  .text              ro code   0x800'33d0          4   0x1e8  stm32f1xx_hal_usart.o [4]
-  .text              ro code   0x800'35b8          4   0x274  I64DivMod.o [6]
-  .text              ro code   0x800'382c          4    0x22  I64Shl.o [6]
-  .rodata            const     0x800'384e          2     0x2  stm32f1xx_hal_rcc.o [4]
-  .text              ro code   0x800'3850          4    0x1e  U64Shr.o [6]
-  .text              ro code   0x800'386e          2     0x2  stm32f1xx_hal_tim.o [4]
-  .text              ro code   0x800'3870          2     0x2  stm32f1xx_hal_tim.o [4]
-  .text              ro code   0x800'3872          2     0x2  stm32f1xx_hal_tim.o [4]
-  .text              ro code   0x800'3874          2     0x2  stm32f1xx_hal_tim_ex.o [4]
-  .text              ro code   0x800'3876          2     0x2  stm32f1xx_hal_tim.o [4]
-  .text              ro code   0x800'3878          2     0x2  stm32f1xx_hal_tim_ex.o [4]
-  .text              ro code   0x800'387c          4     0x2  I64DivZer.o [6]
-  .rodata            const     0x800'3880          4    0x80  main.o [2]
-  .text              ro code   0x800'3900          4    0x4c  stm32f1xx_it.o [2]
-  .text              ro code   0x800'394c          4    0x18  stm32f1xx_hal.o [4]
-  .rodata            const     0x800'3964          4    0x40  main.o [2]
-  .text              ro code   0x800'39a4          2    0x38  zero_init3.o [6]
-  .text              ro code   0x800'39dc          4    0x28  data_init.o [6]
-  .text              ro code   0x800'3a04          4    0x22  cmain.o [6]
-  .text              ro code   0x800'3a26          2     0x4  low_level_init.o [5]
-  .text              ro code   0x800'3a2a          2     0x4  exit.o [5]
-  .text              ro code   0x800'3a30          4     0x4  cexit.o [6]
-  .text              ro code   0x800'3a34          4     0xa  cexit_2.o [6]
-  .text              ro code   0x800'3a40          4    0x14  exit.o [7]
-  .iar.init_table    const     0x800'3a54          4    0x24  - Linker created -
-  .text              ro code   0x800'3a78          4    0x1e  cstartup_M.o [6]
-  .rodata            const     0x800'3a98          4    0x10  stm32f1xx_hal_rcc.o [4]
-  .rodata            const     0x800'3aa8          4    0x10  system_stm32f1xx.o [1]
-  .text              ro code   0x800'3ab8          4    0x10  startup_stm32f103xb.o [3]
-  Initializer bytes  const     0x800'3ac8          4     0xc  <for P2-1>
-  .rodata            const     0x800'3ad4          4     0x8  system_stm32f1xx.o [1]
-  .text              ro code   0x800'3adc          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3ae0          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3ae4          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3ae8          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3aec          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3af0          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3af4          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3af8          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3afc          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b00          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b04          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b08          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b0c          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b10          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b14          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b18          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b1c          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b20          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b24          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b28          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b2c          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b30          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b34          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b38          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b3c          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b40          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b44          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b48          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b4c          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b50          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'1d34          4   0x728  main.o [2]
+  .text              ro code   0x800'245c          2     0x2  stm32f1xx_hal_i2c.o [4]
+  .text              ro code   0x800'245e          2    0x2a  copy_init3.o [6]
+  .text              ro code   0x800'2488          4    0xd6  stm32f1xx_hal_dma.o [4]
+  .text              ro code   0x800'255e          2     0x2  stm32f1xx_hal_i2c.o [4]
+  .text              ro code   0x800'2560          4    0x66  ABImemset.o [6]
+  .rodata            const     0x800'25c6          2     0x2  main.o [2]
+  .text              ro code   0x800'25c8          4   0x2b4  stm32f1xx_hal_gpio.o [4]
+  .text              ro code   0x800'287c          4   0x154  stm32f1xx_hal_cortex.o [4]
+  .text              ro code   0x800'29d0          4     0xc  stm32f1xx_hal.o [4]
+  .text              ro code   0x800'29dc          4    0x4c  stm32f1xx_hal.o [4]
+  .text              ro code   0x800'2a28          4    0x24  stm32f1xx_hal.o [4]
+  .text              ro code   0x800'2a4c          4   0x544  ktv.o [2]
+  .text              ro code   0x800'2f90          4   0x410  stm32f1xx_hal_tim.o [4]
+  .text              ro code   0x800'33a0          4    0x80  stm32f1xx_hal_tim_ex.o [4]
+  .text              ro code   0x800'3420          4   0x1e8  stm32f1xx_hal_usart.o [4]
+  .text              ro code   0x800'3608          4   0x274  I64DivMod.o [6]
+  .text              ro code   0x800'387c          4    0x22  I64Shl.o [6]
+  .rodata            const     0x800'389e          2     0x2  stm32f1xx_hal_rcc.o [4]
+  .text              ro code   0x800'38a0          4    0x1e  U64Shr.o [6]
+  .text              ro code   0x800'38be          2     0x2  stm32f1xx_hal_tim.o [4]
+  .text              ro code   0x800'38c0          2     0x2  stm32f1xx_hal_tim.o [4]
+  .text              ro code   0x800'38c2          2     0x2  stm32f1xx_hal_tim.o [4]
+  .text              ro code   0x800'38c4          2     0x2  stm32f1xx_hal_tim_ex.o [4]
+  .text              ro code   0x800'38c6          2     0x2  stm32f1xx_hal_tim.o [4]
+  .text              ro code   0x800'38c8          2     0x2  stm32f1xx_hal_tim_ex.o [4]
+  .text              ro code   0x800'38cc          4     0x2  I64DivZer.o [6]
+  .rodata            const     0x800'38d0          4    0x80  main.o [2]
+  .text              ro code   0x800'3950          4    0x74  stm32f1xx_it.o [2]
+  .text              ro code   0x800'39c4          4    0x18  stm32f1xx_hal.o [4]
+  .rodata            const     0x800'39dc          4    0x40  main.o [2]
+  .text              ro code   0x800'3a1c          2    0x38  zero_init3.o [6]
+  .text              ro code   0x800'3a54          4    0x28  data_init.o [6]
+  .text              ro code   0x800'3a7c          4    0x22  cmain.o [6]
+  .text              ro code   0x800'3a9e          2     0x4  low_level_init.o [5]
+  .text              ro code   0x800'3aa2          2     0x4  exit.o [5]
+  .text              ro code   0x800'3aa8          4     0x4  cexit.o [6]
+  .text              ro code   0x800'3aac          4     0xa  cexit_2.o [6]
+  .text              ro code   0x800'3ab8          4    0x14  exit.o [7]
+  .iar.init_table    const     0x800'3acc          4    0x24  - Linker created -
+  .text              ro code   0x800'3af0          4    0x1e  cstartup_M.o [6]
+  .rodata            const     0x800'3b10          4    0x10  stm32f1xx_hal_rcc.o [4]
+  .rodata            const     0x800'3b20          4    0x10  system_stm32f1xx.o [1]
+  .text              ro code   0x800'3b30          4    0x10  startup_stm32f103xb.o [3]
+  Initializer bytes  const     0x800'3b40          4     0xc  <for P2-1>
+  .rodata            const     0x800'3b4c          4     0x8  system_stm32f1xx.o [1]
   .text              ro code   0x800'3b54          2     0x4  startup_stm32f103xb.o [3]
   .text              ro code   0x800'3b58          2     0x4  startup_stm32f103xb.o [3]
   .text              ro code   0x800'3b5c          2     0x4  startup_stm32f103xb.o [3]
@@ -198,10 +168,37 @@ initialize by copy {  rw };
   .text              ro code   0x800'3b6c          2     0x4  startup_stm32f103xb.o [3]
   .text              ro code   0x800'3b70          2     0x4  startup_stm32f103xb.o [3]
   .text              ro code   0x800'3b74          2     0x4  startup_stm32f103xb.o [3]
-  .text              ro code   0x800'3b78          4     0x2  system_stm32f1xx.o [1]
-  .rodata            const     0x800'3b7a                0x0  zero_init3.o [6]
-  .rodata            const     0x800'3b7a                0x0  copy_init3.o [6]
-                             - 0x800'3b7a             0x3a8e
+  .text              ro code   0x800'3b78          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3b7c          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3b80          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3b84          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3b88          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3b8c          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3b90          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3b94          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3b98          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3b9c          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3ba0          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3ba4          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3ba8          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bac          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bb0          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bb4          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bb8          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bbc          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bc0          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bc4          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bc8          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bcc          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bd0          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bd4          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bd8          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3bdc          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3be0          2     0x4  startup_stm32f103xb.o [3]
+  .text              ro code   0x800'3be4          4     0x2  system_stm32f1xx.o [1]
+  .rodata            const     0x800'3be6                0x0  zero_init3.o [6]
+  .rodata            const     0x800'3be6                0x0  copy_init3.o [6]
+                             - 0x800'3be6             0x3afa
 
 "P2", part 1 of 3:                                       0xc
   P2-1                        0x2000'0000          4     0x9  <Init block>
@@ -237,7 +234,7 @@ Unused ranges:
 
          From           To      Size
          ----           --      ----
-   0x800'3b7a   0x801'ffff  0x1'c486
+   0x800'3be6   0x801'ffff  0x1'c41a
   0x2000'035c  0x2000'035f       0x4
   0x2000'0760  0x2000'4fff    0x48a0
 
@@ -254,7 +251,7 @@ Zero (__iar_zero_init3)
 
 Copy (__iar_copy_init3)
     1 source range, total size 0xc (133% of destination):
-           0x800'3ac8    0xc
+           0x800'3b40    0xc
     1 destination range, total size 0x9:
           0x2000'0000    0x9
 
@@ -277,16 +274,16 @@ C:\Users\User\Desktop\CBU_3.0\EWARM\÷¡”_ÒÎÂÈ‚ Ã  (2)\Obj\CMSIS_66035918122479027
 
 C:\Users\User\Desktop\CBU_3.0\EWARM\÷¡”_ÒÎÂÈ‚ Ã  (2)\Obj\Core_13247989168731456611.dir: [2]
     ktv.o                     1'348               604
-    main.o                    1'752      194      236
+    main.o                    1'832      194      236
     stm32f1xx_hal_msp.o         368
-    stm32f1xx_it.o               76
+    stm32f1xx_it.o              116
     -------------------------------------------------
-    Total:                    3'544      194      840
+    Total:                    3'664      194      840
 
 C:\Users\User\Desktop\CBU_3.0\EWARM\÷¡”_ÒÎÂÈ‚ Ã  (2)\Obj\EWARM_18443280873093131863.dir: [3]
-    startup_stm32f103xb.o       408
+    startup_stm32f103xb.o       396
     -------------------------------------------------
-    Total:                      408
+    Total:                      396
 
 C:\Users\User\Desktop\CBU_3.0\EWARM\÷¡”_ÒÎÂÈ‚ Ã  (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir: [4]
     stm32f1xx_hal.o             148        5        9
@@ -331,7 +328,7 @@ shb_l.a: [7]
     Gaps                          6        4        4
     Linker created                        39    1'024
 -----------------------------------------------------
-    Grand Total:             14'938      288    1'881
+    Grand Total:             15'046      288    1'881
 
 
 *******************************************************************************
@@ -340,65 +337,65 @@ shb_l.a: [7]
 
 Entry                       Address   Size  Type      Object
 -----                       -------   ----  ----      ------
-.iar.init_table$$Base    0x800'3a54          --   Gb  - Linker created -
-.iar.init_table$$Limit   0x800'3a78          --   Gb  - Linker created -
-?main                    0x800'3a05         Code  Gb  cmain.o [6]
-ADC1_2_IRQHandler        0x800'3b25         Code  Wk  startup_stm32f103xb.o [3]
-AHBPrescTable            0x800'3aa8   0x10  Data  Gb  system_stm32f1xx.o [1]
-APBPrescTable            0x800'3ad4    0x8  Data  Gb  system_stm32f1xx.o [1]
+.iar.init_table$$Base    0x800'3acc          --   Gb  - Linker created -
+.iar.init_table$$Limit   0x800'3af0          --   Gb  - Linker created -
+?main                    0x800'3a7d         Code  Gb  cmain.o [6]
+ADC1_2_IRQHandler        0x800'3b95         Code  Wk  startup_stm32f103xb.o [3]
+AHBPrescTable            0x800'3b20   0x10  Data  Gb  system_stm32f1xx.o [1]
+APBPrescTable            0x800'3b4c    0x8  Data  Gb  system_stm32f1xx.o [1]
 ApplyExpander16State     0x800'1d65   0x6e  Code  Lc  main.o [2]
 ApplyExpander8State      0x800'1dd3   0x3c  Code  Lc  main.o [2]
-BusFault_Handler         0x800'3907    0x2  Code  Gb  stm32f1xx_it.o [2]
-CAN1_RX1_IRQHandler      0x800'3b31         Code  Wk  startup_stm32f103xb.o [3]
-CAN1_SCE_IRQHandler      0x800'3b35         Code  Wk  startup_stm32f103xb.o [3]
+BusFault_Handler         0x800'3957    0x2  Code  Gb  stm32f1xx_it.o [2]
+CAN1_RX1_IRQHandler      0x800'3ba1         Code  Wk  startup_stm32f103xb.o [3]
+CAN1_SCE_IRQHandler      0x800'3ba5         Code  Wk  startup_stm32f103xb.o [3]
 CSTACK$$Base            0x2000'0360          --   Gb  - Linker created -
 CSTACK$$Limit           0x2000'0760          --   Gb  - Linker created -
 ClearPcfIntLatch         0x800'1e8f   0x18  Code  Lc  main.o [2]
 DMA1_Channel1_IRQHandler
-                         0x800'3b09         Code  Wk  startup_stm32f103xb.o [3]
+                         0x800'3b79         Code  Wk  startup_stm32f103xb.o [3]
 DMA1_Channel2_IRQHandler
-                         0x800'3b0d         Code  Wk  startup_stm32f103xb.o [3]
+                         0x800'3b7d         Code  Wk  startup_stm32f103xb.o [3]
 DMA1_Channel3_IRQHandler
-                         0x800'3b11         Code  Wk  startup_stm32f103xb.o [3]
+                         0x800'3b81         Code  Wk  startup_stm32f103xb.o [3]
 DMA1_Channel4_IRQHandler
-                         0x800'3b15         Code  Wk  startup_stm32f103xb.o [3]
+                         0x800'3b85         Code  Wk  startup_stm32f103xb.o [3]
 DMA1_Channel5_IRQHandler
-                         0x800'3b19         Code  Wk  startup_stm32f103xb.o [3]
+                         0x800'3b89         Code  Wk  startup_stm32f103xb.o [3]
 DMA1_Channel6_IRQHandler
-                         0x800'3b1d         Code  Wk  startup_stm32f103xb.o [3]
+                         0x800'3b8d         Code  Wk  startup_stm32f103xb.o [3]
 DMA1_Channel7_IRQHandler
-                         0x800'3b21         Code  Wk  startup_stm32f103xb.o [3]
-DebugMon_Handler         0x800'390d    0x2  Code  Gb  stm32f1xx_it.o [2]
-EXTI0_IRQHandler         0x800'3af5         Code  Wk  startup_stm32f103xb.o [3]
-EXTI15_10_IRQHandler     0x800'3b6d         Code  Wk  startup_stm32f103xb.o [3]
-EXTI1_IRQHandler         0x800'3af9         Code  Wk  startup_stm32f103xb.o [3]
-EXTI2_IRQHandler         0x800'3afd         Code  Wk  startup_stm32f103xb.o [3]
-EXTI3_IRQHandler         0x800'3b01         Code  Wk  startup_stm32f103xb.o [3]
-EXTI4_IRQHandler         0x800'3b05         Code  Wk  startup_stm32f103xb.o [3]
-EXTI9_5_IRQHandler       0x800'3919    0xc  Code  Gb  stm32f1xx_it.o [2]
-Error_Handler            0x800'2409    0x4  Code  Gb  main.o [2]
+                         0x800'3b91         Code  Wk  startup_stm32f103xb.o [3]
+DebugMon_Handler         0x800'395d    0x2  Code  Gb  stm32f1xx_it.o [2]
+EXTI0_IRQHandler         0x800'3969    0xa  Code  Gb  stm32f1xx_it.o [2]
+EXTI15_10_IRQHandler     0x800'39b1   0x14  Code  Gb  stm32f1xx_it.o [2]
+EXTI1_IRQHandler         0x800'3973    0xa  Code  Gb  stm32f1xx_it.o [2]
+EXTI2_IRQHandler         0x800'3b6d         Code  Wk  startup_stm32f103xb.o [3]
+EXTI3_IRQHandler         0x800'3b71         Code  Wk  startup_stm32f103xb.o [3]
+EXTI4_IRQHandler         0x800'3b75         Code  Wk  startup_stm32f103xb.o [3]
+EXTI9_5_IRQHandler       0x800'397d    0xc  Code  Gb  stm32f1xx_it.o [2]
+Error_Handler            0x800'2459    0x4  Code  Gb  main.o [2]
 Expander_WritePin        0x800'1d35   0x30  Code  Lc  main.o [2]
-FLASH_IRQHandler         0x800'3aed         Code  Wk  startup_stm32f103xb.o [3]
-HAL_DMA_Abort_IT         0x800'2439   0xb4  Code  Gb  stm32f1xx_hal_dma.o [4]
-HAL_DMA_GetState         0x800'2509    0x6  Code  Gb  stm32f1xx_hal_dma.o [4]
-HAL_GPIO_EXTI_Callback   0x800'2351   0x5a  Code  Gb  main.o [2]
+FLASH_IRQHandler         0x800'3b65         Code  Wk  startup_stm32f103xb.o [3]
+HAL_DMA_Abort_IT         0x800'2489   0xb4  Code  Gb  stm32f1xx_hal_dma.o [4]
+HAL_DMA_GetState         0x800'2559    0x6  Code  Gb  stm32f1xx_hal_dma.o [4]
+HAL_GPIO_EXTI_Callback   0x800'239d   0x5a  Code  Gb  main.o [2]
 HAL_GPIO_EXTI_IRQHandler
-                         0x800'27c7   0x20  Code  Gb  stm32f1xx_hal_gpio.o [4]
-HAL_GPIO_Init            0x800'2579  0x21e  Code  Gb  stm32f1xx_hal_gpio.o [4]
-HAL_GPIO_ReadPin         0x800'2797   0x16  Code  Gb  stm32f1xx_hal_gpio.o [4]
-HAL_GPIO_WritePin        0x800'27ad   0x1a  Code  Gb  stm32f1xx_hal_gpio.o [4]
-HAL_GetTick              0x800'2981    0xc  Code  Wk  stm32f1xx_hal.o [4]
+                         0x800'2817   0x20  Code  Gb  stm32f1xx_hal_gpio.o [4]
+HAL_GPIO_Init            0x800'25c9  0x21e  Code  Gb  stm32f1xx_hal_gpio.o [4]
+HAL_GPIO_ReadPin         0x800'27e7   0x16  Code  Gb  stm32f1xx_hal_gpio.o [4]
+HAL_GPIO_WritePin        0x800'27fd   0x1a  Code  Gb  stm32f1xx_hal_gpio.o [4]
+HAL_GetTick              0x800'29d1    0xc  Code  Wk  stm32f1xx_hal.o [4]
 HAL_I2C_AbortCpltCallback
-                         0x800'250f    0x2  Code  Wk  stm32f1xx_hal_i2c.o [4]
-HAL_I2C_AddrCallback     0x800'2247   0x9c  Code  Gb  main.o [2]
+                         0x800'255f    0x2  Code  Wk  stm32f1xx_hal_i2c.o [4]
+HAL_I2C_AddrCallback     0x800'2293   0x9c  Code  Gb  main.o [2]
 HAL_I2C_ER_IRQHandler    0x800'0627   0xf8  Code  Gb  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_EV_IRQHandler    0x800'0461  0x1c6  Code  Gb  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_EnableListen_IT
                          0x800'041d   0x44  Code  Gb  stm32f1xx_hal_i2c.o [4]
-HAL_I2C_ErrorCallback    0x800'233d   0x14  Code  Gb  main.o [2]
+HAL_I2C_ErrorCallback    0x800'2389   0x14  Code  Gb  main.o [2]
 HAL_I2C_Init             0x800'00ed  0x1d2  Code  Gb  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_ListenCpltCallback
-                         0x800'2329   0x14  Code  Gb  main.o [2]
+                         0x800'2375   0x14  Code  Gb  main.o [2]
 HAL_I2C_MasterRxCpltCallback
                          0x800'1d33    0x2  Code  Wk  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_MasterTxCpltCallback
@@ -409,21 +406,21 @@ HAL_I2C_MemTxCpltCallback
                          0x800'1d2f    0x2  Code  Wk  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_MspInit          0x800'15ad   0x78  Code  Gb  stm32f1xx_hal_msp.o [2]
 HAL_I2C_SlaveRxCpltCallback
-                         0x800'22e3   0x46  Code  Gb  main.o [2]
+                         0x800'232f   0x46  Code  Gb  main.o [2]
 HAL_I2C_SlaveTxCpltCallback
-                         0x800'240d    0x2  Code  Wk  stm32f1xx_hal_i2c.o [4]
+                         0x800'245d    0x2  Code  Wk  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_Slave_Seq_Receive_IT
                          0x800'0383   0x9a  Code  Gb  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_Slave_Seq_Transmit_IT
                          0x800'02e9   0x9a  Code  Gb  stm32f1xx_hal_i2c.o [4]
-HAL_IncTick              0x800'394d   0x18  Code  Wk  stm32f1xx_hal.o [4]
-HAL_Init                 0x800'29d9   0x20  Code  Gb  stm32f1xx_hal.o [4]
-HAL_InitTick             0x800'298d   0x4c  Code  Wk  stm32f1xx_hal.o [4]
+HAL_IncTick              0x800'39c5   0x18  Code  Wk  stm32f1xx_hal.o [4]
+HAL_Init                 0x800'2a29   0x20  Code  Gb  stm32f1xx_hal.o [4]
+HAL_InitTick             0x800'29dd   0x4c  Code  Wk  stm32f1xx_hal.o [4]
 HAL_MspInit              0x800'1571   0x3c  Code  Gb  stm32f1xx_hal_msp.o [2]
-HAL_NVIC_EnableIRQ       0x800'2945    0xe  Code  Gb  stm32f1xx_hal_cortex.o [4]
-HAL_NVIC_SetPriority     0x800'291b   0x2a  Code  Gb  stm32f1xx_hal_cortex.o [4]
+HAL_NVIC_EnableIRQ       0x800'2995    0xe  Code  Gb  stm32f1xx_hal_cortex.o [4]
+HAL_NVIC_SetPriority     0x800'296b   0x2a  Code  Gb  stm32f1xx_hal_cortex.o [4]
 HAL_NVIC_SetPriorityGrouping
-                         0x800'290f    0xc  Code  Gb  stm32f1xx_hal_cortex.o [4]
+                         0x800'295f    0xc  Code  Gb  stm32f1xx_hal_cortex.o [4]
 HAL_RCC_ClockConfig      0x800'1ae1  0x14c  Code  Gb  stm32f1xx_hal_rcc.o [4]
 HAL_RCC_GetHCLKFreq      0x800'1c89    0x6  Code  Gb  stm32f1xx_hal_rcc.o [4]
 HAL_RCC_GetPCLK1Freq     0x800'1c8f   0x16  Code  Gb  stm32f1xx_hal_rcc.o [4]
@@ -431,40 +428,40 @@ HAL_RCC_GetPCLK2Freq     0x800'1ca5   0x16  Code  Gb  stm32f1xx_hal_rcc.o [4]
 HAL_RCC_GetSysClockFreq
                          0x800'1c2d   0x5c  Code  Gb  stm32f1xx_hal_rcc.o [4]
 HAL_RCC_GetSysClockFreq::aPLLMULFactorTable
-                         0x800'3a98   0x10  Data  Lc  stm32f1xx_hal_rcc.o [4]
+                         0x800'3b10   0x10  Data  Lc  stm32f1xx_hal_rcc.o [4]
 HAL_RCC_GetSysClockFreq::aPredivFactorTable
-                         0x800'384e    0x2  Data  Lc  stm32f1xx_hal_rcc.o [4]
+                         0x800'389e    0x2  Data  Lc  stm32f1xx_hal_rcc.o [4]
 HAL_RCC_OscConfig        0x800'16e1  0x400  Code  Gb  stm32f1xx_hal_rcc.o [4]
-HAL_SYSTICK_Config       0x800'2953    0xc  Code  Gb  stm32f1xx_hal_cortex.o [4]
+HAL_SYSTICK_Config       0x800'29a3    0xc  Code  Gb  stm32f1xx_hal_cortex.o [4]
 HAL_TIMEx_BreakCallback
-                         0x800'3875    0x2  Code  Wk  stm32f1xx_hal_tim_ex.o [4]
+                         0x800'38c5    0x2  Code  Wk  stm32f1xx_hal_tim_ex.o [4]
 HAL_TIMEx_CommutCallback
-                         0x800'3879    0x2  Code  Wk  stm32f1xx_hal_tim_ex.o [4]
+                         0x800'38c9    0x2  Code  Wk  stm32f1xx_hal_tim_ex.o [4]
 HAL_TIMEx_MasterConfigSynchronization
-                         0x800'3351   0x70  Code  Gb  stm32f1xx_hal_tim_ex.o [4]
-HAL_TIM_Base_Init        0x800'2f41   0x6e  Code  Gb  stm32f1xx_hal_tim.o [4]
+                         0x800'33a1   0x70  Code  Gb  stm32f1xx_hal_tim_ex.o [4]
+HAL_TIM_Base_Init        0x800'2f91   0x6e  Code  Gb  stm32f1xx_hal_tim.o [4]
 HAL_TIM_Base_MspInit     0x800'1625   0x32  Code  Gb  stm32f1xx_hal_msp.o [2]
-HAL_TIM_Base_Start_IT    0x800'2faf   0x72  Code  Gb  stm32f1xx_hal_tim.o [4]
+HAL_TIM_Base_Start_IT    0x800'2fff   0x72  Code  Gb  stm32f1xx_hal_tim.o [4]
 HAL_TIM_ConfigClockSource
-                         0x800'316b   0xf4  Code  Gb  stm32f1xx_hal_tim.o [4]
+                         0x800'31bb   0xf4  Code  Gb  stm32f1xx_hal_tim.o [4]
 HAL_TIM_IC_CaptureCallback
-                         0x800'386f    0x2  Code  Wk  stm32f1xx_hal_tim.o [4]
-HAL_TIM_IRQHandler       0x800'302d  0x13e  Code  Gb  stm32f1xx_hal_tim.o [4]
+                         0x800'38bf    0x2  Code  Wk  stm32f1xx_hal_tim.o [4]
+HAL_TIM_IRQHandler       0x800'307d  0x13e  Code  Gb  stm32f1xx_hal_tim.o [4]
 HAL_TIM_OC_DelayElapsedCallback
-                         0x800'3871    0x2  Code  Wk  stm32f1xx_hal_tim.o [4]
+                         0x800'38c1    0x2  Code  Wk  stm32f1xx_hal_tim.o [4]
 HAL_TIM_PWM_PulseFinishedCallback
-                         0x800'3873    0x2  Code  Wk  stm32f1xx_hal_tim.o [4]
+                         0x800'38c3    0x2  Code  Wk  stm32f1xx_hal_tim.o [4]
 HAL_TIM_PeriodElapsedCallback
-                         0x800'2235   0x12  Code  Gb  main.o [2]
+                         0x800'2281   0x12  Code  Gb  main.o [2]
 HAL_TIM_TriggerCallback
-                         0x800'3877    0x2  Code  Wk  stm32f1xx_hal_tim.o [4]
-HAL_USART_Init           0x800'33d1   0x5e  Code  Gb  stm32f1xx_hal_usart.o [4]
+                         0x800'38c7    0x2  Code  Wk  stm32f1xx_hal_tim.o [4]
+HAL_USART_Init           0x800'3421   0x5e  Code  Gb  stm32f1xx_hal_usart.o [4]
 HAL_USART_MspInit        0x800'1657   0x6e  Code  Gb  stm32f1xx_hal_msp.o [2]
-HardFault_Handler        0x800'3903    0x2  Code  Gb  stm32f1xx_it.o [2]
-I2C1_ER_IRQHandler       0x800'3939    0xa  Code  Gb  stm32f1xx_it.o [2]
-I2C1_EV_IRQHandler       0x800'392f    0xa  Code  Gb  stm32f1xx_it.o [2]
-I2C2_ER_IRQHandler       0x800'3b55         Code  Wk  startup_stm32f103xb.o [3]
-I2C2_EV_IRQHandler       0x800'3b51         Code  Wk  startup_stm32f103xb.o [3]
+HardFault_Handler        0x800'3953    0x2  Code  Gb  stm32f1xx_it.o [2]
+I2C1_ER_IRQHandler       0x800'399d    0xa  Code  Gb  stm32f1xx_it.o [2]
+I2C1_EV_IRQHandler       0x800'3993    0xa  Code  Gb  stm32f1xx_it.o [2]
+I2C2_ER_IRQHandler       0x800'3bc5         Code  Wk  startup_stm32f103xb.o [3]
+I2C2_EV_IRQHandler       0x800'3bc1         Code  Wk  startup_stm32f103xb.o [3]
 I2C_ConvertOtherXferOptions
                          0x800'1555   0x1c  Code  Lc  stm32f1xx_hal_i2c.o [4]
 I2C_DMAAbort             0x800'1411   0xf6  Code  Lc  stm32f1xx_hal_i2c.o [4]
@@ -488,98 +485,98 @@ I2C_Slave_AF             0x800'11cb   0xaa  Code  Lc  stm32f1xx_hal_i2c.o [4]
 I2C_Slave_STOPF          0x800'1031  0x19a  Code  Lc  stm32f1xx_hal_i2c.o [4]
 I2C_WaitOnSTOPRequestThroughIT
                          0x800'1507   0x46  Code  Lc  stm32f1xx_hal_i2c.o [4]
-Ktv_ClearResults         0x800'2cbd   0x46  Code  Lc  ktv.o [2]
-Ktv_GetProfile           0x800'2be7   0xd6  Code  Lc  ktv.o [2]
-Ktv_Init                 0x800'29fd   0x48  Code  Gb  ktv.o [2]
-Ktv_Process              0x800'2ba9   0x3e  Code  Gb  ktv.o [2]
-Ktv_ProcessProfile       0x800'2d03  0x22c  Code  Lc  ktv.o [2]
-Ktv_Start                0x800'2a45   0x36  Code  Lc  ktv.o [2]
-Ktv_TickISR              0x800'2a7b  0x12e  Code  Gb  ktv.o [2]
-MX_GPIO_Init             0x800'206f  0x1c6  Code  Lc  main.o [2]
+Ktv_ClearResults         0x800'2d0d   0x46  Code  Lc  ktv.o [2]
+Ktv_GetProfile           0x800'2c37   0xd6  Code  Lc  ktv.o [2]
+Ktv_Init                 0x800'2a4d   0x48  Code  Gb  ktv.o [2]
+Ktv_Process              0x800'2bf9   0x3e  Code  Gb  ktv.o [2]
+Ktv_ProcessProfile       0x800'2d53  0x22c  Code  Lc  ktv.o [2]
+Ktv_Start                0x800'2a95   0x36  Code  Lc  ktv.o [2]
+Ktv_TickISR              0x800'2acb  0x12e  Code  Gb  ktv.o [2]
+MX_GPIO_Init             0x800'206f  0x212  Code  Lc  main.o [2]
 MX_I2C1_Init             0x800'1f7d   0x3e  Code  Lc  main.o [2]
 MX_TIM2_Init             0x800'1fbb   0x78  Code  Lc  main.o [2]
 MX_USART2_Init           0x800'2033   0x3c  Code  Lc  main.o [2]
-MemManage_Handler        0x800'3905    0x2  Code  Gb  stm32f1xx_it.o [2]
-NMI_Handler              0x800'3901    0x2  Code  Gb  stm32f1xx_it.o [2]
-NVIC_EncodePriority      0x800'289f   0x40  Code  Lc  stm32f1xx_hal_cortex.o [4]
-PVD_IRQHandler           0x800'3ae1         Code  Wk  startup_stm32f103xb.o [3]
-PendSV_Handler           0x800'390f    0x2  Code  Gb  stm32f1xx_it.o [2]
+MemManage_Handler        0x800'3955    0x2  Code  Gb  stm32f1xx_it.o [2]
+NMI_Handler              0x800'3951    0x2  Code  Gb  stm32f1xx_it.o [2]
+NVIC_EncodePriority      0x800'28ef   0x40  Code  Lc  stm32f1xx_hal_cortex.o [4]
+PVD_IRQHandler           0x800'3b59         Code  Wk  startup_stm32f103xb.o [3]
+PendSV_Handler           0x800'395f    0x2  Code  Gb  stm32f1xx_it.o [2]
 PrepareExpanderTx        0x800'1e0f   0x6c  Code  Lc  main.o [2]
 RCC_Delay                0x800'1cbb   0x26  Code  Lc  stm32f1xx_hal_rcc.o [4]
-RCC_IRQHandler           0x800'3af1         Code  Wk  startup_stm32f103xb.o [3]
-RTC_Alarm_IRQHandler     0x800'3b71         Code  Wk  startup_stm32f103xb.o [3]
-RTC_IRQHandler           0x800'3ae9         Code  Wk  startup_stm32f103xb.o [3]
-Region$$Table$$Base      0x800'3a54          --   Gb  - Linker created -
-Region$$Table$$Limit     0x800'3a78          --   Gb  - Linker created -
-Reset_Handler            0x800'3ab9         Code  Wk  startup_stm32f103xb.o [3]
-SPI1_IRQHandler          0x800'3b59         Code  Wk  startup_stm32f103xb.o [3]
-SPI2_IRQHandler          0x800'3b5d         Code  Wk  startup_stm32f103xb.o [3]
-SVC_Handler              0x800'390b    0x2  Code  Gb  stm32f1xx_it.o [2]
+RCC_IRQHandler           0x800'3b69         Code  Wk  startup_stm32f103xb.o [3]
+RTC_Alarm_IRQHandler     0x800'3bdd         Code  Wk  startup_stm32f103xb.o [3]
+RTC_IRQHandler           0x800'3b61         Code  Wk  startup_stm32f103xb.o [3]
+Region$$Table$$Base      0x800'3acc          --   Gb  - Linker created -
+Region$$Table$$Limit     0x800'3af0          --   Gb  - Linker created -
+Reset_Handler            0x800'3b31         Code  Wk  startup_stm32f103xb.o [3]
+SPI1_IRQHandler          0x800'3bc9         Code  Wk  startup_stm32f103xb.o [3]
+SPI2_IRQHandler          0x800'3bcd         Code  Wk  startup_stm32f103xb.o [3]
+SVC_Handler              0x800'395b    0x2  Code  Gb  stm32f1xx_it.o [2]
 SetPcfIntLevel           0x800'1e7b   0x14  Code  Lc  main.o [2]
-SysTick_Config           0x800'28df   0x30  Code  Lc  stm32f1xx_hal_cortex.o [4]
-SysTick_Handler          0x800'3911    0x8  Code  Gb  stm32f1xx_it.o [2]
+SysTick_Config           0x800'292f   0x30  Code  Lc  stm32f1xx_hal_cortex.o [4]
+SysTick_Handler          0x800'3961    0x8  Code  Gb  stm32f1xx_it.o [2]
 SystemClock_Config       0x800'1f0f   0x6e  Code  Gb  main.o [2]
 SystemCoreClock         0x2000'0004    0x4  Data  Gb  system_stm32f1xx.o [1]
-SystemInit               0x800'3b79    0x2  Code  Gb  system_stm32f1xx.o [1]
-TAMPER_IRQHandler        0x800'3ae5         Code  Wk  startup_stm32f103xb.o [3]
-TIM1_BRK_IRQHandler      0x800'3b39         Code  Wk  startup_stm32f103xb.o [3]
-TIM1_CC_IRQHandler       0x800'3b45         Code  Wk  startup_stm32f103xb.o [3]
+SystemInit               0x800'3be5    0x2  Code  Gb  system_stm32f1xx.o [1]
+TAMPER_IRQHandler        0x800'3b5d         Code  Wk  startup_stm32f103xb.o [3]
+TIM1_BRK_IRQHandler      0x800'3ba9         Code  Wk  startup_stm32f103xb.o [3]
+TIM1_CC_IRQHandler       0x800'3bb5         Code  Wk  startup_stm32f103xb.o [3]
 TIM1_TRG_COM_IRQHandler
-                         0x800'3b41         Code  Wk  startup_stm32f103xb.o [3]
-TIM1_UP_IRQHandler       0x800'3b3d         Code  Wk  startup_stm32f103xb.o [3]
-TIM2_IRQHandler          0x800'3925    0xa  Code  Gb  stm32f1xx_it.o [2]
-TIM3_IRQHandler          0x800'3b49         Code  Wk  startup_stm32f103xb.o [3]
-TIM4_IRQHandler          0x800'3b4d         Code  Wk  startup_stm32f103xb.o [3]
-TIM_Base_SetConfig       0x800'325f   0x76  Code  Gb  stm32f1xx_hal_tim.o [4]
-TIM_ETR_SetConfig        0x800'333b   0x16  Code  Gb  stm32f1xx_hal_tim.o [4]
-TIM_ITRx_SetConfig       0x800'332b   0x10  Code  Lc  stm32f1xx_hal_tim.o [4]
+                         0x800'3bb1         Code  Wk  startup_stm32f103xb.o [3]
+TIM1_UP_IRQHandler       0x800'3bad         Code  Wk  startup_stm32f103xb.o [3]
+TIM2_IRQHandler          0x800'3989    0xa  Code  Gb  stm32f1xx_it.o [2]
+TIM3_IRQHandler          0x800'3bb9         Code  Wk  startup_stm32f103xb.o [3]
+TIM4_IRQHandler          0x800'3bbd         Code  Wk  startup_stm32f103xb.o [3]
+TIM_Base_SetConfig       0x800'32af   0x76  Code  Gb  stm32f1xx_hal_tim.o [4]
+TIM_ETR_SetConfig        0x800'338b   0x16  Code  Gb  stm32f1xx_hal_tim.o [4]
+TIM_ITRx_SetConfig       0x800'337b   0x10  Code  Lc  stm32f1xx_hal_tim.o [4]
 TIM_TI1_ConfigInputStage
-                         0x800'32e1   0x24  Code  Lc  stm32f1xx_hal_tim.o [4]
+                         0x800'3331   0x24  Code  Lc  stm32f1xx_hal_tim.o [4]
 TIM_TI2_ConfigInputStage
-                         0x800'3305   0x26  Code  Lc  stm32f1xx_hal_tim.o [4]
-USART1_IRQHandler        0x800'3b61         Code  Wk  startup_stm32f103xb.o [3]
-USART2_IRQHandler        0x800'3b65         Code  Wk  startup_stm32f103xb.o [3]
-USART3_IRQHandler        0x800'3b69         Code  Wk  startup_stm32f103xb.o [3]
-USART_SetConfig          0x800'342f  0x17e  Code  Lc  stm32f1xx_hal_usart.o [4]
-USBWakeUp_IRQHandler     0x800'3b75         Code  Wk  startup_stm32f103xb.o [3]
+                         0x800'3355   0x26  Code  Lc  stm32f1xx_hal_tim.o [4]
+USART1_IRQHandler        0x800'3bd1         Code  Wk  startup_stm32f103xb.o [3]
+USART2_IRQHandler        0x800'3bd5         Code  Wk  startup_stm32f103xb.o [3]
+USART3_IRQHandler        0x800'3bd9         Code  Wk  startup_stm32f103xb.o [3]
+USART_SetConfig          0x800'347f  0x17e  Code  Lc  stm32f1xx_hal_usart.o [4]
+USBWakeUp_IRQHandler     0x800'3be1         Code  Wk  startup_stm32f103xb.o [3]
 USB_HP_CAN1_TX_IRQHandler
-                         0x800'3b29         Code  Wk  startup_stm32f103xb.o [3]
+                         0x800'3b99         Code  Wk  startup_stm32f103xb.o [3]
 USB_LP_CAN1_RX0_IRQHandler
-                         0x800'3b2d         Code  Wk  startup_stm32f103xb.o [3]
-UsageFault_Handler       0x800'3909    0x2  Code  Gb  stm32f1xx_it.o [2]
-WWDG_IRQHandler          0x800'3add         Code  Wk  startup_stm32f103xb.o [3]
-__NVIC_EnableIRQ         0x800'2855   0x1e  Code  Lc  stm32f1xx_hal_cortex.o [4]
+                         0x800'3b9d         Code  Wk  startup_stm32f103xb.o [3]
+UsageFault_Handler       0x800'3959    0x2  Code  Gb  stm32f1xx_it.o [2]
+WWDG_IRQHandler          0x800'3b55         Code  Wk  startup_stm32f103xb.o [3]
+__NVIC_EnableIRQ         0x800'28a5   0x1e  Code  Lc  stm32f1xx_hal_cortex.o [4]
 __NVIC_GetPriorityGrouping
-                         0x800'284b    0xa  Code  Lc  stm32f1xx_hal_cortex.o [4]
-__NVIC_SetPriority       0x800'2873   0x2c  Code  Lc  stm32f1xx_hal_cortex.o [4]
+                         0x800'289b    0xa  Code  Lc  stm32f1xx_hal_cortex.o [4]
+__NVIC_SetPriority       0x800'28c3   0x2c  Code  Lc  stm32f1xx_hal_cortex.o [4]
 __NVIC_SetPriorityGrouping
-                         0x800'282d   0x1e  Code  Lc  stm32f1xx_hal_cortex.o [4]
-__aeabi_ldiv0            0x800'387d         Code  Gb  I64DivZer.o [6]
-__aeabi_ldivmod          0x800'35b9         Code  Gb  I64DivMod.o [6]
-__aeabi_llsl             0x800'382d         Code  Gb  I64Shl.o [6]
-__aeabi_llsr             0x800'3851         Code  Gb  U64Shr.o [6]
-__aeabi_memset           0x800'2511         Code  Gb  ABImemset.o [6]
-__aeabi_uldivmod         0x800'35fd         Code  Gb  I64DivMod.o [6]
-__cmain                  0x800'3a05         Code  Gb  cmain.o [6]
-__exit                   0x800'3a41   0x14  Code  Gb  exit.o [7]
-__iar_Memset             0x800'2511         Code  Gb  ABImemset.o [6]
-__iar_Memset_word        0x800'2519         Code  Gb  ABImemset.o [6]
-__iar_copy_init3         0x800'240f   0x2a  Code  Gb  copy_init3.o [6]
-__iar_data_init3         0x800'39dd   0x28  Code  Gb  data_init.o [6]
-__iar_program_start      0x800'3a79         Code  Gb  cstartup_M.o [6]
-__iar_zero_init3         0x800'39a5   0x38  Code  Gb  zero_init3.o [6]
-__low_level_init         0x800'3a27    0x4  Code  Gb  low_level_init.o [5]
+                         0x800'287d   0x1e  Code  Lc  stm32f1xx_hal_cortex.o [4]
+__aeabi_ldiv0            0x800'38cd         Code  Gb  I64DivZer.o [6]
+__aeabi_ldivmod          0x800'3609         Code  Gb  I64DivMod.o [6]
+__aeabi_llsl             0x800'387d         Code  Gb  I64Shl.o [6]
+__aeabi_llsr             0x800'38a1         Code  Gb  U64Shr.o [6]
+__aeabi_memset           0x800'2561         Code  Gb  ABImemset.o [6]
+__aeabi_uldivmod         0x800'364d         Code  Gb  I64DivMod.o [6]
+__cmain                  0x800'3a7d         Code  Gb  cmain.o [6]
+__exit                   0x800'3ab9   0x14  Code  Gb  exit.o [7]
+__iar_Memset             0x800'2561         Code  Gb  ABImemset.o [6]
+__iar_Memset_word        0x800'2569         Code  Gb  ABImemset.o [6]
+__iar_copy_init3         0x800'245f   0x2a  Code  Gb  copy_init3.o [6]
+__iar_data_init3         0x800'3a55   0x28  Code  Gb  data_init.o [6]
+__iar_program_start      0x800'3af1         Code  Gb  cstartup_M.o [6]
+__iar_zero_init3         0x800'3a1d   0x38  Code  Gb  zero_init3.o [6]
+__low_level_init         0x800'3a9f    0x4  Code  Gb  low_level_init.o [5]
 __vector_table           0x800'0000         Data  Gb  startup_stm32f103xb.o [3]
-_call_main               0x800'3a11         Code  Gb  cmain.o [6]
-_exit                    0x800'3a31         Code  Gb  cexit.o [6]
-_exit_2                  0x800'3a35         Code  Gb  cexit_2.o [6]
+_call_main               0x800'3a89         Code  Gb  cmain.o [6]
+_exit                    0x800'3aa9         Code  Gb  cexit.o [6]
+_exit_2                  0x800'3aad         Code  Gb  cexit_2.o [6]
 active_i2c_address      0x2000'0357    0x1  Data  Lc  main.o [2]
 active_rx_size          0x2000'035b    0x1  Data  Lc  main.o [2]
-exit                     0x800'3a2b    0x4  Code  Gb  exit.o [5]
-expander16_input_mask    0x800'2576    0x2  Data  Lc  main.o [2]
-expander16_map           0x800'3880   0x80  Data  Lc  main.o [2]
+exit                     0x800'3aa3    0x4  Code  Gb  exit.o [5]
+expander16_input_mask    0x800'25c6    0x2  Data  Lc  main.o [2]
+expander16_map           0x800'38d0   0x80  Data  Lc  main.o [2]
 expander16_state        0x2000'0354    0x2  Data  Lc  main.o [2]
-expander8_map            0x800'3964   0x40  Data  Lc  main.o [2]
+expander8_map            0x800'39dc   0x40  Data  Lc  main.o [2]
 expander8_state         0x2000'0356    0x1  Data  Lc  main.o [2]
 g_ktv                   0x2000'0010  0x1f8  Data  Lc  ktv.o [2]
 g_result                0x2000'0208   0x64  Data  Lc  ktv.o [2]
@@ -605,7 +602,7 @@ uwTickPrio              0x2000'0000    0x4  Data  Gb  stm32f1xx_hal.o [4]
 [6] = rt7M_tl.a
 [7] = shb_l.a
 
-  14'938 bytes of readonly  code memory
+  15'046 bytes of readonly  code memory
      288 bytes of readonly  data memory
    1'881 bytes of readwrite data memory
 

@@ -453,7 +453,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : DOOR_Pin */
   GPIO_InitStruct.Pin = DOOR_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(DOOR_GPIO_Port, &GPIO_InitStruct);
 
@@ -470,11 +470,9 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(Sv_kont_p_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : On_BKK_k1_Pin On_BKK_k2_Pin error_sv_Pin Optron2_2_Pin
-                           Optron2_1_Pin */
-  GPIO_InitStruct.Pin = On_BKK_k1_Pin|On_BKK_k2_Pin|error_sv_Pin|Optron2_2_Pin
-                          |Optron2_1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  /*Configure GPIO pins : On_BKK_k1_Pin On_BKK_k2_Pin error_sv_Pin */
+  GPIO_InitStruct.Pin = On_BKK_k1_Pin|On_BKK_k2_Pin|error_sv_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
@@ -484,6 +482,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(Break_K_p_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : Optron2_2_Pin Optron2_1_Pin */
+  GPIO_InitStruct.Pin = Optron2_2_Pin|Optron2_1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : Rele_1_Pin Rele_5_Pin DISP_LIGHT_BUF_Pin ON_3_3V_Pin */
   GPIO_InitStruct.Pin = Rele_1_Pin|Rele_5_Pin|DISP_LIGHT_BUF_Pin|ON_3_3V_Pin;
@@ -526,8 +530,17 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(SD_SW_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

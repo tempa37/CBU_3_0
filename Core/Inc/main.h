@@ -61,6 +61,7 @@ void Error_Handler(void);
 #define MUX_SEL_GPIO_Port GPIOC
 #define DOOR_Pin GPIO_PIN_15
 #define DOOR_GPIO_Port GPIOC
+#define DOOR_EXTI_IRQn EXTI15_10_IRQn
 #define Optron1_2_Pin GPIO_PIN_0
 #define Optron1_2_GPIO_Port GPIOA
 #define Optron1_1_Pin GPIO_PIN_1
@@ -69,12 +70,15 @@ void Error_Handler(void);
 #define Sv_kont_p_GPIO_Port GPIOA
 #define On_BKK_k1_Pin GPIO_PIN_0
 #define On_BKK_k1_GPIO_Port GPIOB
+#define On_BKK_k1_EXTI_IRQn EXTI0_IRQn
 #define On_BKK_k2_Pin GPIO_PIN_1
 #define On_BKK_k2_GPIO_Port GPIOB
+#define On_BKK_k2_EXTI_IRQn EXTI1_IRQn
 #define Break_K_p_Pin GPIO_PIN_2
 #define Break_K_p_GPIO_Port GPIOB
 #define error_sv_Pin GPIO_PIN_11
 #define error_sv_GPIO_Port GPIOB
+#define error_sv_EXTI_IRQn EXTI15_10_IRQn
 #define Optron2_2_Pin GPIO_PIN_12
 #define Optron2_2_GPIO_Port GPIOB
 #define Optron2_1_Pin GPIO_PIN_13
