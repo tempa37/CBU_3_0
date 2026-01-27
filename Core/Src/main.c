@@ -453,7 +453,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : DOOR_Pin */
   GPIO_InitStruct.Pin = DOOR_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(DOOR_GPIO_Port, &GPIO_InitStruct);
 
@@ -470,9 +470,9 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(Sv_kont_p_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : On_BKK_k1_Pin On_BKK_k2_Pin error_sv_Pin */
-  GPIO_InitStruct.Pin = On_BKK_k1_Pin|On_BKK_k2_Pin|error_sv_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  /*Configure GPIO pins : On_BKK_k1_Pin On_BKK_k2_Pin error_sv_Pin SD_SW_Pin */
+  GPIO_InitStruct.Pin = On_BKK_k1_Pin|On_BKK_k2_Pin|error_sv_Pin|SD_SW_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
@@ -522,12 +522,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : SD_SW_Pin */
-  GPIO_InitStruct.Pin = SD_SW_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(SD_SW_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
