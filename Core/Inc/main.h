@@ -42,6 +42,8 @@ extern volatile GPIO_PinState on_bkk_k1;
 extern volatile GPIO_PinState on_bkk_k2;
 extern volatile uint8_t direction1;
 extern volatile uint8_t direction2;
+extern volatile uint8_t bkk_k1_poll_required;
+extern volatile uint8_t bkk_k2_poll_required;
 
 /* USER CODE END ET */
 
