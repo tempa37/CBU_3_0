@@ -597,14 +597,21 @@ static void MX_GPIO_Init(void)
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  if (htim->Instance == TIM2) {
-    if (on_3v3_enabled == 0U)
+  static uint8_t on3_3_ones = 0U;
+  
+  if (htim->Instance == TIM2)
+  {
+    if (!on3_3_ones)
     {
-      tim2_tick_count++;
-      if (tim2_tick_count >= ON_3V3_ENABLE_DELAY_TICKS)
+      if (on_3v3_enabled == 0U)
       {
-        on_3v3_enabled = 1U;
-        HAL_GPIO_WritePin(ON_3_3V_GPIO_Port, ON_3_3V_Pin, GPIO_PIN_SET);
+        tim2_tick_count++;
+        if (tim2_tick_count >= ON_3V3_ENABLE_DELAY_TICKS)
+        {
+          on_3v3_enabled = 1U;
+          HAL_GPIO_WritePin(ON_3_3V_GPIO_Port, ON_3_3V_Pin, GPIO_PIN_SET);
+          on3_3_ones = 1;
+        }
       }
     }
     Ktv_TickISR();
