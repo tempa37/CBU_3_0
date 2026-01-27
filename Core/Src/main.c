@@ -459,7 +459,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : Optron1_2_Pin Optron1_1_Pin */
   GPIO_InitStruct.Pin = Optron1_2_Pin|Optron1_1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -470,12 +470,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(Sv_kont_p_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : On_BKK_k1_Pin On_BKK_k2_Pin error_sv_Pin SD_SW_Pin */
-  GPIO_InitStruct.Pin = On_BKK_k1_Pin|On_BKK_k2_Pin|error_sv_Pin|SD_SW_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
   /*Configure GPIO pin : Break_K_p_Pin */
   GPIO_InitStruct.Pin = Break_K_p_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -483,9 +477,9 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(Break_K_p_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Optron2_2_Pin Optron2_1_Pin */
-  GPIO_InitStruct.Pin = Optron2_2_Pin|Optron2_1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  /*Configure GPIO pins : error_sv_Pin Optron2_2_Pin Optron2_1_Pin SD_SW_Pin */
+  GPIO_InitStruct.Pin = error_sv_Pin|Optron2_2_Pin|Optron2_1_Pin|SD_SW_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 

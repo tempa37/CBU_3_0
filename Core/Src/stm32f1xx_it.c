@@ -207,7 +207,7 @@ void EXTI0_IRQHandler(void)
   /* USER CODE BEGIN EXTI0_IRQn 0 */
 
   /* USER CODE END EXTI0_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(On_BKK_k1_Pin);
+  HAL_GPIO_EXTI_IRQHandler(Optron1_2_Pin);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
 
   /* USER CODE END EXTI0_IRQn 1 */
@@ -221,7 +221,7 @@ void EXTI1_IRQHandler(void)
   /* USER CODE BEGIN EXTI1_IRQn 0 */
 
   /* USER CODE END EXTI1_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(On_BKK_k2_Pin);
+  HAL_GPIO_EXTI_IRQHandler(Optron1_1_Pin);
   /* USER CODE BEGIN EXTI1_IRQn 1 */
 
   /* USER CODE END EXTI1_IRQn 1 */
@@ -292,6 +292,8 @@ void EXTI15_10_IRQHandler(void)
 
   /* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(error_sv_Pin);
+  HAL_GPIO_EXTI_IRQHandler(Optron2_2_Pin);
+  HAL_GPIO_EXTI_IRQHandler(Optron2_1_Pin);
   HAL_GPIO_EXTI_IRQHandler(DOOR_Pin);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
 
