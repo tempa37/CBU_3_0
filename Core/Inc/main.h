@@ -73,6 +73,7 @@ void UpdateBkkDirections(void);
 #define DOOR_EXTI_IRQn EXTI15_10_IRQn
 #define Optron1_2_Pin GPIO_PIN_0
 #define Optron1_2_GPIO_Port GPIOA
+#define Optron1_2_EXTI_IRQn EXTI0_IRQn
 #define Optron1_1_Pin GPIO_PIN_1
 #define Optron1_1_GPIO_Port GPIOA
 #define Optron1_1_EXTI_IRQn EXTI1_IRQn

@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V9.70.1.475/W64 for ARM                  27/Jan/2026  16:25:57
+# IAR ELF Linker V9.70.1.475/W64 for ARM                  27/Jan/2026  17:09:51
 # Copyright 2007-2025 IAR Systems AB.
 #
 #    Output file  =
@@ -384,7 +384,7 @@ Expander_WritePin        0x800'1d35   0x30  Code  Lc  main.o [2]
 FLASH_IRQHandler         0x800'3c0d         Code  Wk  startup_stm32f103xb.o [3]
 HAL_DMA_Abort_IT         0x800'2521   0xb4  Code  Gb  stm32f1xx_hal_dma.o [4]
 HAL_DMA_GetState         0x800'25f1    0x6  Code  Gb  stm32f1xx_hal_dma.o [4]
-HAL_GPIO_EXTI_Callback   0x800'23b9   0xba  Code  Gb  main.o [2]
+HAL_GPIO_EXTI_Callback   0x800'23bd   0xba  Code  Gb  main.o [2]
 HAL_GPIO_EXTI_IRQHandler
                          0x800'28af   0x20  Code  Gb  stm32f1xx_hal_gpio.o [4]
 HAL_GPIO_Init            0x800'2661  0x21e  Code  Gb  stm32f1xx_hal_gpio.o [4]
@@ -393,15 +393,15 @@ HAL_GPIO_WritePin        0x800'2895   0x1a  Code  Gb  stm32f1xx_hal_gpio.o [4]
 HAL_GetTick              0x800'2a69    0xc  Code  Wk  stm32f1xx_hal.o [4]
 HAL_I2C_AbortCpltCallback
                          0x800'25f7    0x2  Code  Wk  stm32f1xx_hal_i2c.o [4]
-HAL_I2C_AddrCallback     0x800'22af   0x9c  Code  Gb  main.o [2]
+HAL_I2C_AddrCallback     0x800'22b3   0x9c  Code  Gb  main.o [2]
 HAL_I2C_ER_IRQHandler    0x800'0627   0xf8  Code  Gb  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_EV_IRQHandler    0x800'0461  0x1c6  Code  Gb  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_EnableListen_IT
                          0x800'041d   0x44  Code  Gb  stm32f1xx_hal_i2c.o [4]
-HAL_I2C_ErrorCallback    0x800'23a5   0x14  Code  Gb  main.o [2]
+HAL_I2C_ErrorCallback    0x800'23a9   0x14  Code  Gb  main.o [2]
 HAL_I2C_Init             0x800'00ed  0x1d2  Code  Gb  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_ListenCpltCallback
-                         0x800'2391   0x14  Code  Gb  main.o [2]
+                         0x800'2395   0x14  Code  Gb  main.o [2]
 HAL_I2C_MasterRxCpltCallback
                          0x800'1d33    0x2  Code  Wk  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_MasterTxCpltCallback
@@ -412,7 +412,7 @@ HAL_I2C_MemTxCpltCallback
                          0x800'1d2f    0x2  Code  Wk  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_MspInit          0x800'15ad   0x78  Code  Gb  stm32f1xx_hal_msp.o [2]
 HAL_I2C_SlaveRxCpltCallback
-                         0x800'234b   0x46  Code  Gb  main.o [2]
+                         0x800'234f   0x46  Code  Gb  main.o [2]
 HAL_I2C_SlaveTxCpltCallback
                          0x800'24f5    0x2  Code  Wk  stm32f1xx_hal_i2c.o [4]
 HAL_I2C_Slave_Seq_Receive_IT
@@ -458,7 +458,7 @@ HAL_TIM_OC_DelayElapsedCallback
 HAL_TIM_PWM_PulseFinishedCallback
                          0x800'395b    0x2  Code  Wk  stm32f1xx_hal_tim.o [4]
 HAL_TIM_PeriodElapsedCallback
-                         0x800'2267   0x48  Code  Gb  main.o [2]
+                         0x800'226b   0x48  Code  Gb  main.o [2]
 HAL_TIM_PeriodElapsedCallback::on3_3_ones
                         0x2000'0365    0x1  Data  Lc  main.o [2]
 HAL_TIM_TriggerCallback
@@ -500,7 +500,7 @@ Ktv_Process              0x800'2c91   0x3e  Code  Gb  ktv.o [2]
 Ktv_ProcessProfile       0x800'2deb  0x22c  Code  Lc  ktv.o [2]
 Ktv_Start                0x800'2b2d   0x36  Code  Lc  ktv.o [2]
 Ktv_TickISR              0x800'2b63  0x12e  Code  Gb  ktv.o [2]
-MX_GPIO_Init             0x800'206f  0x1f8  Code  Lc  main.o [2]
+MX_GPIO_Init             0x800'206f  0x1fc  Code  Lc  main.o [2]
 MX_I2C1_Init             0x800'1f7d   0x3e  Code  Lc  main.o [2]
 MX_TIM2_Init             0x800'1fbb   0x78  Code  Lc  main.o [2]
 MX_USART2_Init           0x800'2033   0x3c  Code  Lc  main.o [2]
