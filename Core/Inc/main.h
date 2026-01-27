@@ -36,6 +36,10 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+extern volatile GPIO_PinState door;
+extern volatile GPIO_PinState error_sv;
+extern volatile GPIO_PinState on_bkk_k1;
+extern volatile GPIO_PinState on_bkk_k2;
 
 /* USER CODE END ET */
 
