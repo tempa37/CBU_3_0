@@ -109,6 +109,8 @@ volatile GPIO_PinState on_bkk_k1 = GPIO_PIN_RESET;
 volatile GPIO_PinState on_bkk_k2 = GPIO_PIN_RESET;
 volatile uint8_t direction1 = 0U;
 volatile uint8_t direction2 = 0U;
+volatile uint8_t bkk_k1_poll_required = 0U;
+volatile uint8_t bkk_k2_poll_required = 0U;
 
 /* USER CODE END PV */
 
@@ -222,17 +224,15 @@ void UpdateBkkDirections(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(On_BKK_k1_GPIO_Port, &GPIO_InitStruct);
-    HAL_NVIC_DisableIRQ(On_BKK_k1_EXTI_IRQn);
-    __HAL_GPIO_EXTI_CLEAR_IT(On_BKK_k1_Pin);
+    bkk_k1_poll_required = 0U;
   }
   else
   {
     GPIO_InitStruct.Pin = On_BKK_k1_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(On_BKK_k1_GPIO_Port, &GPIO_InitStruct);
-    __HAL_GPIO_EXTI_CLEAR_IT(On_BKK_k1_Pin);
-    HAL_NVIC_EnableIRQ(On_BKK_k1_EXTI_IRQn);
+    bkk_k1_poll_required = 1U;
   }
 
   if (direction2 == 1U)
@@ -242,17 +242,15 @@ void UpdateBkkDirections(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(On_BKK_k2_GPIO_Port, &GPIO_InitStruct);
-    HAL_NVIC_DisableIRQ(On_BKK_k2_EXTI_IRQn);
-    __HAL_GPIO_EXTI_CLEAR_IT(On_BKK_k2_Pin);
+    bkk_k2_poll_required = 0U;
   }
   else
   {
     GPIO_InitStruct.Pin = On_BKK_k2_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(On_BKK_k2_GPIO_Port, &GPIO_InitStruct);
-    __HAL_GPIO_EXTI_CLEAR_IT(On_BKK_k2_Pin);
-    HAL_NVIC_EnableIRQ(On_BKK_k2_EXTI_IRQn);
+    bkk_k2_poll_required = 1U;
   }
 }
 
