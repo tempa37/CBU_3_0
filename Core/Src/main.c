@@ -125,6 +125,11 @@ static void MX_TIM2_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 static uint8_t active_rx_size = 0U;
+static volatile uint32_t tim2_tick_count = 0U;
+static uint8_t on_3v3_enabled = 0U;
+
+#define ON_3V3_ENABLE_DELAY_MS (10000U)
+#define ON_3V3_ENABLE_DELAY_TICKS (ON_3V3_ENABLE_DELAY_MS / KTV_TICK_IN_MSEC)
 
 static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_PinState state)
 {
@@ -489,8 +494,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, Break_K_p_Pin|PCF_INT_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, Rele_1_Pin|Rele_5_Pin|DISP_LIGHT_BUF_Pin|PWR_KTV_BUF_Pin
-                          |ON_3_3V_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOB, Rele_1_Pin|Rele_5_Pin|DISP_LIGHT_BUF_Pin|PWR_KTV_BUF_Pin, GPIO_PIN_SET);
+
+  /* 3.3V enable should stay low after init and will be enabled later. */
+  HAL_GPIO_WritePin(ON_3_3V_GPIO_Port, ON_3_3V_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, Rele_2_Pin|Rele_3_Pin|Rele_4_Pin, GPIO_PIN_SET);
@@ -591,6 +598,15 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if (htim->Instance == TIM2) {
+    if (on_3v3_enabled == 0U)
+    {
+      tim2_tick_count++;
+      if (tim2_tick_count >= ON_3V3_ENABLE_DELAY_TICKS)
+      {
+        on_3v3_enabled = 1U;
+        HAL_GPIO_WritePin(ON_3_3V_GPIO_Port, ON_3_3V_Pin, GPIO_PIN_SET);
+      }
+    }
     Ktv_TickISR();
   }
 }
