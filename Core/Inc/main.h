@@ -77,6 +77,7 @@ void Error_Handler(void);
 void UpdateBkkDirections(void);
 uint16_t Modbus_BuildReadRegister(void);
 void Modbus_ApplyWriteRegister(uint16_t value);
+void Modbus_ApplyConfig(void);
 
 /* USER CODE END EFP */
 
