@@ -167,9 +167,13 @@ volatile OptronState optron1_1_state = OPTRON_STATE_LOW;
 volatile OptronState optron1_2_state = OPTRON_STATE_LOW;
 volatile OptronState optron2_1_state = OPTRON_STATE_LOW;
 volatile OptronState optron2_2_state = OPTRON_STATE_LOW;
+
 volatile uint8_t kontur1_kz = 0U;
 volatile uint8_t kontur1_diod = 0U;
 volatile uint8_t kontur1_obryv = 0U;
+volatile uint8_t kontur2_kz = 0U;
+volatile uint8_t kontur2_diod = 0U;
+volatile uint8_t kontur2_obryv = 0U;
 
 static void Optron_ProcessFrame(void)
 {
@@ -263,6 +267,41 @@ static void Optron_ProcessFrame(void)
       kontur1_diod = 1U;
     }
   }
+  
+  
+  /* Таблица соответствий для контура 2. */
+  uint8_t optron2_1_meander = (optron2_1_state == OPTRON_STATE_NOISE) ? 1U : 0U;
+  uint8_t optron2_2_meander = (optron2_2_state == OPTRON_STATE_NOISE) ? 1U : 0U;
+  uint8_t optron2_1_high = (optron2_1_state == OPTRON_STATE_HIGH) ? 1U : 0U;
+  uint8_t optron2_2_high = (optron2_2_state == OPTRON_STATE_HIGH) ? 1U : 0U;
+  uint8_t bkk_k2_high = (on_bkk_k2 == GPIO_PIN_SET) ? 1U : 0U;
+
+  kontur2_kz = 0U;
+  kontur2_diod = 0U;
+  kontur2_obryv = 0U;
+
+  if (bkk_k2_high == 1U)
+  {
+    if ((optron2_1_meander == 1U) && (optron2_2_meander == 1U))
+    {
+      kontur2_kz = 1U;
+    }
+    else if ((optron2_1_high == 1U) && (optron2_2_high == 1U))
+    {
+      kontur2_obryv = 1U;
+    }
+  }
+  else
+  {
+    if (((optron2_1_meander == 1U) && (optron2_2_high == 1U)) ||
+        ((optron2_1_high == 1U) && (optron2_2_meander == 1U)))
+    {
+      kontur2_diod = 1U;
+    }
+  }
+  
+  
+  
 }
 
 static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_PinState state)
@@ -361,7 +400,7 @@ void UpdateBkkDirections(void)
   else
   {
     GPIO_InitStruct.Pin = On_BKK_k1_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(On_BKK_k1_GPIO_Port, &GPIO_InitStruct);
     bkk_k1_poll_required = 1U;
@@ -379,7 +418,7 @@ void UpdateBkkDirections(void)
   else
   {
     GPIO_InitStruct.Pin = On_BKK_k2_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(On_BKK_k2_GPIO_Port, &GPIO_InitStruct);
     bkk_k2_poll_required = 1U;
@@ -505,10 +544,10 @@ static void MX_I2C1_Init(void)
   hi2c1.Instance = I2C1;
   hi2c1.Init.ClockSpeed = 100000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.OwnAddress1 = I2C_EXPANDER16_ADDR;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_ENABLE;
+  hi2c1.Init.OwnAddress2 = I2C_EXPANDER8_ADDR;
   hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
   hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
   if (HAL_I2C_Init(&hi2c1) != HAL_OK)
@@ -695,7 +734,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : Optron1_2_Pin Optron1_1_Pin */
   GPIO_InitStruct.Pin = Optron1_2_Pin|Optron1_1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -706,9 +745,9 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(Sv_kont_p_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : On_BKK_k1_Pin On_BKK_k2_Pin */
-  GPIO_InitStruct.Pin = On_BKK_k1_Pin|On_BKK_k2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  /*Configure GPIO pins : On_BKK_k1_Pin On_BKK_k2_Pin error_sv_Pin SD_SW_Pin */
+  GPIO_InitStruct.Pin = On_BKK_k1_Pin|On_BKK_k2_Pin|error_sv_Pin|SD_SW_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
@@ -719,9 +758,9 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(Break_K_p_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : error_sv_Pin Optron2_2_Pin Optron2_1_Pin SD_SW_Pin */
-  GPIO_InitStruct.Pin = error_sv_Pin|Optron2_2_Pin|Optron2_1_Pin|SD_SW_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  /*Configure GPIO pins : Optron2_2_Pin Optron2_1_Pin */
+  GPIO_InitStruct.Pin = Optron2_2_Pin|Optron2_1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
@@ -773,7 +812,10 @@ static void MX_GPIO_Init(void)
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
-
+  on_bkk_k1 = HAL_GPIO_ReadPin(On_BKK_k1_GPIO_Port, On_BKK_k1_Pin);
+  on_bkk_k2 = HAL_GPIO_ReadPin(On_BKK_k2_GPIO_Port, On_BKK_k2_Pin);
+  error_sv  = HAL_GPIO_ReadPin(error_sv_GPIO_Port, error_sv_Pin);
+  door      = HAL_GPIO_ReadPin(DOOR_GPIO_Port, DOOR_Pin);
   /* USER CODE END MX_GPIO_Init_2 */
 }
 
