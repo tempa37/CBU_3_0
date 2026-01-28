@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V9.70.1.475/W64 for ARM                  28/Jan/2026  16:07:58
+# IAR ELF Linker V9.70.1.475/W64 for ARM                  28/Jan/2026  16:12:44
 # Copyright 2007-2025 IAR Systems AB.
 #
 #    Output file  =
@@ -15,6 +15,8 @@
 #        (2)\Obj\Core_13247989168731456611.dir\ktv.o"
 #        "C:\Users\User\Desktop\CBU_3.0\EWARM\ײֱ׃_סכויג ּÊ
 #        (2)\Obj\Core_13247989168731456611.dir\main.o"
+#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ײֱ׃_סכויג ּÊ
+#        (2)\Obj\Core_13247989168731456611.dir\mbcrc.o"
 #        "C:\Users\User\Desktop\CBU_3.0\EWARM\ײֱ׃_סכויג ּÊ
 #        (2)\Obj\EWARM_18443280873093131863.dir\startup_stm32f103xb.o"
 #        "C:\Users\User\Desktop\CBU_3.0\EWARM\ײֱ׃_סכויג ּÊ
