@@ -44,6 +44,19 @@ extern volatile uint8_t direction1;
 extern volatile uint8_t direction2;
 extern volatile uint8_t bkk_k1_poll_required;
 extern volatile uint8_t bkk_k2_poll_required;
+extern volatile uint8_t modbus_cfg1;
+extern volatile uint8_t modbus_cfg2;
+extern volatile uint8_t modbus_cfg3;
+extern volatile uint8_t modbus_cfg4;
+extern volatile uint8_t modbus_cfg5;
+extern volatile uint8_t modbus_cfg6;
+extern volatile uint8_t modbus_cfg7;
+extern volatile uint8_t modbus_cfg8;
+extern volatile uint8_t modbus_exec_config;
+extern volatile uint8_t modbus_on_3v3;
+extern volatile uint8_t modbus_break_k_p;
+extern volatile uint8_t modbus_sv_kont_p;
+extern volatile uint16_t modbus_write_register;
 
 /* USER CODE END ET */
 
@@ -63,6 +76,7 @@ void Error_Handler(void);
 /* USER CODE BEGIN EFP */
 void UpdateBkkDirections(void);
 uint16_t Modbus_BuildReadRegister(void);
+void Modbus_ApplyWriteRegister(uint16_t value);
 
 /* USER CODE END EFP */
 
@@ -131,6 +145,20 @@ uint16_t Modbus_BuildReadRegister(void);
 #define MODBUS_READ_BIT_ERROR         (7U)
 #define MODBUS_READ_BIT_ON_BKK_K1     (6U)
 #define MODBUS_READ_BIT_ON_BKK_K2     (5U)
+
+/* Регистр Modbus для записи: соответствие битов (резерв не используем). */
+#define MODBUS_WRITE_BIT_CFG8         (15U)
+#define MODBUS_WRITE_BIT_CFG7         (14U)
+#define MODBUS_WRITE_BIT_CFG6         (13U)
+#define MODBUS_WRITE_BIT_CFG5         (12U)
+#define MODBUS_WRITE_BIT_CFG4         (11U)
+#define MODBUS_WRITE_BIT_CFG3         (10U)
+#define MODBUS_WRITE_BIT_CFG2         (9U)
+#define MODBUS_WRITE_BIT_CFG1         (8U)
+#define MODBUS_WRITE_BIT_EXEC_CONFIG  (7U)
+#define MODBUS_WRITE_BIT_SV_KONT_P    (5U)
+#define MODBUS_WRITE_BIT_BREAK_K_P    (3U)
+#define MODBUS_WRITE_BIT_ON_3V3       (0U)
 
 /* USER CODE END Private defines */
 

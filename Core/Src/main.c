@@ -112,6 +112,19 @@ volatile uint8_t direction1 = 0U;
 volatile uint8_t direction2 = 0U;
 volatile uint8_t bkk_k1_poll_required = 0U;
 volatile uint8_t bkk_k2_poll_required = 0U;
+volatile uint8_t modbus_cfg1 = 0U;
+volatile uint8_t modbus_cfg2 = 0U;
+volatile uint8_t modbus_cfg3 = 0U;
+volatile uint8_t modbus_cfg4 = 0U;
+volatile uint8_t modbus_cfg5 = 0U;
+volatile uint8_t modbus_cfg6 = 0U;
+volatile uint8_t modbus_cfg7 = 0U;
+volatile uint8_t modbus_cfg8 = 0U;
+volatile uint8_t modbus_exec_config = 0U;
+volatile uint8_t modbus_on_3v3 = 0U;
+volatile uint8_t modbus_break_k_p = 0U;
+volatile uint8_t modbus_sv_kont_p = 0U;
+volatile uint16_t modbus_write_register = 0U;
 
 
 
@@ -481,6 +494,63 @@ uint16_t Modbus_BuildReadRegister(void)
   }
 
   return value;
+}
+
+void Modbus_ApplyWriteRegister(uint16_t value)
+{
+  uint8_t cfg_count = 0U;
+
+  modbus_write_register = value;
+
+  modbus_cfg8 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG8) & 0x1U);
+  modbus_cfg7 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG7) & 0x1U);
+  modbus_cfg6 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG6) & 0x1U);
+  modbus_cfg5 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG5) & 0x1U);
+  modbus_cfg4 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG4) & 0x1U);
+  modbus_cfg3 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG3) & 0x1U);
+  modbus_cfg2 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG2) & 0x1U);
+  modbus_cfg1 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG1) & 0x1U);
+
+  cfg_count = (uint8_t)(modbus_cfg1 + modbus_cfg2 + modbus_cfg3 + modbus_cfg4 +
+                        modbus_cfg5 + modbus_cfg6 + modbus_cfg7 + modbus_cfg8);
+  if (cfg_count > 1U)
+  {
+    modbus_cfg1 = 0U;
+    modbus_cfg2 = 0U;
+    modbus_cfg3 = 0U;
+    modbus_cfg4 = 0U;
+    modbus_cfg5 = 0U;
+    modbus_cfg6 = 0U;
+    modbus_cfg7 = 0U;
+    modbus_cfg8 = 0U;
+  }
+
+  modbus_exec_config = (uint8_t)((value >> MODBUS_WRITE_BIT_EXEC_CONFIG) & 0x1U);
+  modbus_on_3v3 = (uint8_t)((value >> MODBUS_WRITE_BIT_ON_3V3) & 0x1U);
+  modbus_break_k_p = (uint8_t)((value >> MODBUS_WRITE_BIT_BREAK_K_P) & 0x1U);
+  modbus_sv_kont_p = (uint8_t)((value >> MODBUS_WRITE_BIT_SV_KONT_P) & 0x1U);
+
+  if (modbus_exec_config != 0U)
+  {
+    modbus_break_k_p = 0U;
+    modbus_sv_kont_p = 0U;
+  }
+
+  if (modbus_on_3v3 != 0U)
+  {
+    on_3v3_enabled = 1U;
+    HAL_GPIO_WritePin(ON_3_3V_GPIO_Port, ON_3_3V_Pin, GPIO_PIN_SET);
+  }
+  else
+  {
+    on_3v3_enabled = 1U;
+    HAL_GPIO_WritePin(ON_3_3V_GPIO_Port, ON_3_3V_Pin, GPIO_PIN_RESET);
+  }
+
+  HAL_GPIO_WritePin(Break_K_p_GPIO_Port, Break_K_p_Pin,
+                    (modbus_break_k_p != 0U) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Sv_kont_p_GPIO_Port, Sv_kont_p_Pin,
+                    (modbus_sv_kont_p != 0U) ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
 /* USER CODE END 0 */
