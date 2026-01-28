@@ -135,6 +135,102 @@ static uint8_t on_3v3_enabled = 0U;
 #define ON_3V3_ENABLE_DELAY_MS (10000U)
 #define ON_3V3_ENABLE_DELAY_TICKS (ON_3V3_ENABLE_DELAY_MS / KTV_TICK_IN_MSEC)
 
+/* Буфер/анализ оптронов: выбор 250 мс окна при частоте 1 кГц. */
+#define OPTRON_SAMPLE_RATE_HZ 1000U
+#define OPTRON_FRAME_MS 250U
+#define OPTRON_EVAL_PERIOD_MS 1000U
+#define OPTRON_FRAME_SAMPLES ((OPTRON_SAMPLE_RATE_HZ * OPTRON_FRAME_MS) / 1000U)
+#define OPTRON_EVAL_TICKS ((OPTRON_SAMPLE_RATE_HZ * OPTRON_EVAL_PERIOD_MS) / 1000U)
+#define OPTRON_NOISE_MIN_PERCENT 40U
+#define OPTRON_NOISE_MAX_PERCENT 60U
+
+typedef enum
+{
+  OPTRON_STATE_LOW = 0U,
+  OPTRON_STATE_HIGH = 1U,
+  OPTRON_STATE_NOISE = 2U
+} OptronState;
+
+/* Биты в выборке для четырёх оптронов. */
+#define OPTRON_SAMPLE_1_1 (1U << 0)
+#define OPTRON_SAMPLE_1_2 (1U << 1)
+#define OPTRON_SAMPLE_2_1 (1U << 2)
+#define OPTRON_SAMPLE_2_2 (1U << 3)
+
+static volatile uint8_t optron_samples[OPTRON_FRAME_SAMPLES];
+static volatile uint16_t optron_sample_index = 0U;
+static volatile uint16_t optron_cycle_tick = 0U;
+static volatile uint8_t optron_eval_pending = 0U;
+
+/* Текущее состояние входов оптронов после фильтрации. */
+volatile OptronState optron1_1_state = OPTRON_STATE_LOW;
+volatile OptronState optron1_2_state = OPTRON_STATE_LOW;
+volatile OptronState optron2_1_state = OPTRON_STATE_LOW;
+volatile OptronState optron2_2_state = OPTRON_STATE_LOW;
+
+static void Optron_ProcessFrame(void)
+{
+  uint8_t frame_copy[OPTRON_FRAME_SAMPLES];
+  uint16_t ones_1_1 = 0U;
+  uint16_t ones_1_2 = 0U;
+  uint16_t ones_2_1 = 0U;
+  uint16_t ones_2_2 = 0U;
+
+  if (optron_eval_pending == 0U)
+  {
+    return;
+  }
+
+  /* Копируем буфер быстро, чтобы не мешать прерыванию TIM1. */
+  __disable_irq();
+  for (uint16_t i = 0U; i < OPTRON_FRAME_SAMPLES; i++)
+  {
+    frame_copy[i] = optron_samples[i];
+  }
+  optron_eval_pending = 0U;
+  __enable_irq();
+
+  for (uint16_t i = 0U; i < OPTRON_FRAME_SAMPLES; i++)
+  {
+    uint8_t sample = frame_copy[i];
+    if ((sample & OPTRON_SAMPLE_1_1) != 0U)
+    {
+      ones_1_1++;
+    }
+    if ((sample & OPTRON_SAMPLE_1_2) != 0U)
+    {
+      ones_1_2++;
+    }
+    if ((sample & OPTRON_SAMPLE_2_1) != 0U)
+    {
+      ones_2_1++;
+    }
+    if ((sample & OPTRON_SAMPLE_2_2) != 0U)
+    {
+      ones_2_2++;
+    }
+  }
+
+  /* Классификация по заполнению: 40-60% = зашумленный меандр. */
+  uint8_t percent_1_1 = (uint8_t)((ones_1_1 * 100U) / OPTRON_FRAME_SAMPLES);
+  uint8_t percent_1_2 = (uint8_t)((ones_1_2 * 100U) / OPTRON_FRAME_SAMPLES);
+  uint8_t percent_2_1 = (uint8_t)((ones_2_1 * 100U) / OPTRON_FRAME_SAMPLES);
+  uint8_t percent_2_2 = (uint8_t)((ones_2_2 * 100U) / OPTRON_FRAME_SAMPLES);
+
+  optron1_1_state = (percent_1_1 < OPTRON_NOISE_MIN_PERCENT) ? OPTRON_STATE_LOW :
+                    (percent_1_1 > OPTRON_NOISE_MAX_PERCENT) ? OPTRON_STATE_HIGH :
+                    OPTRON_STATE_NOISE;
+  optron1_2_state = (percent_1_2 < OPTRON_NOISE_MIN_PERCENT) ? OPTRON_STATE_LOW :
+                    (percent_1_2 > OPTRON_NOISE_MAX_PERCENT) ? OPTRON_STATE_HIGH :
+                    OPTRON_STATE_NOISE;
+  optron2_1_state = (percent_2_1 < OPTRON_NOISE_MIN_PERCENT) ? OPTRON_STATE_LOW :
+                    (percent_2_1 > OPTRON_NOISE_MAX_PERCENT) ? OPTRON_STATE_HIGH :
+                    OPTRON_STATE_NOISE;
+  optron2_2_state = (percent_2_2 < OPTRON_NOISE_MIN_PERCENT) ? OPTRON_STATE_LOW :
+                    (percent_2_2 > OPTRON_NOISE_MAX_PERCENT) ? OPTRON_STATE_HIGH :
+                    OPTRON_STATE_NOISE;
+}
+
 static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_PinState state)
 {
   if (map[index].port != NULL)
@@ -311,6 +407,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    /* Обработка результатов измерения оптронов в основном цикле. */
+    Optron_ProcessFrame();
     Ktv_Process();
   }
   /* USER CODE END 3 */
@@ -667,6 +765,52 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
       }
     }
     Ktv_TickISR();
+  }
+  else if (htim->Instance == TIM1)
+  {
+    uint8_t sample = 0U;
+
+    /* Снимаем состояние оптронов каждые 1 мс в кольцевой буфер. */
+    if (HAL_GPIO_ReadPin(Optron1_1_GPIO_Port, Optron1_1_Pin) == GPIO_PIN_SET)
+    {
+      sample |= OPTRON_SAMPLE_1_1;
+    }
+    if (HAL_GPIO_ReadPin(Optron1_2_GPIO_Port, Optron1_2_Pin) == GPIO_PIN_SET)
+    {
+      sample |= OPTRON_SAMPLE_1_2;
+    }
+    if (HAL_GPIO_ReadPin(Optron2_1_GPIO_Port, Optron2_1_Pin) == GPIO_PIN_SET)
+    {
+      sample |= OPTRON_SAMPLE_2_1;
+    }
+    if (HAL_GPIO_ReadPin(Optron2_2_GPIO_Port, Optron2_2_Pin) == GPIO_PIN_SET)
+    {
+      sample |= OPTRON_SAMPLE_2_2;
+    }
+
+    /* Окно сбора 250 мс, далее 750 мс пауза до следующего цикла. */
+    if (optron_cycle_tick < OPTRON_FRAME_SAMPLES)
+    {
+      optron_samples[optron_sample_index] = sample;
+      optron_sample_index++;
+      if (optron_sample_index >= OPTRON_FRAME_SAMPLES)
+      {
+        optron_sample_index = 0U;
+      }
+
+      /* По окончании окна разрешаем анализ буфера. */
+      if (optron_cycle_tick == (OPTRON_FRAME_SAMPLES - 1U))
+      {
+        optron_eval_pending = 1U;
+      }
+    }
+
+    /* Полный цикл 1 секунда: окно 250 мс + пауза 750 мс. */
+    optron_cycle_tick++;
+    if (optron_cycle_tick >= OPTRON_EVAL_TICKS)
+    {
+      optron_cycle_tick = 0U;
+    }
   }
 }
 
