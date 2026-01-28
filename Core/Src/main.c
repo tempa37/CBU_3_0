@@ -113,6 +113,10 @@ volatile uint8_t direction2 = 0U;
 volatile uint8_t bkk_k1_poll_required = 0U;
 volatile uint8_t bkk_k2_poll_required = 0U;
 
+
+
+static inline void EXTI_DisableLine(uint16_t pinmask);
+static inline void EXTI_EnableLine(uint16_t pinmask);
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -394,8 +398,10 @@ void UpdateBkkDirections(void)
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    EXTI_DisableLine(On_BKK_k1_Pin);
     HAL_GPIO_Init(On_BKK_k1_GPIO_Port, &GPIO_InitStruct);
     bkk_k1_poll_required = 0U;
+
   }
   else
   {
@@ -404,6 +410,7 @@ void UpdateBkkDirections(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(On_BKK_k1_GPIO_Port, &GPIO_InitStruct);
     bkk_k1_poll_required = 1U;
+    EXTI_EnableLine(On_BKK_k1_Pin);
   }
 
   if (direction2 == 1U)
@@ -412,8 +419,10 @@ void UpdateBkkDirections(void)
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    EXTI_DisableLine(On_BKK_k2_Pin); 
     HAL_GPIO_Init(On_BKK_k2_GPIO_Port, &GPIO_InitStruct);
     bkk_k2_poll_required = 0U;
+    
   }
   else
   {
@@ -422,6 +431,7 @@ void UpdateBkkDirections(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(On_BKK_k2_GPIO_Port, &GPIO_InitStruct);
     bkk_k2_poll_required = 1U;
+    EXTI_EnableLine(On_BKK_k2_Pin);
   }
 }
 
@@ -1032,6 +1042,20 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
   sd_sw_last_state = current_state;
 }
+
+
+static inline void EXTI_DisableLine(uint16_t pinmask)
+{
+  EXTI->IMR &= ~pinmask;   // запретить прерывание по линии
+  EXTI->PR   =  pinmask;   // сбросить pending, чтобы не прилетело сразу после enable
+}
+
+static inline void EXTI_EnableLine(uint16_t pinmask)
+{
+  EXTI->PR   =  pinmask;   // сбросить pending
+  EXTI->IMR |=  pinmask;   // разрешить прерывания
+}
+
 
 /* USER CODE END 4 */
 
