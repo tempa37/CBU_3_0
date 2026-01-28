@@ -522,7 +522,7 @@ void Modbus_ApplyWriteRegister(uint16_t value)
     modbus_cfg5 = 0U;
     modbus_cfg6 = 0U;
     modbus_cfg7 = 0U;
-    modbus_cfg8 = 0U;
+    modbus_cfg8 = 0U;    //запрещаем включить более 1й предустановки
   }
 
   modbus_exec_config = (uint8_t)((value >> MODBUS_WRITE_BIT_EXEC_CONFIG) & 0x1U);
@@ -532,7 +532,7 @@ void Modbus_ApplyWriteRegister(uint16_t value)
 
   if (modbus_exec_config != 0U)
   {
-    modbus_break_k_p = 0U;
+    modbus_break_k_p = 0U;   
     modbus_sv_kont_p = 0U;
   }
 
@@ -543,7 +543,7 @@ void Modbus_ApplyWriteRegister(uint16_t value)
   }
   else
   {
-    on_3v3_enabled = 1U;
+    on_3v3_enabled = 0U;
     HAL_GPIO_WritePin(ON_3_3V_GPIO_Port, ON_3_3V_Pin, GPIO_PIN_RESET);
   }
 
