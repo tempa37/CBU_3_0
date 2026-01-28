@@ -167,6 +167,9 @@ volatile OptronState optron1_1_state = OPTRON_STATE_LOW;
 volatile OptronState optron1_2_state = OPTRON_STATE_LOW;
 volatile OptronState optron2_1_state = OPTRON_STATE_LOW;
 volatile OptronState optron2_2_state = OPTRON_STATE_LOW;
+volatile uint8_t kontur1_kz = 0U;
+volatile uint8_t kontur1_diod = 0U;
+volatile uint8_t kontur1_obryv = 0U;
 
 static void Optron_ProcessFrame(void)
 {
@@ -229,6 +232,37 @@ static void Optron_ProcessFrame(void)
   optron2_2_state = (percent_2_2 < OPTRON_NOISE_MIN_PERCENT) ? OPTRON_STATE_LOW :
                     (percent_2_2 > OPTRON_NOISE_MAX_PERCENT) ? OPTRON_STATE_HIGH :
                     OPTRON_STATE_NOISE;
+
+  /* Таблица соответствий для контура 1. */
+  uint8_t optron1_1_meander = (optron1_1_state == OPTRON_STATE_NOISE) ? 1U : 0U;
+  uint8_t optron1_2_meander = (optron1_2_state == OPTRON_STATE_NOISE) ? 1U : 0U;
+  uint8_t optron1_1_high = (optron1_1_state == OPTRON_STATE_HIGH) ? 1U : 0U;
+  uint8_t optron1_2_high = (optron1_2_state == OPTRON_STATE_HIGH) ? 1U : 0U;
+  uint8_t bkk_k1_high = (on_bkk_k1 == GPIO_PIN_SET) ? 1U : 0U;
+
+  kontur1_kz = 0U;
+  kontur1_diod = 0U;
+  kontur1_obryv = 0U;
+
+  if (bkk_k1_high == 1U)
+  {
+    if ((optron1_1_meander == 1U) && (optron1_2_meander == 1U))
+    {
+      kontur1_kz = 1U;
+    }
+    else if ((optron1_1_high == 1U) && (optron1_2_high == 1U))
+    {
+      kontur1_obryv = 1U;
+    }
+  }
+  else
+  {
+    if (((optron1_1_meander == 1U) && (optron1_2_high == 1U)) ||
+        ((optron1_1_high == 1U) && (optron1_2_meander == 1U)))
+    {
+      kontur1_diod = 1U;
+    }
+  }
 }
 
 static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_PinState state)
