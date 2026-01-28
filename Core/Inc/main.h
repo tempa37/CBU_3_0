@@ -62,7 +62,7 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 void UpdateBkkDirections(void);
-uint16_t Modbus_BuildWriteRegister(void);
+uint16_t Modbus_BuildReadRegister(void);
 
 /* USER CODE END EFP */
 
@@ -120,17 +120,17 @@ uint16_t Modbus_BuildWriteRegister(void);
 #define ON_3_3V_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-/* Регистр Modbus для записи: соответствие битов (бит 8 и 4..0 зарезервированы). */
-#define MODBUS_WRITE_BIT_KONTUR1_KZ    (15U)
-#define MODBUS_WRITE_BIT_KONTUR1_DIOD  (14U)
-#define MODBUS_WRITE_BIT_KONTUR2_KZ    (13U)
-#define MODBUS_WRITE_BIT_KONTUR2_DIOD  (12U)
-#define MODBUS_WRITE_BIT_KONTUR1_OBRYV (11U)
-#define MODBUS_WRITE_BIT_KONTUR2_OBRYV (10U)
-#define MODBUS_WRITE_BIT_DOOR          (9U)
-#define MODBUS_WRITE_BIT_ERROR         (7U)
-#define MODBUS_WRITE_BIT_ON_BKK_K1     (6U)
-#define MODBUS_WRITE_BIT_ON_BKK_K2     (5U)
+/* Регистр Modbus для чтения: соответствие битов (бит 8 и 4..0 зарезервированы). */
+#define MODBUS_READ_BIT_KONTUR1_KZ    (15U)
+#define MODBUS_READ_BIT_KONTUR1_DIOD  (14U)
+#define MODBUS_READ_BIT_KONTUR2_KZ    (13U)
+#define MODBUS_READ_BIT_KONTUR2_DIOD  (12U)
+#define MODBUS_READ_BIT_KONTUR1_OBRYV (11U)
+#define MODBUS_READ_BIT_KONTUR2_OBRYV (10U)
+#define MODBUS_READ_BIT_DOOR          (9U)
+#define MODBUS_READ_BIT_ERROR         (7U)
+#define MODBUS_READ_BIT_ON_BKK_K1     (6U)
+#define MODBUS_READ_BIT_ON_BKK_K2     (5U)
 
 /* USER CODE END Private defines */
 

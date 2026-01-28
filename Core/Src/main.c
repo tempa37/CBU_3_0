@@ -435,49 +435,49 @@ void UpdateBkkDirections(void)
   }
 }
 
-uint16_t Modbus_BuildWriteRegister(void)
+uint16_t Modbus_BuildReadRegister(void)
 {
   uint16_t value = 0U;
 
   if (kontur1_kz != 0U)
   {
-    value |= (uint16_t)(1U << MODBUS_WRITE_BIT_KONTUR1_KZ);
+    value |= (uint16_t)(1U << MODBUS_READ_BIT_KONTUR1_KZ);
   }
   if (kontur1_diod != 0U)
   {
-    value |= (uint16_t)(1U << MODBUS_WRITE_BIT_KONTUR1_DIOD);
+    value |= (uint16_t)(1U << MODBUS_READ_BIT_KONTUR1_DIOD);
   }
   if (kontur2_kz != 0U)
   {
-    value |= (uint16_t)(1U << MODBUS_WRITE_BIT_KONTUR2_KZ);
+    value |= (uint16_t)(1U << MODBUS_READ_BIT_KONTUR2_KZ);
   }
   if (kontur2_diod != 0U)
   {
-    value |= (uint16_t)(1U << MODBUS_WRITE_BIT_KONTUR2_DIOD);
+    value |= (uint16_t)(1U << MODBUS_READ_BIT_KONTUR2_DIOD);
   }
   if (kontur1_obryv != 0U)
   {
-    value |= (uint16_t)(1U << MODBUS_WRITE_BIT_KONTUR1_OBRYV);
+    value |= (uint16_t)(1U << MODBUS_READ_BIT_KONTUR1_OBRYV);
   }
   if (kontur2_obryv != 0U)
   {
-    value |= (uint16_t)(1U << MODBUS_WRITE_BIT_KONTUR2_OBRYV);
+    value |= (uint16_t)(1U << MODBUS_READ_BIT_KONTUR2_OBRYV);
   }
   if (door == GPIO_PIN_SET)
   {
-    value |= (uint16_t)(1U << MODBUS_WRITE_BIT_DOOR);
+    value |= (uint16_t)(1U << MODBUS_READ_BIT_DOOR);
   }
   if (error_sv == GPIO_PIN_SET)
   {
-    value |= (uint16_t)(1U << MODBUS_WRITE_BIT_ERROR);
+    value |= (uint16_t)(1U << MODBUS_READ_BIT_ERROR);
   }
   if (on_bkk_k1 == GPIO_PIN_SET)
   {
-    value |= (uint16_t)(1U << MODBUS_WRITE_BIT_ON_BKK_K1);
+    value |= (uint16_t)(1U << MODBUS_READ_BIT_ON_BKK_K1);
   }
   if (on_bkk_k2 == GPIO_PIN_SET)
   {
-    value |= (uint16_t)(1U << MODBUS_WRITE_BIT_ON_BKK_K2);
+    value |= (uint16_t)(1U << MODBUS_READ_BIT_ON_BKK_K2);
   }
 
   return value;

@@ -66,3 +66,18 @@
 146	233	7913127644768302	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	6b422eb6578e0761
 146	233	7913127644768302	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	6b422eb6578e0761
 234	243	7913127645641193	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	aca44051d32d8a71
+183	658	7913148522313867	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	774d4afea8b0a855
+183	658	7913148522313867	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	774d4afea8b0a855
+179	690	7913148522274001	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/mbcrc.o	8cd3d4cad8227f83
+179	690	7913148522274001	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/mbcrc.o	8cd3d4cad8227f83
+29	720	7913148520782902	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/ktv.o	2f6ee0be4c4ba81b
+29	720	7913148520782902	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/ktv.o	2f6ee0be4c4ba81b
+174	768	7913148522234153	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
+174	768	7913148522234153	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	f22054a6e7acb5ef
+659	826	7913148527081890	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	9a8c00aafa8a9d9a
+659	826	7913148527081890	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	9a8c00aafa8a9d9a
+827	1120	7913148528752862	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	6b422eb6578e0761
+827	1120	7913148528752862	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	6b422eb6578e0761
+827	1120	7913148528752862	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	6b422eb6578e0761
+827	1120	7913148528752862	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	6b422eb6578e0761
+1121	1171	7913148531704682	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	aca44051d32d8a71
