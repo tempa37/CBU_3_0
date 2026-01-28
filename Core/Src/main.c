@@ -754,7 +754,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : Sv_kont_p_Pin */
   GPIO_InitStruct.Pin = Sv_kont_p_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(Sv_kont_p_GPIO_Port, &GPIO_InitStruct);
 
@@ -801,15 +801,22 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : KTV_ADR_Pin */
   GPIO_InitStruct.Pin = KTV_ADR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(KTV_ADR_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PWR_KTV_BUF_Pin PCF_INT_Pin */
-  GPIO_InitStruct.Pin = PWR_KTV_BUF_Pin|PCF_INT_Pin;
+  /*Configure GPIO pin : PWR_KTV_BUF_Pin */
+  GPIO_InitStruct.Pin = PWR_KTV_BUF_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(PWR_KTV_BUF_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PCF_INT_Pin */
+  GPIO_InitStruct.Pin = PCF_INT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(PCF_INT_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
