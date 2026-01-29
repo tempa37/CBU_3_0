@@ -149,6 +149,12 @@ static uint8_t active_rx_size = 0U;
 static volatile uint32_t tim2_tick_count = 0U;
 static uint8_t on_3v3_enabled = 0U;
 
+#define FLASH_CFG_START_ADDR    0x0801FC00U
+#define FLASH_CFG_EMPTY_VALUE   0xFFFFU
+
+#pragma location = ".flash_cfg"
+__root const uint16_t flash_cfg_storage = FLASH_CFG_EMPTY_VALUE;
+
 #define ON_3V3_ENABLE_DELAY_MS (10000U)
 #define ON_3V3_ENABLE_DELAY_TICKS (ON_3V3_ENABLE_DELAY_MS / KTV_TICK_IN_MSEC)
 
@@ -191,6 +197,55 @@ volatile uint8_t kontur1_obryv = 0U;
 volatile uint8_t kontur2_kz = 0U;
 volatile uint8_t kontur2_diod = 0U;
 volatile uint8_t kontur2_obryv = 0U;
+
+static uint16_t FlashConfig_Read(void)
+{
+  return *(const volatile uint16_t *)(FLASH_CFG_START_ADDR);
+}
+
+static HAL_StatusTypeDef FlashConfig_Write(uint16_t value)
+{
+  uint16_t current = FlashConfig_Read();
+  HAL_StatusTypeDef status = HAL_OK;
+  FLASH_EraseInitTypeDef erase = {0};
+  uint32_t page_error = 0U;
+
+  if (current == value)
+  {
+    return HAL_OK;
+  }
+
+  status = HAL_FLASH_Unlock();
+  if (status != HAL_OK)
+  {
+    HAL_FLASH_Lock();
+    return status;
+  }
+
+  erase.TypeErase = FLASH_TYPEERASE_PAGES;
+  erase.PageAddress = FLASH_CFG_START_ADDR;
+  erase.NbPages = 1U;
+  status = HAL_FLASHEx_Erase(&erase, &page_error);
+  if (status == HAL_OK)
+  {
+    status = HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD,
+                               FLASH_CFG_START_ADDR,
+                               value);
+  }
+
+  HAL_FLASH_Lock();
+  return status;
+}
+
+static void FlashConfig_ApplyOnBoot(void)
+{
+  uint16_t stored = FlashConfig_Read();
+
+  if (stored != FLASH_CFG_EMPTY_VALUE)
+  {
+    Modbus_ApplyWriteRegister(stored);
+  }
+}
 
 static void Optron_ProcessFrame(void)
 {
@@ -546,6 +601,7 @@ void Modbus_ApplyWriteRegister(uint16_t value)
   uint8_t cfg_count = 0U;
 
   modbus_write_register = value;
+  (void)FlashConfig_Write(value);
 
   modbus_cfg8 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG8) & 0x1U);
   modbus_cfg7 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG7) & 0x1U);
@@ -636,6 +692,7 @@ int main(void)
   pcf_int_latched = 0U;
   SetPcfIntLevel(GPIO_PIN_SET);
   Ktv_Init();
+  FlashConfig_ApplyOnBoot();
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_Base_Start_IT(&htim1);
   /* USER CODE END 2 */
