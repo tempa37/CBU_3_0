@@ -76,6 +76,7 @@ NVIC.SVCall_IRQn=true\:0\:0\:false\:false\:true\:false\:false\:false
 NVIC.SysTick_IRQn=true\:15\:0\:false\:false\:true\:false\:true\:false
 NVIC.TIM1_UP_IRQn=true\:0\:0\:false\:false\:true\:true\:true\:true
 NVIC.TIM2_IRQn=true\:0\:0\:false\:false\:true\:true\:true\:true
+NVIC.USART2_IRQn=true\:0\:0\:false\:false\:true\:true\:true\:true
 NVIC.UsageFault_IRQn=true\:0\:0\:false\:false\:true\:false\:false\:false
 PA0-WKUP.GPIOParameters=GPIO_PuPd,GPIO_Label
 PA0-WKUP.GPIO_Label=Optron1.2

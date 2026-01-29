@@ -783,7 +783,6 @@ static void MX_I2C1_Init(void)
   /* USER CODE END I2C1_Init 2 */
 
 }
-
 /**
   * @brief TIM1 Initialization Function
   * @param None
@@ -937,14 +936,11 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, Break_K_p_Pin|PCF_INT_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, Rele_1_Pin|Rele_5_Pin|DISP_LIGHT_BUF_Pin|PWR_KTV_BUF_Pin,
-                    GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, Rele_1_Pin|Rele_5_Pin|DISP_LIGHT_BUF_Pin|PWR_KTV_BUF_Pin
+                          |ON_3_3V_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(ON_3_3V_GPIO_Port, ON_3_3V_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, Rele_2_Pin|Rele_3_Pin|Rele_4_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, Rele_2_Pin|Rele_3_Pin|Rele_4_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin : MUX_SEL_Pin */
   GPIO_InitStruct.Pin = MUX_SEL_Pin;
@@ -959,18 +955,18 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(DOOR_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Optron1_2_Pin Optron1_1_Pin */
-  GPIO_InitStruct.Pin = Optron1_2_Pin|Optron1_1_Pin;
+  /*Configure GPIO pins : Optron1_2_Pin Optron1_1_Pin KTV_ADR_Pin */
+  GPIO_InitStruct.Pin = Optron1_2_Pin|Optron1_1_Pin|KTV_ADR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : Sv_kont_p_Pin */
-  GPIO_InitStruct.Pin = Sv_kont_p_Pin;
+  /*Configure GPIO pins : Sv_kont_p_Pin OE_RELE_Pin */
+  GPIO_InitStruct.Pin = Sv_kont_p_Pin|OE_RELE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(Sv_kont_p_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : On_BKK_k1_Pin On_BKK_k2_Pin error_sv_Pin SD_SW_Pin */
   GPIO_InitStruct.Pin = On_BKK_k1_Pin|On_BKK_k2_Pin|error_sv_Pin|SD_SW_Pin;
@@ -981,7 +977,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : Break_K_p_Pin */
   GPIO_InitStruct.Pin = Break_K_p_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(Break_K_p_GPIO_Port, &GPIO_InitStruct);
 
@@ -991,8 +987,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Rele_1_Pin Rele_5_Pin DISP_LIGHT_BUF_Pin ON_3_3V_Pin */
-  GPIO_InitStruct.Pin = Rele_1_Pin|Rele_5_Pin|DISP_LIGHT_BUF_Pin|ON_3_3V_Pin;
+  /*Configure GPIO pins : Rele_1_Pin Rele_5_Pin DISP_LIGHT_BUF_Pin PWR_KTV_BUF_Pin
+                           ON_3_3V_Pin */
+  GPIO_InitStruct.Pin = Rele_1_Pin|Rele_5_Pin|DISP_LIGHT_BUF_Pin|PWR_KTV_BUF_Pin
+                          |ON_3_3V_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -1004,26 +1002,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : OE_RELE_Pin */
-  GPIO_InitStruct.Pin = OE_RELE_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(OE_RELE_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : KTV_ADR_Pin */
-  GPIO_InitStruct.Pin = KTV_ADR_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(KTV_ADR_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PWR_KTV_BUF_Pin */
-  GPIO_InitStruct.Pin = PWR_KTV_BUF_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(PWR_KTV_BUF_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PCF_INT_Pin */
   GPIO_InitStruct.Pin = PCF_INT_Pin;
