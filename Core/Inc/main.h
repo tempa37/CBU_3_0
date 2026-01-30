@@ -78,6 +78,9 @@ void UpdateBkkDirections(void);
 uint16_t Modbus_BuildReadRegister(void);
 void Modbus_ApplyWriteRegister(uint16_t value);
 void Modbus_ApplyConfig(void);
+void Modbus_RxIdleCallbackFromISR(void);
+void Modbus_ProcessPacket(void);
+void Modbus_RestartUartIfNeeded(void);
 
 /* USER CODE END EFP */
 

@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "ktv.h"
+#include "mbcrc.h"
 
 /* USER CODE END Includes */
 
@@ -126,6 +127,15 @@ volatile uint8_t modbus_break_k_p = 0U;
 volatile uint8_t modbus_sv_kont_p = 0U;
 volatile uint16_t modbus_write_register = 0U;
 
+static uint8_t modbus_rx_buffer[256U];
+static uint8_t modbus_tx_buffer[256U];
+static uint8_t modbus_rx_byte = 0U;
+static volatile uint16_t modbus_rx_count = 0U;
+static volatile uint16_t modbus_packet_length = 0U;
+static volatile uint8_t modbus_packet_ready = 0U;
+static volatile uint8_t modbus_rx_locked = 0U;
+static volatile uint8_t modbus_last_error = 0U;
+
 
 
 static inline void EXTI_DisableLine(uint16_t pinmask);
@@ -148,6 +158,18 @@ static void MX_TIM1_Init(void);
 static uint8_t active_rx_size = 0U;
 static volatile uint32_t tim2_tick_count = 0U;
 static uint8_t on_3v3_enabled = 0U;
+
+#define MODBUS_SLAVE_ID               (1U)
+#define MODBUS_FUNC_READ_HOLDING      (0x03U)
+#define MODBUS_FUNC_WRITE_SINGLE      (0x06U)
+#define MODBUS_EXCEPTION_ILLEGAL_FUNC (0x01U)
+#define MODBUS_EXCEPTION_ILLEGAL_ADDR (0x02U)
+#define MODBUS_EXCEPTION_ILLEGAL_VAL  (0x03U)
+#define MODBUS_ERROR_CRC              (1U)
+#define MODBUS_ERROR_FRAME            (2U)
+#define MODBUS_ERROR_OVERFLOW         (3U)
+#define MODBUS_ERROR_UART             (4U)
+#define MODBUS_MAX_REGISTERS          (KTV_NUM_MAX + 1U)
 
 #define FLASH_CFG_START_ADDR    0x0801FC00U
 #define FLASH_CFG_EMPTY_VALUE   0xFFFFU
@@ -235,6 +257,277 @@ static HAL_StatusTypeDef FlashConfig_Write(uint16_t value)
 
   HAL_FLASH_Lock();
   return status;
+}
+
+static void Modbus_StartUartReception(void)
+{
+  modbus_rx_count = 0U;
+  modbus_packet_ready = 0U;
+  modbus_packet_length = 0U;
+  modbus_rx_locked = 0U;
+  modbus_last_error = 0U;
+
+  __HAL_USART_ENABLE_IT(&husart2, USART_IT_IDLE);
+  (void)HAL_USART_Receive_IT(&husart2, &modbus_rx_byte, 1U);
+}
+
+static void Modbus_HandleError(uint8_t code)
+{
+  modbus_last_error = code;
+}
+
+static uint8_t Modbus_ReadRegister(uint16_t address, uint16_t *value)
+{
+  if (value == NULL)
+  {
+    return 0U;
+  }
+
+  if (address == 0U)
+  {
+    *value = Modbus_BuildReadRegister();
+    return 1U;
+  }
+
+  if ((address >= 1U) && (address <= KTV_NUM_MAX))
+  {
+    const KtvResultBuffer *buffer = Ktv_GetResultBuffer();
+    uint16_t index = (uint16_t)(address - 1U);
+    uint16_t offset = (uint16_t)(index * 2U);
+    uint16_t online = buffer->items[offset] & 0x01U;
+    uint16_t state = (buffer->items[offset + 1U] & 0x01U);
+
+    *value = (uint16_t)(online + state);
+    return 1U;
+  }
+
+  return 0U;
+}
+
+static uint8_t Modbus_WriteRegister(uint16_t address, uint16_t value)
+{
+  if (address == 0U)
+  {
+    Modbus_ApplyWriteRegister(value);
+    return 1U;
+  }
+
+  return 0U;
+}
+
+static uint8_t Modbus_ReadRegisters(uint16_t start, uint16_t count, uint16_t *dest)
+{
+  if ((dest == NULL) || (count == 0U))
+  {
+    return 0U;
+  }
+
+  if ((start >= MODBUS_MAX_REGISTERS) || ((start + count) > MODBUS_MAX_REGISTERS))
+  {
+    return 0U;
+  }
+
+  for (uint16_t i = 0U; i < count; i++)
+  {
+    if (Modbus_ReadRegister((uint16_t)(start + i), &dest[i]) == 0U)
+    {
+      return 0U;
+    }
+  }
+
+  return 1U;
+}
+
+static void Modbus_SendException(uint8_t address, uint8_t function, uint8_t code)
+{
+  modbus_tx_buffer[0] = address;
+  modbus_tx_buffer[1] = (uint8_t)(function | 0x80U);
+  modbus_tx_buffer[2] = code;
+
+  uint16_t crc = mbcrc(modbus_tx_buffer, 3);
+  modbus_tx_buffer[3] = (uint8_t)(crc & 0xFFU);
+  modbus_tx_buffer[4] = (uint8_t)((crc >> 8) & 0xFFU);
+
+  if (HAL_USART_GetState(&husart2) == HAL_USART_STATE_READY)
+  {
+    (void)HAL_USART_Transmit_IT(&husart2, modbus_tx_buffer, 5U);
+  }
+}
+
+static void Modbus_SendResponse(uint16_t length)
+{
+  uint16_t crc = mbcrc(modbus_tx_buffer, (int32_t)length);
+  modbus_tx_buffer[length] = (uint8_t)(crc & 0xFFU);
+  modbus_tx_buffer[length + 1U] = (uint8_t)((crc >> 8) & 0xFFU);
+
+  if (HAL_USART_GetState(&husart2) == HAL_USART_STATE_READY)
+  {
+    (void)HAL_USART_Transmit_IT(&husart2, modbus_tx_buffer, (uint16_t)(length + 2U));
+  }
+}
+
+static void Modbus_HandleRequest(uint16_t length)
+{
+  if (length < 8U)
+  {
+    Modbus_HandleError(MODBUS_ERROR_FRAME);
+    return;
+  }
+
+  uint16_t crc_rx = (uint16_t)modbus_rx_buffer[length - 2U] |
+                    (uint16_t)(modbus_rx_buffer[length - 1U] << 8U);
+  uint16_t crc_calc = mbcrc(modbus_rx_buffer, (int32_t)(length - 2U));
+  if (crc_rx != crc_calc)
+  {
+    Modbus_HandleError(MODBUS_ERROR_CRC);
+    return;
+  }
+
+  uint8_t address = modbus_rx_buffer[0];
+  uint8_t function = modbus_rx_buffer[1];
+  uint8_t is_broadcast = (address == 0U) ? 1U : 0U;
+
+  if ((address != MODBUS_SLAVE_ID) && (address != 0U))
+  {
+    return;
+  }
+
+  if (function == MODBUS_FUNC_READ_HOLDING)
+  {
+    if (length != 8U)
+    {
+      Modbus_HandleError(MODBUS_ERROR_FRAME);
+      return;
+    }
+
+    uint16_t start = (uint16_t)((modbus_rx_buffer[2] << 8U) | modbus_rx_buffer[3]);
+    uint16_t count = (uint16_t)((modbus_rx_buffer[4] << 8U) | modbus_rx_buffer[5]);
+    uint16_t values[MODBUS_MAX_REGISTERS];
+
+    if ((count == 0U) || (count > MODBUS_MAX_REGISTERS))
+    {
+      if (!is_broadcast)
+      {
+        Modbus_SendException(address, function, MODBUS_EXCEPTION_ILLEGAL_VAL);
+      }
+      return;
+    }
+
+    if (Modbus_ReadRegisters(start, count, values) == 0U)
+    {
+      if (!is_broadcast)
+      {
+        Modbus_SendException(address, function, MODBUS_EXCEPTION_ILLEGAL_ADDR);
+      }
+      return;
+    }
+
+    modbus_tx_buffer[0] = address;
+    modbus_tx_buffer[1] = function;
+    modbus_tx_buffer[2] = (uint8_t)(count * 2U);
+    uint16_t out_index = 3U;
+    for (uint16_t i = 0U; i < count; i++)
+    {
+      uint16_t value = values[i];
+      modbus_tx_buffer[out_index++] = (uint8_t)((value >> 8U) & 0xFFU);
+      modbus_tx_buffer[out_index++] = (uint8_t)(value & 0xFFU);
+    }
+
+    if (!is_broadcast)
+    {
+      Modbus_SendResponse(out_index);
+    }
+
+    return;
+  }
+
+  if (function == MODBUS_FUNC_WRITE_SINGLE)
+  {
+    if (length != 8U)
+    {
+      Modbus_HandleError(MODBUS_ERROR_FRAME);
+      return;
+    }
+
+    uint16_t reg = (uint16_t)((modbus_rx_buffer[2] << 8U) | modbus_rx_buffer[3]);
+    uint16_t value = (uint16_t)((modbus_rx_buffer[4] << 8U) | modbus_rx_buffer[5]);
+
+    if (Modbus_WriteRegister(reg, value) == 0U)
+    {
+      if (!is_broadcast)
+      {
+        Modbus_SendException(address, function, MODBUS_EXCEPTION_ILLEGAL_ADDR);
+      }
+      return;
+    }
+
+    if (!is_broadcast)
+    {
+      modbus_tx_buffer[0] = address;
+      modbus_tx_buffer[1] = function;
+      modbus_tx_buffer[2] = modbus_rx_buffer[2];
+      modbus_tx_buffer[3] = modbus_rx_buffer[3];
+      modbus_tx_buffer[4] = modbus_rx_buffer[4];
+      modbus_tx_buffer[5] = modbus_rx_buffer[5];
+      Modbus_SendResponse(6U);
+    }
+
+    return;
+  }
+
+  if (!is_broadcast)
+  {
+    Modbus_SendException(address, function, MODBUS_EXCEPTION_ILLEGAL_FUNC);
+  }
+}
+
+void Modbus_RxIdleCallbackFromISR(void)
+{
+  if ((modbus_rx_count == 0U) || (modbus_packet_ready != 0U))
+  {
+    return;
+  }
+
+  modbus_packet_length = modbus_rx_count;
+  modbus_packet_ready = 1U;
+  modbus_rx_locked = 1U;
+}
+
+void Modbus_ProcessPacket(void)
+{
+  if (modbus_packet_ready == 0U)
+  {
+    return;
+  }
+
+  __disable_irq();
+  uint16_t length = modbus_packet_length;
+  modbus_packet_ready = 0U;
+  __enable_irq();
+
+  if (length > 0U)
+  {
+    Modbus_HandleRequest(length);
+  }
+
+  __disable_irq();
+  modbus_rx_count = 0U;
+  modbus_rx_locked = 0U;
+  modbus_packet_length = 0U;
+  __enable_irq();
+}
+
+void Modbus_RestartUartIfNeeded(void)
+{
+  if (husart2.ErrorCode == HAL_USART_ERROR_NONE)
+  {
+    return;
+  }
+
+  (void)HAL_USART_Abort(&husart2);
+  (void)HAL_USART_DeInit(&husart2);
+  MX_USART2_Init();
+  Modbus_StartUartReception();
 }
 
 static void FlashConfig_ApplyOnBoot(void)
@@ -693,6 +986,7 @@ int main(void)
   SetPcfIntLevel(GPIO_PIN_SET);
   Ktv_Init();
   FlashConfig_ApplyOnBoot();
+  Modbus_StartUartReception();
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_Base_Start_IT(&htim1);
   /* USER CODE END 2 */
@@ -706,6 +1000,8 @@ int main(void)
     /* USER CODE BEGIN 3 */
     /* Обработка результатов измерения оптронов в основном цикле. */
     Optron_ProcessFrame();
+    Modbus_RestartUartIfNeeded();
+    Modbus_ProcessPacket();
     Ktv_Process();
   }
   /* USER CODE END 3 */
@@ -1190,6 +1486,37 @@ void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
   if (hi2c->Instance == I2C1)
   {
     HAL_I2C_EnableListen_IT(hi2c);
+  }
+}
+
+void HAL_USART_RxCpltCallback(USART_HandleTypeDef *husart)
+{
+  if (husart->Instance != USART2)
+  {
+    return;
+  }
+
+  if (modbus_rx_locked == 0U)
+  {
+    if (modbus_rx_count < sizeof(modbus_rx_buffer))
+    {
+      modbus_rx_buffer[modbus_rx_count++] = modbus_rx_byte;
+    }
+    else
+    {
+      modbus_rx_count = 0U;
+      Modbus_HandleError(MODBUS_ERROR_OVERFLOW);
+    }
+  }
+
+  (void)HAL_USART_Receive_IT(husart, &modbus_rx_byte, 1U);
+}
+
+void HAL_USART_ErrorCallback(USART_HandleTypeDef *husart)
+{
+  if (husart->Instance == USART2)
+  {
+    Modbus_HandleError(MODBUS_ERROR_UART);
   }
 }
 

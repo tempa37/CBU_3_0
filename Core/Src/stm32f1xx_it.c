@@ -309,6 +309,11 @@ void USART2_IRQHandler(void)
   /* USER CODE END USART2_IRQn 0 */
   HAL_USART_IRQHandler(&husart2);
   /* USER CODE BEGIN USART2_IRQn 1 */
+  if (__HAL_USART_GET_FLAG(&husart2, USART_FLAG_IDLE) != RESET)
+  {
+    __HAL_USART_CLEAR_IDLEFLAG(&husart2);
+    Modbus_RxIdleCallbackFromISR();
+  }
 
   /* USER CODE END USART2_IRQn 1 */
 }
