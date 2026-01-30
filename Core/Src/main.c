@@ -401,6 +401,12 @@ static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_Pin
 {
   if (map[index].port != NULL)
   {
+    if ((map[index].port == PWR_KTV_BUF_GPIO_Port) &&
+        (map[index].pin == PWR_KTV_BUF_Pin) &&
+        (state == GPIO_PIN_RESET))
+    {
+      KTV_poll_start = 1U;
+    }
     HAL_GPIO_WritePin(map[index].port, map[index].pin, state);
   }
 }
