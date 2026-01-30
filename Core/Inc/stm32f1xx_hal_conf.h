@@ -65,8 +65,8 @@
 /*#define HAL_SPI_MODULE_ENABLED   */
 /*#define HAL_SRAM_MODULE_ENABLED   */
 #define HAL_TIM_MODULE_ENABLED
-/*#define HAL_UART_MODULE_ENABLED   */
-#define HAL_USART_MODULE_ENABLED
+#define HAL_UART_MODULE_ENABLED
+/*#define HAL_USART_MODULE_ENABLED   */
 /*#define HAL_WWDG_MODULE_ENABLED   */
 
 #define HAL_CORTEX_MODULE_ENABLED
@@ -388,4 +388,3 @@ void assert_failed(uint8_t* file, uint32_t line);
 #endif
 
 #endif /* __STM32F1xx_HAL_CONF_H */
-
