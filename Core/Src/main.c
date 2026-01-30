@@ -217,6 +217,8 @@ volatile uint8_t kontur2_kz = 0U;
 volatile uint8_t kontur2_diod = 0U;
 volatile uint8_t kontur2_obryv = 0U;
 
+volatile uint8_t KTV_poll_start = 0;
+
 static uint16_t FlashConfig_Read(void)
 {
   return *(const volatile uint16_t *)(FLASH_CFG_START_ADDR);
