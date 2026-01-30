@@ -78,6 +78,12 @@ void UpdateBkkDirections(void);
 uint16_t Modbus_BuildReadRegister(void);
 void Modbus_ApplyWriteRegister(uint16_t value);
 void Modbus_ApplyConfig(void);
+uint8_t Modbus_ReadRegister(uint16_t address, uint16_t *value);
+uint8_t Modbus_WriteRegister(uint16_t address, uint16_t value);
+uint8_t Modbus_ReadRegisters(uint16_t start_address, uint16_t count, uint16_t *dest, uint16_t dest_len);
+void Modbus_HandleError(uint8_t error_code);
+void Modbus_ProcessPendingRequest(void);
+void Modbus_CheckUartRestart(void);
 
 /* USER CODE END EFP */
 

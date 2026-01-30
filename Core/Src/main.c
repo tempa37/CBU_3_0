@@ -22,6 +22,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "ktv.h"
+#include "mbcrc.h"
+#include <string.h>
 
 /* USER CODE END Includes */
 
@@ -148,6 +150,23 @@ static void MX_TIM1_Init(void);
 static uint8_t active_rx_size = 0U;
 static volatile uint32_t tim2_tick_count = 0U;
 static uint8_t on_3v3_enabled = 0U;
+
+#define MODBUS_SLAVE_ADDRESS 1U
+#define MODBUS_MAX_REGISTERS (KTV_NUM_MAX + 1U)
+#define MODBUS_RX_BUFFER_SIZE 256U
+#define MODBUS_TX_BUFFER_SIZE 256U
+#define MODBUS_FUNC_READ_HOLDING_REGISTERS 0x03U
+#define MODBUS_FUNC_WRITE_SINGLE_REGISTER 0x06U
+#define MODBUS_EXCEPTION_ILLEGAL_FUNCTION 0x01U
+#define MODBUS_EXCEPTION_ILLEGAL_DATA_ADDRESS 0x02U
+#define MODBUS_EXCEPTION_ILLEGAL_DATA_VALUE 0x03U
+
+static uint8_t modbus_rx_buffer[MODBUS_RX_BUFFER_SIZE];
+static uint8_t modbus_rx_frame[MODBUS_RX_BUFFER_SIZE];
+static uint8_t modbus_tx_buffer[MODBUS_TX_BUFFER_SIZE];
+static volatile uint16_t modbus_rx_frame_len = 0U;
+static volatile uint8_t modbus_rx_ready = 0U;
+static volatile uint8_t modbus_last_error = 0U;
 
 #define FLASH_CFG_START_ADDR    0x0801FC00U
 #define FLASH_CFG_EMPTY_VALUE   0xFFFFU
@@ -648,6 +667,273 @@ void Modbus_ApplyWriteRegister(uint16_t value)
   }
 }
 
+uint8_t Modbus_ReadRegister(uint16_t address, uint16_t *value)
+{
+  if (value == NULL)
+  {
+    return 0U;
+  }
+
+  if (address == 0U)
+  {
+    *value = Modbus_BuildReadRegister();
+    return 1U;
+  }
+
+  if (address <= KTV_NUM_MAX)
+  {
+    const KtvResultBuffer *buffer = Ktv_GetResultBuffer();
+    uint16_t index = (uint16_t)((address - 1U) * 2U);
+    *value = (uint16_t)buffer->items[index] |
+             (uint16_t)((uint16_t)buffer->items[index + 1U] << 8);
+    return 1U;
+  }
+
+  return 0U;
+}
+
+uint8_t Modbus_WriteRegister(uint16_t address, uint16_t value)
+{
+  if (address == 0U)
+  {
+    Modbus_ApplyWriteRegister(value);
+    return 1U;
+  }
+
+  return 0U;
+}
+
+uint8_t Modbus_ReadRegisters(uint16_t start_address, uint16_t count, uint16_t *dest, uint16_t dest_len)
+{
+  if ((dest == NULL) || (count == 0U) || (count > dest_len))
+  {
+    return 0U;
+  }
+
+  if ((start_address >= MODBUS_MAX_REGISTERS) ||
+      ((start_address + count) > MODBUS_MAX_REGISTERS))
+  {
+    return 0U;
+  }
+
+  for (uint16_t i = 0U; i < count; i++)
+  {
+    if (Modbus_ReadRegister((uint16_t)(start_address + i), &dest[i]) == 0U)
+    {
+      return 0U;
+    }
+  }
+
+  return 1U;
+}
+
+void Modbus_HandleError(uint8_t error_code)
+{
+  modbus_last_error = error_code;
+}
+
+static void Modbus_SendException(uint8_t address, uint8_t function, uint8_t exception_code)
+{
+  uint16_t crc = 0U;
+  uint16_t length = 0U;
+
+  modbus_tx_buffer[0] = address;
+  modbus_tx_buffer[1] = (uint8_t)(function | 0x80U);
+  modbus_tx_buffer[2] = exception_code;
+  length = 3U;
+  crc = mbcrc(modbus_tx_buffer, length);
+  modbus_tx_buffer[length] = (uint8_t)(crc >> 8);
+  modbus_tx_buffer[length + 1U] = (uint8_t)(crc & 0xFFU);
+  length += 2U;
+  (void)HAL_UART_Transmit(&huart2, modbus_tx_buffer, length, 100U);
+}
+
+void Modbus_ProcessPendingRequest(void)
+{
+  uint8_t frame[MODBUS_RX_BUFFER_SIZE];
+  uint16_t frame_len = 0U;
+  uint16_t response_len = 0U;
+  uint8_t address = 0U;
+  uint8_t function = 0U;
+  uint16_t received_crc = 0U;
+  uint16_t calc_crc = 0U;
+  uint16_t start_address = 0U;
+  uint16_t count = 0U;
+  uint16_t registers[MODBUS_MAX_REGISTERS];
+  uint16_t reg_address = 0U;
+  uint16_t reg_value = 0U;
+  uint16_t crc = 0U;
+
+  if (modbus_rx_ready == 0U)
+  {
+    return;
+  }
+
+  __disable_irq();
+  if (modbus_rx_ready != 0U)
+  {
+    frame_len = modbus_rx_frame_len;
+    if (frame_len > MODBUS_RX_BUFFER_SIZE)
+    {
+      frame_len = MODBUS_RX_BUFFER_SIZE;
+    }
+    (void)memcpy(frame, modbus_rx_frame, frame_len);
+    modbus_rx_ready = 0U;
+  }
+  __enable_irq();
+
+  if (frame_len < 4U)
+  {
+    Modbus_HandleError(MODBUS_EXCEPTION_ILLEGAL_DATA_VALUE);
+    return;
+  }
+
+  address = frame[0];
+  if ((address != MODBUS_SLAVE_ADDRESS) && (address != 0U))
+  {
+    return;
+  }
+
+  received_crc = (uint16_t)((uint16_t)frame[frame_len - 2U] << 8) |
+                 (uint16_t)frame[frame_len - 1U];
+  calc_crc = mbcrc(frame, (int32_t)(frame_len - 2U));
+  if (calc_crc != received_crc)
+  {
+    Modbus_HandleError(MODBUS_EXCEPTION_ILLEGAL_DATA_VALUE);
+    return;
+  }
+
+  function = frame[1];
+  if (function == MODBUS_FUNC_READ_HOLDING_REGISTERS)
+  {
+    if (frame_len < 8U)
+    {
+      Modbus_HandleError(MODBUS_EXCEPTION_ILLEGAL_DATA_VALUE);
+      if (address != 0U)
+      {
+        Modbus_SendException(address, function, MODBUS_EXCEPTION_ILLEGAL_DATA_VALUE);
+      }
+      return;
+    }
+
+    start_address = (uint16_t)((uint16_t)frame[2] << 8) | frame[3];
+    count = (uint16_t)((uint16_t)frame[4] << 8) | frame[5];
+
+    if ((count == 0U) || (count > MODBUS_MAX_REGISTERS))
+    {
+      Modbus_HandleError(MODBUS_EXCEPTION_ILLEGAL_DATA_VALUE);
+      if (address != 0U)
+      {
+        Modbus_SendException(address, function, MODBUS_EXCEPTION_ILLEGAL_DATA_VALUE);
+      }
+      return;
+    }
+
+    if (Modbus_ReadRegisters(start_address, count, registers, MODBUS_MAX_REGISTERS) == 0U)
+    {
+      Modbus_HandleError(MODBUS_EXCEPTION_ILLEGAL_DATA_ADDRESS);
+      if (address != 0U)
+      {
+        Modbus_SendException(address, function, MODBUS_EXCEPTION_ILLEGAL_DATA_ADDRESS);
+      }
+      return;
+    }
+
+    modbus_tx_buffer[0] = address;
+    modbus_tx_buffer[1] = function;
+    modbus_tx_buffer[2] = (uint8_t)(count * 2U);
+    response_len = 3U;
+
+    for (uint16_t i = 0U; i < count; i++)
+    {
+      modbus_tx_buffer[response_len++] = (uint8_t)(registers[i] >> 8);
+      modbus_tx_buffer[response_len++] = (uint8_t)(registers[i] & 0xFFU);
+    }
+
+    crc = mbcrc(modbus_tx_buffer, (int32_t)response_len);
+    modbus_tx_buffer[response_len++] = (uint8_t)(crc >> 8);
+    modbus_tx_buffer[response_len++] = (uint8_t)(crc & 0xFFU);
+    if (address != 0U)
+    {
+      (void)HAL_UART_Transmit(&huart2, modbus_tx_buffer, response_len, 100U);
+    }
+    return;
+  }
+
+  if (function == MODBUS_FUNC_WRITE_SINGLE_REGISTER)
+  {
+    if (frame_len < 8U)
+    {
+      Modbus_HandleError(MODBUS_EXCEPTION_ILLEGAL_DATA_VALUE);
+      if (address != 0U)
+      {
+        Modbus_SendException(address, function, MODBUS_EXCEPTION_ILLEGAL_DATA_VALUE);
+      }
+      return;
+    }
+
+    reg_address = (uint16_t)((uint16_t)frame[2] << 8) | frame[3];
+    reg_value = (uint16_t)((uint16_t)frame[4] << 8) | frame[5];
+
+    if (Modbus_WriteRegister(reg_address, reg_value) == 0U)
+    {
+      Modbus_HandleError(MODBUS_EXCEPTION_ILLEGAL_DATA_ADDRESS);
+      if (address != 0U)
+      {
+        Modbus_SendException(address, function, MODBUS_EXCEPTION_ILLEGAL_DATA_ADDRESS);
+      }
+      return;
+    }
+
+    if (address != 0U)
+    {
+      (void)memcpy(modbus_tx_buffer, frame, 6U);
+      response_len = 6U;
+      crc = mbcrc(modbus_tx_buffer, (int32_t)response_len);
+      modbus_tx_buffer[response_len++] = (uint8_t)(crc >> 8);
+      modbus_tx_buffer[response_len++] = (uint8_t)(crc & 0xFFU);
+      (void)HAL_UART_Transmit(&huart2, modbus_tx_buffer, response_len, 100U);
+    }
+    return;
+  }
+
+  Modbus_HandleError(MODBUS_EXCEPTION_ILLEGAL_FUNCTION);
+  if (address != 0U)
+  {
+    Modbus_SendException(address, function, MODBUS_EXCEPTION_ILLEGAL_FUNCTION);
+  }
+}
+
+void Modbus_CheckUartRestart(void)
+{
+  if (huart2.ErrorCode != HAL_UART_ERROR_NONE)
+  {
+    Modbus_HandleError((uint8_t)huart2.ErrorCode);
+    (void)HAL_UART_Abort(&huart2);
+    (void)HAL_UART_DeInit(&huart2);
+    MX_USART2_UART_Init();
+    huart2.ErrorCode = HAL_UART_ERROR_NONE;
+    (void)HAL_UARTEx_ReceiveToIdle_IT(&huart2, modbus_rx_buffer, MODBUS_RX_BUFFER_SIZE);
+  }
+}
+
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t size)
+{
+  if (huart->Instance != USART2)
+  {
+    return;
+  }
+
+  if ((modbus_rx_ready == 0U) && (size > 0U) && (size <= MODBUS_RX_BUFFER_SIZE))
+  {
+    (void)memcpy(modbus_rx_frame, modbus_rx_buffer, size);
+    modbus_rx_frame_len = size;
+    modbus_rx_ready = 1U;
+  }
+
+  (void)HAL_UARTEx_ReceiveToIdle_IT(&huart2, modbus_rx_buffer, MODBUS_RX_BUFFER_SIZE);
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -695,6 +981,7 @@ int main(void)
   FlashConfig_ApplyOnBoot();
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_Base_Start_IT(&htim1);
+  (void)HAL_UARTEx_ReceiveToIdle_IT(&huart2, modbus_rx_buffer, MODBUS_RX_BUFFER_SIZE);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -707,6 +994,8 @@ int main(void)
     /* Обработка результатов измерения оптронов в основном цикле. */
     Optron_ProcessFrame();
     Ktv_Process();
+    Modbus_CheckUartRestart();
+    Modbus_ProcessPendingRequest();
   }
   /* USER CODE END 3 */
 }
