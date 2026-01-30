@@ -218,6 +218,21 @@ volatile uint8_t kontur2_diod = 0U;
 volatile uint8_t kontur2_obryv = 0U;
 
 volatile uint8_t KTV_poll_start = 0;
+static uint8_t tim2_running = 0U;
+
+static void UpdateKtvTimerState(void)
+{
+  if ((KTV_poll_start != 0U) && (tim2_running == 0U))
+  {
+    HAL_TIM_Base_Start_IT(&htim2);
+    tim2_running = 1U;
+  }
+  else if ((KTV_poll_start == 0U) && (tim2_running != 0U))
+  {
+    HAL_TIM_Base_Stop_IT(&htim2);
+    tim2_running = 0U;
+  }
+}
 
 static uint16_t FlashConfig_Read(void)
 {
@@ -999,7 +1014,7 @@ int main(void)
   SetPcfIntLevel(GPIO_PIN_SET);
   Ktv_Init();
   FlashConfig_ApplyOnBoot();
-  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_Base_Stop_IT(&htim2);
   HAL_TIM_Base_Start_IT(&htim1);
   (void)HAL_UARTEx_ReceiveToIdle_IT(&huart2, modbus_rx_buffer, MODBUS_RX_BUFFER_SIZE);
   /* USER CODE END 2 */
@@ -1013,6 +1028,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
     /* Обработка результатов измерения оптронов в основном цикле. */
     Optron_ProcessFrame();
+    UpdateKtvTimerState();
     Ktv_Process();
     Modbus_CheckUartRestart();
     Modbus_ProcessPendingRequest();

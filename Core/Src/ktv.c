@@ -3,6 +3,8 @@
 #include "main.h"
 #include <string.h>
 
+extern volatile uint8_t KTV_poll_start;
+
 typedef enum
 {
   ksNone,
@@ -93,13 +95,28 @@ void Ktv_TickISR(void)
     case ksStart:
       if (--g_ktv.counter <= 0)
       {
-        g_ktv.state = ksStarted;
+        if (KTV_poll_start != 0U)
+        {
+          g_ktv.state = ksStarted;
+        }
+        else
+        {
+          g_ktv.state = ksWait;
+          g_ktv.counter = 1;
+        }
       }
       break;
     case ksWait:
       if (--g_ktv.counter <= 0)
       {
-        g_ktv.state = ksStarted;
+        if (KTV_poll_start != 0U)
+        {
+          g_ktv.state = ksStarted;
+        }
+        else
+        {
+          g_ktv.counter = 1;
+        }
       }
       break;
     case ksStPulse:
@@ -146,6 +163,11 @@ void Ktv_TickISR(void)
 
 void Ktv_Process(void)
 {
+  if ((KTV_poll_start != 0U) && (g_ktv.state == ksWait))
+  {
+    g_ktv.state = ksStarted;
+  }
+
   if (g_ktv.state == ksStarted)
   {
     Ktv_Start();
@@ -157,12 +179,14 @@ void Ktv_Process(void)
     (void)Ktv_ProcessProfile();
     g_ktv.state = ksWait;
     g_ktv.counter = (int32_t)(KTV_TEST_INTERVAL / KTV_TICK_IN_MSEC);
+    KTV_poll_start = 0U;
   }
   else if (g_ktv.state == ksNoActive)
   {
     Ktv_ClearResults();
     g_ktv.state = ksWait;
     g_ktv.counter = (int32_t)(KTV_TEST_INTERVAL / KTV_TICK_IN_MSEC);
+    KTV_poll_start = 0U;
   }
 }
 
