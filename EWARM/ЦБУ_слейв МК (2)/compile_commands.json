@@ -18383,7 +18383,7 @@
 		"arguments" : 
 		[
 			"C:\\iar\\ewarm-9.70.1\\arm\\bin\\iccarm.exe",
-			"C:\\Users\\User\\Desktop\\CBU_3.0\\Drivers\\STM32F1xx_HAL_Driver\\Src\\stm32f1xx_hal_usart.c",
+			"C:\\Users\\User\\Desktop\\CBU_3.0\\Drivers\\STM32F1xx_HAL_Driver\\Src\\stm32f1xx_hal_uart.c",
 			"-nostdinc",
 			"-undef",
 			"-Wno-unaligned-access",
@@ -19295,7 +19295,7 @@
 			"c"
 		],
 		"directory" : "C:\\Users\\User\\Desktop\\CBU_3.0\\Drivers\\STM32F1xx_HAL_Driver\\Src",
-		"file" : "C:\\Users\\User\\Desktop\\CBU_3.0\\Drivers\\STM32F1xx_HAL_Driver\\Src\\stm32f1xx_hal_usart.c",
-		"output" : "C:\\Users\\User\\Desktop\\CBU_3.0\\EWARM\\ЦБУ_слейв МК (2)\\Obj\\STM32F1xx_HAL_Driver_9701002599162248031.dir\\stm32f1xx_hal_usart.o"
+		"file" : "C:\\Users\\User\\Desktop\\CBU_3.0\\Drivers\\STM32F1xx_HAL_Driver\\Src\\stm32f1xx_hal_uart.c",
+		"output" : "C:\\Users\\User\\Desktop\\CBU_3.0\\EWARM\\ЦБУ_слейв МК (2)\\Obj\\STM32F1xx_HAL_Driver_9701002599162248031.dir\\stm32f1xx_hal_uart.o"
 	}
 ]
