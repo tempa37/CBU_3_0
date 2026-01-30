@@ -60,13 +60,11 @@ void Ktv_Init(void)
 
 static void Ktv_Start(void)
 {
-  /* Стартовый импульс: тянем PWR.KTV.BUF вниз. */
-  HAL_GPIO_WritePin(PWR_KTV_BUF_GPIO_Port, PWR_KTV_BUF_Pin, GPIO_PIN_RESET);
-
-  g_ktv.counter = (int32_t)TICK_NUM_KTV_START;
+  /* Стартовый импульс формируется мастером, стартуем после фронта 0->1. */
+  g_ktv.counter = (int32_t)TICK_NUM_TO_SYNC;
   g_ktv.buff_idx = 0;
   memset(g_ktv.bitmap, 0, sizeof(g_ktv.bitmap));
-  g_ktv.state = ksStPulse;
+  g_ktv.state = ksSync;
 }
 
 const KtvResultBuffer *Ktv_GetResultBuffer(void)
@@ -117,15 +115,6 @@ void Ktv_TickISR(void)
         {
           g_ktv.counter = 1;
         }
-      }
-      break;
-    case ksStPulse:
-      if (--g_ktv.counter <= 0)
-      {
-        /* Возвращаем питание и начинаем чтение профиля. */
-        HAL_GPIO_WritePin(PWR_KTV_BUF_GPIO_Port, PWR_KTV_BUF_Pin, GPIO_PIN_SET);
-        g_ktv.counter = (int32_t)TICK_NUM_TO_SYNC;
-        g_ktv.state = ksSync;
       }
       break;
     case ksSync:

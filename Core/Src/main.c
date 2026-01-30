@@ -105,6 +105,7 @@ static uint8_t active_i2c_address = 0U;
 static const uint16_t expander16_input_mask = (1U << 9); /* p9 = SD_SW (input) */
 static GPIO_PinState sd_sw_last_state = GPIO_PIN_RESET;
 static GPIO_PinState sd_sw_return_state = GPIO_PIN_RESET;
+static GPIO_PinState pwr_ktv_last_state = GPIO_PIN_SET;
 static uint8_t pcf_int_latched = 0U;
 volatile GPIO_PinState door = GPIO_PIN_RESET;
 volatile GPIO_PinState error_sv = GPIO_PIN_RESET;
@@ -417,10 +418,13 @@ static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_Pin
   if (map[index].port != NULL)
   {
     if ((map[index].port == PWR_KTV_BUF_GPIO_Port) &&
-        (map[index].pin == PWR_KTV_BUF_Pin) &&
-        (state == GPIO_PIN_RESET))
+        (map[index].pin == PWR_KTV_BUF_Pin))
     {
-      KTV_poll_start = 1U;
+      if ((pwr_ktv_last_state == GPIO_PIN_RESET) && (state == GPIO_PIN_SET))
+      {
+        KTV_poll_start = 1U;
+      }
+      pwr_ktv_last_state = state;
     }
     HAL_GPIO_WritePin(map[index].port, map[index].pin, state);
   }
