@@ -153,7 +153,7 @@ static uint8_t on_3v3_enabled = 0U;
 
 #define MODBUS_SLAVE_ADDRESS 1U
 #define MODBUS_MAX_REGISTERS (KTV_NUM_MAX + 1U)
-#define MODBUS_RX_BUFFER_SIZE 256U
+#define MODBUS_RX_BUFFER_SIZE 30U
 #define MODBUS_TX_BUFFER_SIZE 256U
 #define MODBUS_FUNC_READ_HOLDING_REGISTERS 0x03U
 #define MODBUS_FUNC_WRITE_SINGLE_REGISTER 0x06U
@@ -279,14 +279,14 @@ static void Optron_ProcessFrame(void)
     return;
   }
 
-  /* Копируем буфер быстро, чтобы не мешать прерыванию TIM1. */
-  __disable_irq();
+  /* отключаем TIM1. */
+  __HAL_TIM_DISABLE_IT(&htim1, TIM_IT_UPDATE);
   for (uint16_t i = 0U; i < OPTRON_FRAME_SAMPLES; i++)
   {
     frame_copy[i] = optron_samples[i];
   }
   optron_eval_pending = 0U;
-  __enable_irq();
+  __HAL_TIM_ENABLE_IT(&htim1, TIM_IT_UPDATE);
 
   for (uint16_t i = 0U; i < OPTRON_FRAME_SAMPLES; i++)
   {

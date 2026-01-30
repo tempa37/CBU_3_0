@@ -30,7 +30,7 @@
 #define KTV_PAUSE_IN_TICKS      (16U)
 #define KTV_START_PAUSE_IN_TICKS (20U)
 #define KTV_BOOTUP_INTERVAL     (5000U)
-#define KTV_TEST_INTERVAL       (5000U)
+#define KTV_TEST_INTERVAL       (1000U)
 
 /* Задержка до чтения профиля после стартового импульса (синхроимпульс). */
 #define SYNC_PULSE_OFFSET_IN_TICK  (75U)

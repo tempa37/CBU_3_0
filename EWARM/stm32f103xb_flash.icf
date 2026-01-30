@@ -5,7 +5,7 @@
 define symbol __ICFEDIT_intvec_start__ = 0x08000000;
 /*-Memory Regions-*/
 define symbol __ICFEDIT_region_ROM_start__   = 0x08000000 ;
-define symbol __ICFEDIT_region_ROM_end__     = 0x0801FFFF;
+define symbol __ICFEDIT_region_ROM_end__     = 0x0800FFFF;
 define symbol __ICFEDIT_region_RAM_start__   = 0x20000000;
 define symbol __ICFEDIT_region_RAM_end__     = 0x20004FFF;
 /*-Sizes-*/
@@ -14,8 +14,9 @@ define symbol __ICFEDIT_size_heap__   = 0x200;
 /**** End of ICF editor section. ###ICF###*/
 
 
-define symbol __FLASH_CFG_START__ = 0x0801FC00;
-define symbol __FLASH_CFG_END__   = 0x0801FFFF;
+
+define symbol __FLASH_CFG_START__ = 0x0800FC00;
+define symbol __FLASH_CFG_END__   = 0x0800FFFF;
 
 define memory mem with size = 4G;
 define region ROM_region   = mem:[from __ICFEDIT_region_ROM_start__   to (__FLASH_CFG_START__ - 1)];
