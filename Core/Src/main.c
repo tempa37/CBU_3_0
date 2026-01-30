@@ -615,6 +615,14 @@ void Modbus_ApplyConfig(void)
   }
 }
 
+void Modbus_ApplyManualPins(void)
+{
+  HAL_GPIO_WritePin(Break_K_p_GPIO_Port, Break_K_p_Pin,
+                    (modbus_break_k_p != 0U) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Sv_kont_p_GPIO_Port, Sv_kont_p_Pin,
+                    (modbus_sv_kont_p != 0U) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
+
 void Modbus_ApplyWriteRegister(uint16_t value)
 {
   uint8_t cfg_count = 0U;
@@ -653,6 +661,10 @@ void Modbus_ApplyWriteRegister(uint16_t value)
   if (modbus_exec_config)
   {
     Modbus_ApplyConfig();
+  }
+  else
+  {
+    Modbus_ApplyManualPins();
   }
 
   if (modbus_on_3v3 != 0U)
