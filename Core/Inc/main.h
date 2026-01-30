@@ -31,11 +31,13 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#define USART2_RX_BUFFER_SIZE 40U
 
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+extern DMA_HandleTypeDef hdma_usart2_rx;
 extern volatile GPIO_PinState door;
 extern volatile GPIO_PinState error_sv;
 extern volatile GPIO_PinState on_bkk_k1;
@@ -57,6 +59,8 @@ extern volatile uint8_t modbus_on_3v3;
 extern volatile uint8_t modbus_break_k_p;
 extern volatile uint8_t modbus_sv_kont_p;
 extern volatile uint16_t modbus_write_register;
+extern uint8_t usart2_rx_buffer[USART2_RX_BUFFER_SIZE];
+extern volatile uint16_t usart2_rx_length;
 
 /* USER CODE END ET */
 
@@ -78,6 +82,8 @@ void UpdateBkkDirections(void);
 uint16_t Modbus_BuildReadRegister(void);
 void Modbus_ApplyWriteRegister(uint16_t value);
 void Modbus_ApplyConfig(void);
+void USART2_RxEventCallback(uint16_t size);
+void Modbus_HandleUartError(uint32_t error_code);
 
 /* USER CODE END EFP */
 

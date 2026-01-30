@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "ktv.h"
+#include "mbcrc.h"
 
 /* USER CODE END Includes */
 
@@ -54,7 +55,8 @@ I2C_HandleTypeDef hi2c1;
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 
-USART_HandleTypeDef husart2;
+UART_HandleTypeDef huart2;
+DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
 typedef struct
@@ -125,7 +127,8 @@ volatile uint8_t modbus_on_3v3 = 0U;
 volatile uint8_t modbus_break_k_p = 0U;
 volatile uint8_t modbus_sv_kont_p = 0U;
 volatile uint16_t modbus_write_register = 0U;
-
+uint8_t usart2_rx_buffer[USART2_RX_BUFFER_SIZE] = {0U};
+volatile uint16_t usart2_rx_length = 0U;
 
 
 static inline void EXTI_DisableLine(uint16_t pinmask);
@@ -139,6 +142,7 @@ static void MX_I2C1_Init(void);
 static void MX_USART2_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_DMA_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -148,6 +152,7 @@ static void MX_TIM1_Init(void);
 static uint8_t active_rx_size = 0U;
 static volatile uint32_t tim2_tick_count = 0U;
 static uint8_t on_3v3_enabled = 0U;
+static volatile uint32_t modbus_uart_error_code = 0U;
 
 #define FLASH_CFG_START_ADDR    0x0801FC00U
 #define FLASH_CFG_EMPTY_VALUE   0xFFFFU
@@ -166,6 +171,9 @@ __root const uint16_t flash_cfg_storage = FLASH_CFG_EMPTY_VALUE;
 #define OPTRON_EVAL_TICKS ((OPTRON_SAMPLE_RATE_HZ * OPTRON_EVAL_PERIOD_MS) / 1000U)
 #define OPTRON_NOISE_MIN_PERCENT 40U
 #define OPTRON_NOISE_MAX_PERCENT 60U
+#define MODBUS_SLAVE_ID 1U
+#define MODBUS_MAX_REGISTERS (KTV_NUM_MAX + 1U)
+#define MODBUS_TX_BUFFER_SIZE 128U
 
 typedef enum
 {
@@ -197,6 +205,192 @@ volatile uint8_t kontur1_obryv = 0U;
 volatile uint8_t kontur2_kz = 0U;
 volatile uint8_t kontur2_diod = 0U;
 volatile uint8_t kontur2_obryv = 0U;
+
+static uint8_t modbus_tx_buffer[MODBUS_TX_BUFFER_SIZE];
+
+static uint16_t Modbus_ReadRegister(uint16_t address, bool *ok)
+{
+  if (address == 0U)
+  {
+    *ok = true;
+    return Modbus_BuildReadRegister();
+  }
+  if ((address >= 1U) && (address <= KTV_NUM_MAX))
+  {
+    const KtvResultBuffer *result = Ktv_GetResultBuffer();
+    uint16_t idx = (uint16_t)((address - 1U) * 2U);
+    *ok = true;
+    return (uint16_t)((uint16_t)result->items[idx] |
+                      ((uint16_t)result->items[idx + 1U] << 8U));
+  }
+
+  *ok = false;
+  return 0U;
+}
+
+static bool Modbus_WriteRegister(uint16_t address, uint16_t value)
+{
+  if (address == 0U)
+  {
+    Modbus_ApplyWriteRegister(value);
+    return true;
+  }
+
+  return false;
+}
+
+static bool Modbus_ReadRegisters(uint16_t start, uint16_t count, uint16_t *out)
+{
+  if ((count == 0U) || ((uint32_t)start + (uint32_t)count > MODBUS_MAX_REGISTERS))
+  {
+    return false;
+  }
+
+  for (uint16_t i = 0U; i < count; i++)
+  {
+    bool ok = false;
+    out[i] = Modbus_ReadRegister((uint16_t)(start + i), &ok);
+    if (!ok)
+    {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+static void Modbus_SendException(uint8_t address, uint8_t function, uint8_t code)
+{
+  modbus_tx_buffer[0] = address;
+  modbus_tx_buffer[1] = (uint8_t)(function | 0x80U);
+  modbus_tx_buffer[2] = code;
+
+  uint16_t crc = mbcrc(modbus_tx_buffer, 3);
+  modbus_tx_buffer[3] = (uint8_t)(crc & 0xFFU);
+  modbus_tx_buffer[4] = (uint8_t)((crc >> 8U) & 0xFFU);
+  (void)HAL_UART_Transmit(&huart2, modbus_tx_buffer, 5U, 100U);
+}
+
+static void Modbus_HandleFrame(const uint8_t *frame, uint16_t length)
+{
+  if (length < 8U)
+  {
+    return;
+  }
+
+  uint8_t address = frame[0];
+  if ((address != MODBUS_SLAVE_ID) && (address != 0U))
+  {
+    return;
+  }
+
+  uint16_t received_crc = (uint16_t)((uint16_t)frame[length - 2U] |
+                                     ((uint16_t)frame[length - 1U] << 8U));
+  uint16_t computed_crc = mbcrc((unsigned char *)frame, (int32_t)(length - 2U));
+  if (received_crc != computed_crc)
+  {
+    return;
+  }
+
+  uint8_t function = frame[1];
+  if (function == 0x03U)
+  {
+    uint16_t start = (uint16_t)((uint16_t)frame[2] << 8U) | frame[3];
+    uint16_t count = (uint16_t)((uint16_t)frame[4] << 8U) | frame[5];
+    uint16_t registers[MODBUS_MAX_REGISTERS];
+
+    if (!Modbus_ReadRegisters(start, count, registers))
+    {
+      if (address != 0U)
+      {
+        Modbus_SendException(address, function, 0x02U);
+      }
+      return;
+    }
+
+    if (address == 0U)
+    {
+      return;
+    }
+
+    modbus_tx_buffer[0] = address;
+    modbus_tx_buffer[1] = function;
+    modbus_tx_buffer[2] = (uint8_t)(count * 2U);
+
+    uint16_t offset = 3U;
+    for (uint16_t i = 0U; i < count; i++)
+    {
+      modbus_tx_buffer[offset++] = (uint8_t)((registers[i] >> 8U) & 0xFFU);
+      modbus_tx_buffer[offset++] = (uint8_t)(registers[i] & 0xFFU);
+    }
+
+    uint16_t crc = mbcrc(modbus_tx_buffer, (int32_t)offset);
+    modbus_tx_buffer[offset++] = (uint8_t)(crc & 0xFFU);
+    modbus_tx_buffer[offset++] = (uint8_t)((crc >> 8U) & 0xFFU);
+    (void)HAL_UART_Transmit(&huart2, modbus_tx_buffer, offset, 100U);
+    return;
+  }
+
+  if (function == 0x06U)
+  {
+    uint16_t reg = (uint16_t)((uint16_t)frame[2] << 8U) | frame[3];
+    uint16_t value = (uint16_t)((uint16_t)frame[4] << 8U) | frame[5];
+
+    if (!Modbus_WriteRegister(reg, value))
+    {
+      if (address != 0U)
+      {
+        Modbus_SendException(address, function, 0x02U);
+      }
+      return;
+    }
+
+    if (address == 0U)
+    {
+      return;
+    }
+
+    modbus_tx_buffer[0] = address;
+    modbus_tx_buffer[1] = function;
+    modbus_tx_buffer[2] = frame[2];
+    modbus_tx_buffer[3] = frame[3];
+    modbus_tx_buffer[4] = frame[4];
+    modbus_tx_buffer[5] = frame[5];
+
+    uint16_t crc = mbcrc(modbus_tx_buffer, 6);
+    modbus_tx_buffer[6] = (uint8_t)(crc & 0xFFU);
+    modbus_tx_buffer[7] = (uint8_t)((crc >> 8U) & 0xFFU);
+    (void)HAL_UART_Transmit(&huart2, modbus_tx_buffer, 8U, 100U);
+    return;
+  }
+
+  if (address != 0U)
+  {
+    Modbus_SendException(address, function, 0x01U);
+  }
+}
+
+void Modbus_HandleUartError(uint32_t error_code)
+{
+  modbus_uart_error_code = error_code;
+}
+
+static void Modbus_RestartUart(void)
+{
+  (void)HAL_UART_AbortReceive(&huart2);
+  (void)HAL_UARTEx_ReceiveToIdle_DMA(&huart2, usart2_rx_buffer, USART2_RX_BUFFER_SIZE);
+  __HAL_DMA_DISABLE_IT(huart2.hdmarx, DMA_IT_HT);
+  huart2.ErrorCode = HAL_UART_ERROR_NONE;
+}
+
+static void Modbus_UartRestartCheck(void)
+{
+  if (huart2.ErrorCode != HAL_UART_ERROR_NONE)
+  {
+    Modbus_HandleUartError(huart2.ErrorCode);
+    Modbus_RestartUart();
+  }
+}
 
 static uint16_t FlashConfig_Read(void)
 {
@@ -648,6 +842,30 @@ void Modbus_ApplyWriteRegister(uint16_t value)
   }
 }
 
+void USART2_RxEventCallback(uint16_t size)
+{
+  usart2_rx_length = size;
+}
+
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t size)
+{
+  if (huart->Instance == USART2)
+  {
+    USART2_RxEventCallback(size);
+    Modbus_HandleFrame(usart2_rx_buffer, size);
+    (void)HAL_UARTEx_ReceiveToIdle_DMA(&huart2, usart2_rx_buffer, USART2_RX_BUFFER_SIZE);
+    __HAL_DMA_DISABLE_IT(huart2.hdmarx, DMA_IT_HT);
+  }
+}
+
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
+{
+  if (huart->Instance == USART2)
+  {
+    Modbus_HandleUartError(huart->ErrorCode);
+  }
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -680,6 +898,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_I2C1_Init();
+  MX_DMA_Init();
   MX_USART2_Init();
   MX_TIM2_Init();
   MX_TIM1_Init();
@@ -693,6 +912,8 @@ int main(void)
   SetPcfIntLevel(GPIO_PIN_SET);
   Ktv_Init();
   FlashConfig_ApplyOnBoot();
+  (void)HAL_UARTEx_ReceiveToIdle_DMA(&huart2, usart2_rx_buffer, USART2_RX_BUFFER_SIZE);
+  __HAL_DMA_DISABLE_IT(huart2.hdmarx, DMA_IT_HT);
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_Base_Start_IT(&htim1);
   /* USER CODE END 2 */
@@ -707,6 +928,7 @@ int main(void)
     /* Обработка результатов измерения оптронов в основном цикле. */
     Optron_ProcessFrame();
     Ktv_Process();
+    Modbus_UartRestartCheck();
   }
   /* USER CODE END 3 */
 }
@@ -889,22 +1111,36 @@ static void MX_USART2_Init(void)
   /* USER CODE BEGIN USART2_Init 1 */
 
   /* USER CODE END USART2_Init 1 */
-  husart2.Instance = USART2;
-  husart2.Init.BaudRate = 115200;
-  husart2.Init.WordLength = USART_WORDLENGTH_8B;
-  husart2.Init.StopBits = USART_STOPBITS_1;
-  husart2.Init.Parity = USART_PARITY_NONE;
-  husart2.Init.Mode = USART_MODE_TX_RX;
-  husart2.Init.CLKPolarity = USART_POLARITY_LOW;
-  husart2.Init.CLKPhase = USART_PHASE_1EDGE;
-  husart2.Init.CLKLastBit = USART_LASTBIT_DISABLE;
-  if (HAL_USART_Init(&husart2) != HAL_OK)
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 115200;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart2) != HAL_OK)
   {
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
 
   /* USER CODE END USART2_Init 2 */
+
+}
+
+/**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  HAL_NVIC_SetPriority(DMA1_Channel6_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel6_IRQn);
 
 }
 

@@ -58,7 +58,8 @@
 extern I2C_HandleTypeDef hi2c1;
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
-extern USART_HandleTypeDef husart2;
+extern UART_HandleTypeDef huart2;
+extern DMA_HandleTypeDef hdma_usart2_rx;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -305,12 +306,25 @@ void I2C1_ER_IRQHandler(void)
 void USART2_IRQHandler(void)
 {
   /* USER CODE BEGIN USART2_IRQn 0 */
-
   /* USER CODE END USART2_IRQn 0 */
-  HAL_USART_IRQHandler(&husart2);
+  HAL_UART_IRQHandler(&huart2);
   /* USER CODE BEGIN USART2_IRQn 1 */
 
   /* USER CODE END USART2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA1 channel6 global interrupt.
+  */
+void DMA1_Channel6_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel6_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel6_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_usart2_rx);
+  /* USER CODE BEGIN DMA1_Channel6_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel6_IRQn 1 */
 }
 
 /**
