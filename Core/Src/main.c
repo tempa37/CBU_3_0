@@ -280,7 +280,7 @@ static void FlashConfig_ApplyOnBoot(void)
 
   if (stored != FLASH_CFG_EMPTY_VALUE)
   {
-    Modbus_ApplyWriteRegister(stored);
+   //Modbus_ApplyWriteRegister(stored);
   }
 }
 
@@ -430,7 +430,7 @@ static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_Pin
   }
 }
 
-static void ApplyExpander16State(uint16_t value)
+static void ApplyExpander16State(uint16_t value)  //------------------------------16--
 {
   uint8_t oe_enabled = (value & 0x0001U) ? 1U : 0U;
   uint16_t masked_value = value;
@@ -454,7 +454,7 @@ static void ApplyExpander16State(uint16_t value)
   expander16_state = masked_value;
 }
 
-static void ApplyExpander8State(uint8_t value)
+static void ApplyExpander8State(uint8_t value)  //--------------------------------8--
 {
   for (uint8_t i = 0U; i < 8U; i++)
   {
@@ -650,7 +650,7 @@ void Modbus_ApplyManualPins(void)
                     (modbus_sv_kont_p != 0U) ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
-void Modbus_ApplyWriteRegister(uint16_t value)
+void Modbus_ApplyWriteRegister(uint16_t value) //CONFIGS
 {
   uint8_t cfg_count = 0U;
 
@@ -1030,7 +1030,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    /* Обработка результатов измерения оптронов в основном цикле. */
     Optron_ProcessFrame();
     UpdateKtvTimerState();
     Ktv_Process();
