@@ -44,6 +44,7 @@ static uint64_t Ktv_GetProfile(int32_t bitmap_idx);
 static void Ktv_ClearResults(void);
 static bool Ktv_ProcessProfile(void);
 
+/* Инициализация состояния КТВ и запуск таймера ожидания старта. */
 void Ktv_Init(void)
 {
   
@@ -58,6 +59,7 @@ void Ktv_Init(void)
   
 }
 
+/* Запуск чтения КТВ после стартового импульса. */
 static void Ktv_Start(void)
 {
   /* Стартовый импульс формируется мастером, стартуем после фронта 0->1. */
@@ -67,11 +69,13 @@ static void Ktv_Start(void)
   g_ktv.state = ksSync;
 }
 
+/* Получение буфера результатов в формате (online/triggered) на КТВ. */
 const KtvResultBuffer *Ktv_GetResultBuffer(void)
 {
   return &g_result;
 }
 
+/* Возврат флагов состояния для конкретного КТВ. */
 uint8_t Ktv_GetFlags(uint8_t ktv_index)
 {
   if ((ktv_index == 0U) || (ktv_index > KTV_NUM_MAX))
@@ -82,6 +86,7 @@ uint8_t Ktv_GetFlags(uint8_t ktv_index)
   return g_ktv.flags[ktv_index];
 }
 
+/* Обработчик тика таймера: сбор битовой карты входа КТВ. */
 void Ktv_TickISR(void)
 {
   /* Линия активна в логическом 0, поэтому инвертируем. */
@@ -150,6 +155,7 @@ void Ktv_TickISR(void)
   }
 }
 
+/* Основной обработчик состояний КТВ, вызывается из главного цикла. */
 void Ktv_Process(void)
 {
   if ((KTV_poll_start != 0U) && (g_ktv.state == ksWait))
@@ -179,6 +185,7 @@ void Ktv_Process(void)
   }
 }
 
+/* Получение окна битовой карты для одного КТВ-профиля. */
 static uint64_t Ktv_GetProfile(int32_t bitmap_idx)
 {
   /* Получаем окно в TICK_NUM_KTV_AREA тиков (КТВ + пауза). */
@@ -209,6 +216,7 @@ static uint64_t Ktv_GetProfile(int32_t bitmap_idx)
   return prof & mask;
 }
 
+/* Очистка всех результатов диагностики КТВ. */
 static void Ktv_ClearResults(void)
 {
   memset(g_ktv.flags, 0, sizeof(g_ktv.flags));
@@ -216,6 +224,7 @@ static void Ktv_ClearResults(void)
   memset(&g_result, 0, sizeof(g_result));
 }
 
+/* Анализ битовой карты, разбор сегментов и формирование флагов КТВ. */
 static bool Ktv_ProcessProfile(void)
 {
   uint64_t start_word = g_ktv.bitmap[0];
@@ -258,6 +267,7 @@ static bool Ktv_ProcessProfile(void)
     base_start = (uint32_t)start_idx + count;
   }
 
+  /* Длинная серия единиц означает отсутствие активности на линии. */
   if ((count >= 28U) && (base_start == 32U))
   {
     /* Линия постоянно в "1" -> КТВ не активны. */
@@ -345,6 +355,7 @@ static bool Ktv_ProcessProfile(void)
       }
     }
 
+    /* Пороговая логика: определяем Online/Triggered по суммарной длительности. */
     if (length >= (TICK_NUM_KTV_BIT - 2U))
     {
       value |= KTV_ONLINE;
