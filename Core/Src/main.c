@@ -221,6 +221,7 @@ volatile uint8_t kontur2_obryv = 0U;
 volatile uint8_t KTV_poll_start = 0;
 static uint8_t tim2_running = 0U;
 
+/* Управление запуском/остановкой таймера опроса КТВ по флагу KTV_poll_start. */
 static void UpdateKtvTimerState(void)
 {
   if ((KTV_poll_start != 0U) && (tim2_running == 0U))
@@ -235,11 +236,13 @@ static void UpdateKtvTimerState(void)
   }
 }
 
+/* Чтение сохранённого конфигурационного слова из флеша. */
 static uint16_t FlashConfig_Read(void)
 {
   return *(const volatile uint16_t *)(FLASH_CFG_START_ADDR);
 }
 
+/* Перезапись конфигурационного слова в выделенной странице флеша. */
 static HAL_StatusTypeDef FlashConfig_Write(uint16_t value)
 {
   uint16_t current = FlashConfig_Read();
@@ -274,6 +277,7 @@ static HAL_StatusTypeDef FlashConfig_Write(uint16_t value)
   return status;
 }
 
+/* Применение сохранённой в флеше конфигурации после старта. */
 static void FlashConfig_ApplyOnBoot(void)
 {
   uint16_t stored = FlashConfig_Read();
@@ -284,6 +288,7 @@ static void FlashConfig_ApplyOnBoot(void)
   }
 }
 
+/* Обработка окна выборки оптронов и вычисление состояний контуров. */
 static void Optron_ProcessFrame(void)
 {
   uint8_t frame_copy[OPTRON_FRAME_SAMPLES];
@@ -299,6 +304,7 @@ static void Optron_ProcessFrame(void)
 
   /* отключаем TIM1. */
   __HAL_TIM_DISABLE_IT(&htim1, TIM_IT_UPDATE);
+  /* Копируем буфер под защитой, чтобы не пересекаться с ISR. */
   for (uint16_t i = 0U; i < OPTRON_FRAME_SAMPLES; i++)
   {
     frame_copy[i] = optron_samples[i];
@@ -306,6 +312,7 @@ static void Optron_ProcessFrame(void)
   optron_eval_pending = 0U;
   __HAL_TIM_ENABLE_IT(&htim1, TIM_IT_UPDATE);
 
+  /* Подсчёт количества единиц по каждому входу оптронов. */
   for (uint16_t i = 0U; i < OPTRON_FRAME_SAMPLES; i++)
   {
     uint8_t sample = frame_copy[i];
@@ -333,6 +340,7 @@ static void Optron_ProcessFrame(void)
   uint8_t percent_2_1 = (uint8_t)((ones_2_1 * 100U) / OPTRON_FRAME_SAMPLES);
   uint8_t percent_2_2 = (uint8_t)((ones_2_2 * 100U) / OPTRON_FRAME_SAMPLES);
 
+  /* Преобразование процента заполнения в состояние (low/high/noise). */
   optron1_1_state = (percent_1_1 < OPTRON_NOISE_MIN_PERCENT) ? OPTRON_STATE_LOW :
                     (percent_1_1 > OPTRON_NOISE_MAX_PERCENT) ? OPTRON_STATE_HIGH :
                     OPTRON_STATE_NOISE;
@@ -346,7 +354,7 @@ static void Optron_ProcessFrame(void)
                     (percent_2_2 > OPTRON_NOISE_MAX_PERCENT) ? OPTRON_STATE_HIGH :
                     OPTRON_STATE_NOISE;
 
-  /* Таблица соответствий для контура 1. */
+  /* Таблица соответствий для контура 1 (диагностика). */
   uint8_t optron1_1_meander = (optron1_1_state == OPTRON_STATE_NOISE) ? 1U : 0U;
   uint8_t optron1_2_meander = (optron1_2_state == OPTRON_STATE_NOISE) ? 1U : 0U;
   uint8_t optron1_1_high = (optron1_1_state == OPTRON_STATE_HIGH) ? 1U : 0U;
@@ -378,7 +386,7 @@ static void Optron_ProcessFrame(void)
   }
   
   
-  /* Таблица соответствий для контура 2. */
+  /* Таблица соответствий для контура 2 (диагностика). */
   uint8_t optron2_1_meander = (optron2_1_state == OPTRON_STATE_NOISE) ? 1U : 0U;
   uint8_t optron2_2_meander = (optron2_2_state == OPTRON_STATE_NOISE) ? 1U : 0U;
   uint8_t optron2_1_high = (optron2_1_state == OPTRON_STATE_HIGH) ? 1U : 0U;
@@ -413,6 +421,7 @@ static void Optron_ProcessFrame(void)
   
 }
 
+/* Запись состояния в GPIO по карте экспандера. */
 static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_PinState state)
 {
   if (map[index].port != NULL)
@@ -430,6 +439,7 @@ static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_Pin
   }
 }
 
+/* Применение 16-битного состояния PCF8575 с учётом входных пинов. */
 static void ApplyExpander16State(uint16_t value)  //------------------------------16--
 {
   uint8_t oe_enabled = (value & 0x0001U) ? 1U : 0U;
@@ -442,6 +452,7 @@ static void ApplyExpander16State(uint16_t value)  //----------------------------
   }
   masked_value &= (uint16_t)(~expander16_input_mask);
 
+  /* Маппинг битов состояния в физические GPIO. */
   for (uint8_t i = 0U; i < 16U; i++)
   {
     if ((expander16_input_mask & (1U << i)) == 0U)
@@ -454,6 +465,7 @@ static void ApplyExpander16State(uint16_t value)  //----------------------------
   expander16_state = masked_value;
 }
 
+/* Применение 8-битного состояния PCF8574 на GPIO. */
 static void ApplyExpander8State(uint8_t value)  //--------------------------------8--
 {
   for (uint8_t i = 0U; i < 8U; i++)
@@ -465,6 +477,7 @@ static void ApplyExpander8State(uint8_t value)  //------------------------------
   expander8_state = value;
 }
 
+/* Подготовка ответного буфера I2C для выбранного экспандера. */
 static void PrepareExpanderTx(uint8_t address)
 {
   if (address == I2C_EXPANDER16_ADDR)
@@ -487,12 +500,14 @@ static void PrepareExpanderTx(uint8_t address)
   }
 }
 
+/* Установка уровня на линии PCF_INT (open-drain). */
 static void SetPcfIntLevel(GPIO_PinState level)
 {
   /* PCF_INT работает как open-drain: лог.1 = отпущен, лог.0 = тянем к земле. */
   HAL_GPIO_WritePin(PCF_INT_GPIO_Port, PCF_INT_Pin, level);
 }
 
+/* Сброс защёлки прерывания PCF при обслуживании события. */
 static void ClearPcfIntLatch(void)
 {
   if (pcf_int_latched != 0U)
@@ -502,6 +517,7 @@ static void ClearPcfIntLatch(void)
   }
 }
 
+/* Переключение направления пинов БКК между выходом и входом с EXTI. */
 void UpdateBkkDirections(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -549,6 +565,7 @@ void UpdateBkkDirections(void)
   }
 }
 
+/* Формирование read-регистра Modbus из текущих диагностических флагов. */
 uint16_t Modbus_BuildReadRegister(void)
 {
   uint16_t value = 0U;
@@ -597,6 +614,7 @@ uint16_t Modbus_BuildReadRegister(void)
   return value;
 }
 
+/* Применение выбранной предустановки конфигурации Modbus. */
 void Modbus_ApplyConfig(void)
 {
   uint8_t sv_kont_p = 0U;
@@ -642,6 +660,7 @@ void Modbus_ApplyConfig(void)
   }
 }
 
+/* Применение ручных значений пинов управления из Modbus-регистра. */
 void Modbus_ApplyManualPins(void)
 {
   HAL_GPIO_WritePin(Break_K_p_GPIO_Port, Break_K_p_Pin,
@@ -650,6 +669,7 @@ void Modbus_ApplyManualPins(void)
                     (modbus_sv_kont_p != 0U) ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
+/* Разбор и применение записанного регистра конфигурации Modbus. */
 void Modbus_ApplyWriteRegister(uint16_t value) //CONFIGS
 {
   uint8_t cfg_count = 0U;
@@ -706,6 +726,7 @@ void Modbus_ApplyWriteRegister(uint16_t value) //CONFIGS
   }
 }
 
+/* Чтение одного регистра Modbus по адресу. */
 uint8_t Modbus_ReadRegister(uint16_t address, uint16_t *value)
 {
   if (value == NULL)
@@ -731,6 +752,7 @@ uint8_t Modbus_ReadRegister(uint16_t address, uint16_t *value)
   return 0U;
 }
 
+/* Запись одного регистра Modbus по адресу. */
 uint8_t Modbus_WriteRegister(uint16_t address, uint16_t value)
 {
   if (address == 0U)
@@ -742,6 +764,7 @@ uint8_t Modbus_WriteRegister(uint16_t address, uint16_t value)
   return 0U;
 }
 
+/* Чтение диапазона регистров Modbus с проверкой границ. */
 uint8_t Modbus_ReadRegisters(uint16_t start_address, uint16_t count, uint16_t *dest, uint16_t dest_len)
 {
   if ((dest == NULL) || (count == 0U) || (count > dest_len))
@@ -766,11 +789,13 @@ uint8_t Modbus_ReadRegisters(uint16_t start_address, uint16_t count, uint16_t *d
   return 1U;
 }
 
+/* Фиксация последнего кода ошибки Modbus. */
 void Modbus_HandleError(uint8_t error_code)
 {
   modbus_last_error = error_code;
 }
 
+/* Формирование и отправка Modbus-исключения. */
 static void Modbus_SendException(uint8_t address, uint8_t function, uint8_t exception_code)
 {
   uint16_t crc = 0U;
@@ -787,6 +812,7 @@ static void Modbus_SendException(uint8_t address, uint8_t function, uint8_t exce
   (void)HAL_UART_Transmit(&huart2, modbus_tx_buffer, length, 100U);
 }
 
+/* Разбор и обработка принятого Modbus-фрейма (read/write single). */
 void Modbus_ProcessPendingRequest(void)
 {
   uint8_t frame[MODBUS_RX_BUFFER_SIZE];
@@ -821,6 +847,7 @@ void Modbus_ProcessPendingRequest(void)
   }
   __enable_irq();
 
+  /* Минимальная длина фрейма: адрес + функция + CRC. */
   if (frame_len < 4U)
   {
     Modbus_HandleError(MODBUS_EXCEPTION_ILLEGAL_DATA_VALUE);
@@ -843,6 +870,7 @@ void Modbus_ProcessPendingRequest(void)
   }
 
   function = frame[1];
+  /* Разбор функции: чтение регистров. */
   if (function == MODBUS_FUNC_READ_HOLDING_REGISTERS)
   {
     if (frame_len < 8U)
@@ -899,6 +927,7 @@ void Modbus_ProcessPendingRequest(void)
     return;
   }
 
+  /* Разбор функции: запись одного регистра. */
   if (function == MODBUS_FUNC_WRITE_SINGLE_REGISTER)
   {
     if (frame_len < 8U)
@@ -936,6 +965,7 @@ void Modbus_ProcessPendingRequest(void)
     return;
   }
 
+  /* Остальные функции считаем неподдерживаемыми. */
   Modbus_HandleError(MODBUS_EXCEPTION_ILLEGAL_FUNCTION);
   if (address != 0U)
   {
@@ -943,6 +973,7 @@ void Modbus_ProcessPendingRequest(void)
   }
 }
 
+/* Проверка и восстановление UART в случае ошибок при работе Modbus. */
 void Modbus_CheckUartRestart(void)
 {
   if (huart2.ErrorCode != HAL_UART_ERROR_NONE)
@@ -1574,12 +1605,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 
 
+/* Отключение линии EXTI и очистка pending-бита. */
 static inline void EXTI_DisableLine(uint16_t pinmask)
 {
   EXTI->IMR &= ~pinmask;   // запретить прерывание по линии
   EXTI->PR   =  pinmask;   // сбросить pending, чтобы не прилетело сразу после enable
 }
 
+/* Включение линии EXTI и очистка pending-бита. */
 static inline void EXTI_EnableLine(uint16_t pinmask)
 {
   EXTI->PR   =  pinmask;   // сбросить pending
