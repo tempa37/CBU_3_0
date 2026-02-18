@@ -231,11 +231,12 @@ static void Remap_Table(void)
     VectorTable[ui32_VectorIndex] = *(__IO uint32_t *)(APP_START_ADDR + (ui32_VectorIndex << 2));
   }
 
-  __HAL_RCC_AHB_FORCE_RESET();
-  __HAL_RCC_SYSCFG_CLK_ENABLE();
-  __HAL_RCC_AHB_RELEASE_RESET();
+  __disable_irq();
 
-  __HAL_SYSCFG_REMAPMEMORY_SRAM();
+  SCB->VTOR = SRAM_BASE;
+
+  __DSB();
+  __ISB();
   __enable_irq();
 }
 
