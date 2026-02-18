@@ -158,6 +158,9 @@ static void MX_TIM2_Init(void);
 static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
 
+void OS_update(void);
+void VectorRelocateToAppFlash(void);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -172,6 +175,7 @@ static uint8_t on_3v3_enabled = 0U;
 #define MODBUS_TX_BUFFER_SIZE 256U
 #define MODBUS_FUNC_READ_HOLDING_REGISTERS 0x03U
 #define MODBUS_FUNC_WRITE_SINGLE_REGISTER 0x06U
+#define MODBUS_FUNC_UPDATE                0x2Bu
 #define MODBUS_EXCEPTION_ILLEGAL_FUNCTION 0x01U
 #define MODBUS_EXCEPTION_ILLEGAL_DATA_ADDRESS 0x02U
 #define MODBUS_EXCEPTION_ILLEGAL_DATA_VALUE 0x03U
@@ -410,6 +414,8 @@ static void Expander_WritePin(const ExpanderPinMap *map, uint8_t index, GPIO_Pin
     HAL_GPIO_WritePin(map[index].port, map[index].pin, state);
   }
 }
+
+
 
 /* Применение 16-битного состояния PCF8575 с учётом входных пинов. */
 static void ApplyExpander16State(uint16_t value)  //------------------------------16--
@@ -937,6 +943,13 @@ void Modbus_ProcessPendingRequest(void)
     }
     return;
   }
+  
+   /* Разбор функции: обновление ПО */
+  if (function == MODBUS_FUNC_UPDATE )
+  {
+    OS_update();
+  }
+  
 
   /* Остальные функции считаем неподдерживаемыми. */
   Modbus_HandleError(MODBUS_EXCEPTION_ILLEGAL_FUNCTION);
@@ -975,6 +988,41 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t size)
   }
 
   (void)HAL_UARTEx_ReceiveToIdle_IT(&huart2, modbus_rx_buffer, MODBUS_RX_BUFFER_SIZE);
+}
+
+
+
+/*
+ * OS_update
+ * ---------
+ * Помечает во флеше необходимость обновления прошивки и инициирует
+ * программный перезапуск контроллера.
+ */
+void OS_update(void)
+{
+    //  Отправляем Modbus ответ об успешном выполнении функции 0x2B
+    uint8_t resp[5] = {0};
+    uint16_t crc;
+    resp[0] = MODBUS_SLAVE_ADDRESS;       // Slave address
+    resp[1] = 0x2B;       // Echo function code
+    crc     = mbcrc(resp, 2);
+    resp[2] = 0x00;
+    resp[3] = (uint8_t)(crc >> 8);
+    resp[4] = (uint8_t)(crc & 0xFF);
+
+    // Индикация передачи и само отправление
+    
+
+    HAL_UART_Transmit(&huart2, resp, sizeof(resp), 100);
+    
+
+    //  Помечаем флаг обновления в конце флеша
+    HAL_FLASH_Unlock();
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, (APP_FLASH_CFG_START + 4), 0x1111);
+    HAL_FLASH_Lock();
+
+    HAL_DeInit();
+    HAL_NVIC_SystemReset();
 }
 
 /* USER CODE END 0 */
