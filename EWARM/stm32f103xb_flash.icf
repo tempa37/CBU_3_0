@@ -2,10 +2,10 @@
 /*-Editor annotation file-*/
 /* IcfEditorFile="$TOOLKIT_DIR$\config\ide\IcfEditor\cortex_v1_0.xml" */
 /*-Specials-*/
-define symbol __ICFEDIT_intvec_start__ = 0x08000000;
+define symbol __ICFEDIT_intvec_start__ = 0x08002000;
 /*-Memory Regions-*/
-define symbol __ICFEDIT_region_ROM_start__   = 0x08000000 ;
-define symbol __ICFEDIT_region_ROM_end__     = 0x0800FFFF;
+define symbol __ICFEDIT_region_ROM_start__   = 0x08002000 ;
+define symbol __ICFEDIT_region_ROM_end__     = 0x0801FFFF;
 define symbol __ICFEDIT_region_RAM_start__   = 0x20000000;
 define symbol __ICFEDIT_region_RAM_end__     = 0x20004FFF;
 /*-Sizes-*/
@@ -15,10 +15,14 @@ define symbol __ICFEDIT_size_heap__   = 0x200;
 
 
 
-define symbol __FLASH_CFG_START__ = 0x0800FC00;
-define symbol __FLASH_CFG_END__   = 0x0800FFFF;
+define symbol __BOOTLOADER_START__ = 0x08000000;
+define symbol __BOOTLOADER_END__   = 0x08001FFF;
+
+define symbol __FLASH_CFG_START__ = 0x0801FC00;
+define symbol __FLASH_CFG_END__   = 0x0801FFFF;
 
 define memory mem with size = 4G;
+define region BOOT_region  = mem:[from __BOOTLOADER_START__           to __BOOTLOADER_END__];
 define region ROM_region   = mem:[from __ICFEDIT_region_ROM_start__   to (__FLASH_CFG_START__ - 1)];
 define region CFG_region   = mem:[from __FLASH_CFG_START__           to __FLASH_CFG_END__];
 define region RAM_region   = mem:[from __ICFEDIT_region_RAM_start__   to __ICFEDIT_region_RAM_end__];
