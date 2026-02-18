@@ -43,6 +43,10 @@
 #define I2C_EXPANDER16_RX_SIZE 2U /* Два байта: p0..p7 и p8..p15 */
 #define I2C_EXPANDER8_RX_SIZE  1U /* Один байт: p0..p7 */
 
+
+extern const uint32_t __vector_table;   // в IAR/CMSIS часто так называется
+
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -59,6 +63,16 @@ TIM_HandleTypeDef htim2;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
+
+void VectorRelocateToAppFlash(void)
+{
+    __disable_irq();
+    __DSB(); __ISB();
+    SCB->VTOR = (uint32_t)&__vector_table;   // будет 0x08002000 по твоему ICF
+    __DSB(); __ISB();
+    __enable_irq();
+}
+
 typedef struct
 {
   GPIO_TypeDef *port;
@@ -220,25 +234,6 @@ volatile uint8_t kontur2_obryv = 0U;
 volatile uint8_t KTV_poll_start = 0;
 static uint8_t tim2_running = 0U;
 
-/* Копирует таблицу векторов приложения в SRAM и выполняет remap памяти. */
-static void Remap_Table(void)
-{
-  volatile uint32_t *VectorTable = (volatile uint32_t *)0x20000000U;
-  uint32_t ui32_VectorIndex = 0U;
-
-  for (ui32_VectorIndex = 0U; ui32_VectorIndex < 48U; ui32_VectorIndex++)
-  {
-    VectorTable[ui32_VectorIndex] = *(__IO uint32_t *)(APP_START_ADDR + (ui32_VectorIndex << 2));
-  }
-
-  __disable_irq();
-
-  SCB->VTOR = SRAM_BASE;
-
-  __DSB();
-  __ISB();
-  __enable_irq();
-}
 
 /* Управление запуском/остановкой таймера опроса КТВ по флагу KTV_poll_start. */
 static void UpdateKtvTimerState(void)
@@ -261,53 +256,9 @@ static uint16_t FlashConfig_Read(void)
   return *(const volatile uint16_t *)(APP_FLASH_CFG_START);
 }
 
-/* Перезапись конфигурационного слова в выделенной странице флеша. */
-//на данный момент вызывается, но чтение при старте не происходит
-static HAL_StatusTypeDef FlashConfig_Write(uint16_t value)
-{
-  uint16_t current = FlashConfig_Read();
-  HAL_StatusTypeDef status = HAL_OK;
-  FLASH_EraseInitTypeDef erase = {0};
-  uint32_t page_error = 0U;
 
-  if (current == value)
-  {
-    return HAL_OK;
-  }
 
-  status = HAL_FLASH_Unlock();
-  if (status != HAL_OK)
-  {
-    HAL_FLASH_Lock();
-    return status;
-  }
 
-  erase.TypeErase = FLASH_TYPEERASE_PAGES;
-  erase.PageAddress = APP_FLASH_CFG_START;
-  erase.NbPages = 1U;
-  status = HAL_FLASHEx_Erase(&erase, &page_error);
-  if (status == HAL_OK)
-  {
-    status = HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD,
-                               APP_FLASH_CFG_START,
-                               value);
-  }
-
-  HAL_FLASH_Lock();
-  return status;
-}
-
-/* Применение сохранённой в флеше конфигурации после старта. */
-//пока не применяется
-static void FlashConfig_ApplyOnBoot(void)
-{
-  uint16_t stored = FlashConfig_Read();
-
-  if (stored != FLASH_CFG_EMPTY_VALUE)
-  {
-   //Modbus_ApplyWriteRegister(stored);
-  }
-}
 
 /* Обработка окна выборки оптронов и вычисление состояний контуров. */
 static void Optron_ProcessFrame(void)
@@ -697,7 +648,7 @@ void Modbus_ApplyWriteRegister(uint16_t value) //CONFIGS
   uint8_t cfg_count = 0U;
 
   modbus_write_register = value;
-  (void)FlashConfig_Write(value);
+
 
   modbus_cfg8 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG8) & 0x1U);
   modbus_cfg7 = (uint8_t)((value >> MODBUS_WRITE_BIT_CFG7) & 0x1U);
@@ -1036,7 +987,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+  VectorRelocateToAppFlash();
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -1045,7 +996,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  Remap_Table();
+  
 
   /* USER CODE END Init */
 
@@ -1071,7 +1022,6 @@ int main(void)
   pcf_int_latched = 0U;
   SetPcfIntLevel(GPIO_PIN_SET);
   Ktv_Init();
-  FlashConfig_ApplyOnBoot();
   HAL_TIM_Base_Stop_IT(&htim2);
   HAL_TIM_Base_Start_IT(&htim1);
   (void)HAL_UARTEx_ReceiveToIdle_IT(&huart2, modbus_rx_buffer, MODBUS_RX_BUFFER_SIZE);

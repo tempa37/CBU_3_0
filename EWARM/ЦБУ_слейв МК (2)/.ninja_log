@@ -142,3 +142,88 @@
 1946	2078	7931177391465822	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
 1946	2078	7931177391465822	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
 2079	2092	7931177392797388	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069
+26	311	7931210158270502	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/mbcrc.o	bd8f41f3603eb619
+26	311	7931210158270502	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/mbcrc.o	bd8f41f3603eb619
+15	326	7931210158104423	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/ktv.o	e7f29dd6ba5c7323
+15	326	7931210158104423	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/ktv.o	e7f29dd6ba5c7323
+29	361	7931210158270502	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	434c63c8abe0cf92
+29	361	7931210158270502	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	434c63c8abe0cf92
+312	443	7931210161131641	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	e8522583984ad23d
+312	443	7931210161131641	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	e8522583984ad23d
+22	488	7931210158220146	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+22	488	7931210158220146	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+489	569	7931210162889836	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+489	569	7931210162889836	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+489	569	7931210162889836	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+571	583	7931210163715144	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069
+3	288	7931211590941058	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/ktv.o	e7f29dd6ba5c7323
+3	288	7931211590941058	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/ktv.o	e7f29dd6ba5c7323
+11	331	7931211591034101	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/mbcrc.o	bd8f41f3603eb619
+11	331	7931211591034101	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/mbcrc.o	bd8f41f3603eb619
+15	363	7931211591071547	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	434c63c8abe0cf92
+15	363	7931211591071547	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	434c63c8abe0cf92
+290	430	7931211593777153	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	e8522583984ad23d
+290	430	7931211593777153	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	e8522583984ad23d
+6	487	7931211590981960	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+6	487	7931211590981960	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+488	580	7931211595773295	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+488	580	7931211595773295	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+488	580	7931211595773295	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+488	580	7931211595773295	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+581	596	7931211596683740	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069
+3	81	7931212026697242	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+3	81	7931212026697242	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+3	81	7931212026697242	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+3	81	7931212026697242	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+82	97	7931212027470597	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069
+2	394	7931212491570055	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+2	394	7931212491570055	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+395	469	7931212495468836	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+395	469	7931212495468836	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+395	469	7931212495468836	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+395	469	7931212495468836	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+471	485	7931212496271352	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069
+4	367	7931217306869774	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+4	367	7931217306869774	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+369	469	7931217310605398	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+369	469	7931217310605398	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+369	469	7931217310605398	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+369	469	7931217310605398	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+470	482	7931217311611811	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069
+4	351	7931224044986308	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+4	351	7931224044986308	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+3	271	7931224262741111	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+3	271	7931224262741111	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+272	345	7931224265523064	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+272	345	7931224265523064	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+272	345	7931224265523064	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+272	345	7931224265523064	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+346	358	7931224266274184	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069
+5	330	7931249445898360	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+5	330	7931249445898360	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+331	411	7931249449154461	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+331	411	7931249449154461	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+331	411	7931249449154461	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+331	411	7931249449154461	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+412	424	7931249449971732	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069
+4	286	7931251581687441	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+4	286	7931251581687441	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+287	367	7931251584512056	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+287	367	7931251584512056	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+287	367	7931251584512056	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+287	367	7931251584512056	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+369	380	7931251585329342	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069
+3	355	7931260176986550	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+3	355	7931260176986550	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+357	455	7931260180519584	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+357	455	7931260180519584	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+357	455	7931260180519584	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+357	455	7931260180519584	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+456	467	7931260181502060	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069
+3	271	7931261151693373	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+3	271	7931261151693373	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+272	343	7931261154372137	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+272	343	7931261154372137	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+272	343	7931261154372137	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+272	343	7931261154372137	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+344	356	7931261155098408	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069

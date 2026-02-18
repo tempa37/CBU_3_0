@@ -21,27 +21,27 @@
         <ByteLimit>50</ByteLimit>
     </Stack>
     <PlDriver>
-        <MemConfigValue>C:\iar\ewarm-9.70.1\arm\config\debugger\ST\STM32F103C8.ddf</MemConfigValue>
         <FirstRun>0</FirstRun>
+        <MemConfigValue>C:\iar\ewarm-9.70.1\arm\config\debugger\ST\STM32F103C8.ddf</MemConfigValue>
     </PlDriver>
     <StLinkDriver>
-        <stlinkResetStyle>0</stlinkResetStyle>
-        <stlinkResetStrategy>2</stlinkResetStrategy>
-        <LeaveTargetRunning>_ 0</LeaveTargetRunning>
-        <CStepIntDis>_ 0</CStepIntDis>
         <stlinkserialNo>001E00383156501420323443</stlinkserialNo>
         <stlinkfoundProbes />
+        <LeaveTargetRunning>_ 0</LeaveTargetRunning>
+        <CStepIntDis>_ 0</CStepIntDis>
+        <stlinkResetStyle>0</stlinkResetStyle>
+        <stlinkResetStrategy>2</stlinkResetStrategy>
     </StLinkDriver>
     <ArmDriver>
         <EnableCache>0</EnableCache>
         <EnforceMemoryConfiguration>1</EnforceMemoryConfiguration>
     </ArmDriver>
     <DebugChecksum>
-        <Checksum>58860823</Checksum>
+        <Checksum>2125199192</Checksum>
     </DebugChecksum>
     <Exceptions>
-        <StopOnThrow>_ 0</StopOnThrow>
         <StopOnUncaught>_ 0</StopOnUncaught>
+        <StopOnThrow>_ 0</StopOnThrow>
     </Exceptions>
     <Disassembly>
         <MixedMode>1</MixedMode>
@@ -147,6 +147,16 @@
         <ShowTimeSum>1</ShowTimeSum>
         <SumSortOrder>0</SumSortOrder>
     </EventLog>
+    <TermIOLog>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+    </TermIOLog>
+    <DisassembleMode>
+        <mode>0</mode>
+    </DisassembleMode>
+    <Breakpoints2>
+        <Count>0</Count>
+    </Breakpoints2>
     <DriverProfiling>
         <Enabled>0</Enabled>
         <Mode>3</Mode>
@@ -159,14 +169,4 @@
         <SuppressDialog>0</SuppressDialog>
         <SuppressResolveSourcesForDebugTarget>1</SuppressResolveSourcesForDebugTarget>
     </Aliases>
-    <TermIOLog>
-        <LoggingEnabled>_ 0</LoggingEnabled>
-        <LogFile>_ ""</LogFile>
-    </TermIOLog>
-    <DisassembleMode>
-        <mode>0</mode>
-    </DisassembleMode>
-    <Breakpoints2>
-        <Count>0</Count>
-    </Breakpoints2>
 </settings>
