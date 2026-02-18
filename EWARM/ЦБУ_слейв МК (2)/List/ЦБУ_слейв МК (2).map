@@ -1,72 +1,100 @@
 ###############################################################################
 #
-# IAR ELF Linker V9.70.1.475/W64 for ARM                  30/Jan/2026  22:58:19
+# IAR ELF Linker V9.70.1.475/W64 for ARM                  18/Feb/2026  18:35:39
 # Copyright 2007-2025 IAR Systems AB.
 #
 #    Output file  =
-#        C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Exe\ЦБУ_слейв МК
-#        (2).out
+#        C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Exe\ЦБУ_слейв
+#        МК (2).out
 #    Map file     =
-#        C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\List\ЦБУ_слейв МК
-#        (2).map
+#        C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
+#        (2)\List\ЦБУ_слейв МК (2).map
 #    Command line =
-#        -f "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Exe\ЦБУ_слейв
-#        МК (2).out.rsp" ("C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        -f "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Exe\ЦБУ_слейв
+#        МК (2).out.rsp" ("C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\Core_13247989168731456611.dir\ktv.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\Core_13247989168731456611.dir\main.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\Core_13247989168731456611.dir\mbcrc.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\EWARM_18443280873093131863.dir\startup_stm32f103xb.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_cortex.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_dma.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_exti.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_flash.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_flash_ex.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_gpio.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_gpio_ex.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_i2c.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\Core_13247989168731456611.dir\stm32f1xx_hal_msp.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_pwr.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_rcc.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_rcc_ex.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_tim.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_tim_ex.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir\stm32f1xx_hal_uart.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\Core_13247989168731456611.dir\stm32f1xx_it.o"
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
 #        (2)\Obj\CMSIS_6603591812247902717.dir\system_stm32f1xx.o"
-#        --no_out_extension -o "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв
-#        МК (2)\Exe\ЦБУ_слейв МК (2).out" --redirect _Printf=_PrintfFullNoMb
-#        --redirect _Scanf=_ScanfFullNoMb --map
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\List\ЦБУ_слейв
-#        МК (2).map" --config
-#        C:\Users\User\Desktop\CBU_3.0\EWARM/stm32f103xb_flash.icf
+#        --no_out_extension -o "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Exe\ЦБУ_слейв
+#        МК (2).out" --redirect _Printf=_PrintfFullNoMb --redirect
+#        _Scanf=_ScanfFullNoMb --map "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК
+#        (2)\List\ЦБУ_слейв МК (2).map" --config
+#        "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM/stm32f103xb_flash.icf"
 #        --semihosting --entry __iar_program_start --vfe --text_out locale
 #        --cpu=Cortex-M3 --fpu=None) --diagnostics_format=sarif_stdout
-#        --dependencies=n "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК
-#        (2)\Exe\ЦБУ_слейв МК (2).out.iar_deps" --dynamic_output
-#        "C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Exe\ЦБУ_слейв МК
-#        (2).out.iar_dynout"
+#        --dependencies=n "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Exe\ЦБУ_слейв
+#        МК (2).out.iar_deps" --dynamic_output "C:\Users\User\Desktop\Активные
+#        проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Exe\ЦБУ_слейв
+#        МК (2).out.iar_dynout"
 #
 ###############################################################################
 
@@ -327,12 +355,12 @@ command line/config:
     ---------------------------------------------------
     Total:
 
-C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Obj\CMSIS_6603591812247902717.dir: [1]
+C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Obj\CMSIS_6603591812247902717.dir: [1]
     system_stm32f1xx.o              2       28        4
     ---------------------------------------------------
     Total:                          2       28        4
 
-C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Obj\Core_13247989168731456611.dir: [2]
+C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Obj\Core_13247989168731456611.dir: [2]
     ktv.o                       1'408               604
     main.o                      5'764      197      930
     mbcrc.o                        76      512
@@ -341,12 +369,12 @@ C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Obj\Core_132479891687314566
     ---------------------------------------------------
     Total:                      7'868      709    1'534
 
-C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Obj\EWARM_18443280873093131863.dir: [3]
+C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Obj\EWARM_18443280873093131863.dir: [3]
     startup_stm32f103xb.o         388
     ---------------------------------------------------
     Total:                        388
 
-C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir: [4]
+C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir: [4]
     stm32f1xx_hal.o               148        5        9
     stm32f1xx_hal_cortex.o        396
     stm32f1xx_hal_dma.o           298
@@ -771,10 +799,10 @@ uwTickFreq              0x2000'0009    0x1  Data  Gb  stm32f1xx_hal.o [4]
 uwTickPrio              0x2000'0000    0x4  Data  Gb  stm32f1xx_hal.o [4]
 
 
-[1] = C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Obj\CMSIS_6603591812247902717.dir
-[2] = C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Obj\Core_13247989168731456611.dir
-[3] = C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Obj\EWARM_18443280873093131863.dir
-[4] = C:\Users\User\Desktop\CBU_3.0\EWARM\ЦБУ_слейв МК (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir
+[1] = C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Obj\CMSIS_6603591812247902717.dir
+[2] = C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Obj\Core_13247989168731456611.dir
+[3] = C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Obj\EWARM_18443280873093131863.dir
+[4] = C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\ЦБУ_слейв МК (2)\Obj\STM32F1xx_HAL_Driver_9701002599162248031.dir
 [5] = dl7M_tln.a
 [6] = rt7M_tl.a
 [7] = shb_l.a

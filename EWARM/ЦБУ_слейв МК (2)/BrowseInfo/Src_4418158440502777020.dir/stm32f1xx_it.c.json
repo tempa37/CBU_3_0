@@ -2,7 +2,7 @@
 	"arguments" : 
 	[
 		"C:\\iar\\ewarm-9.70.1\\arm\\bin\\iccarm.exe",
-		"C:\\Users\\User\\Desktop\\CBU_3.0\\Core\\Src\\stm32f1xx_it.c",
+		"C:\\Users\\User\\Desktop\\Активные проекты\\CBU_F103\\CBU_3_0_F103_APP\\Core\\Src\\stm32f1xx_it.c",
 		"-nostdinc",
 		"-undef",
 		"-Wno-unaligned-access",
@@ -16,15 +16,15 @@
 		"-isystem",
 		"C:\\iar\\ewarm-9.70.1\\arm\\inc\\c",
 		"-I",
-		"C:\\Users\\User\\Desktop\\CBU_3.0\\Core\\Inc\\",
+		"C:\\Users\\User\\Desktop\\Активные проекты\\CBU_F103\\CBU_3_0_F103_APP\\Core\\Inc\\",
 		"-I",
-		"C:\\Users\\User\\Desktop\\CBU_3.0\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\",
+		"C:\\Users\\User\\Desktop\\Активные проекты\\CBU_F103\\CBU_3_0_F103_APP\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\",
 		"-I",
-		"C:\\Users\\User\\Desktop\\CBU_3.0\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy\\",
+		"C:\\Users\\User\\Desktop\\Активные проекты\\CBU_F103\\CBU_3_0_F103_APP\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy\\",
 		"-I",
-		"C:\\Users\\User\\Desktop\\CBU_3.0\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include\\",
+		"C:\\Users\\User\\Desktop\\Активные проекты\\CBU_F103\\CBU_3_0_F103_APP\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include\\",
 		"-I",
-		"C:\\Users\\User\\Desktop\\CBU_3.0\\Drivers\\CMSIS\\Include\\",
+		"C:\\Users\\User\\Desktop\\Активные проекты\\CBU_F103\\CBU_3_0_F103_APP\\Drivers\\CMSIS\\Include\\",
 		"--target=armv7m-none-eabi",
 		"-D",
 		"__CHAR_BITS__=8",
@@ -913,7 +913,7 @@
 		"-x",
 		"c"
 	],
-	"directory" : "C:\\Users\\User\\Desktop\\CBU_3.0\\Core\\Src",
-	"file" : "C:\\Users\\User\\Desktop\\CBU_3.0\\Core\\Src\\stm32f1xx_it.c",
-	"output" : "C:\\Users\\User\\Desktop\\CBU_3.0\\EWARM\\ЦБУ_слейв МК (2)\\Obj\\Core_13247989168731456611.dir\\stm32f1xx_it.o"
+	"directory" : "C:\\Users\\User\\Desktop\\Активные проекты\\CBU_F103\\CBU_3_0_F103_APP\\Core\\Src",
+	"file" : "C:\\Users\\User\\Desktop\\Активные проекты\\CBU_F103\\CBU_3_0_F103_APP\\Core\\Src\\stm32f1xx_it.c",
+	"output" : "C:\\Users\\User\\Desktop\\Активные проекты\\CBU_F103\\CBU_3_0_F103_APP\\EWARM\\ЦБУ_слейв МК (2)\\Obj\\Core_13247989168731456611.dir\\stm32f1xx_it.o"
 }

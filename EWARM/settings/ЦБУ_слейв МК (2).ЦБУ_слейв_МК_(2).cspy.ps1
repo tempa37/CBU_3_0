@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "C:\iar\ewarm-9.70.1\common\bin\cspybat" -f "C:\Users\User\Desktop\CBU_3.0\EWARM\settings\ЦБУ_слейв МК (2).ЦБУ_слейв_МК_(2).general.xcl" --backend -f "C:\Users\User\Desktop\CBU_3.0\EWARM\settings\ЦБУ_слейв МК (2).ЦБУ_слейв_МК_(2).driver.xcl" 
+& "C:\iar\ewarm-9.70.1\common\bin\cspybat" -f "C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\settings\ЦБУ_слейв МК (2).ЦБУ_слейв_МК_(2).general.xcl" --backend -f "C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\settings\ЦБУ_слейв МК (2).ЦБУ_слейв_МК_(2).driver.xcl" 
 }
 else
 {
-& "C:\iar\ewarm-9.70.1\common\bin\cspybat" -f "C:\Users\User\Desktop\CBU_3.0\EWARM\settings\ЦБУ_слейв МК (2).ЦБУ_слейв_МК_(2).general.xcl" --debug_file=$debugfile --backend -f "C:\Users\User\Desktop\CBU_3.0\EWARM\settings\ЦБУ_слейв МК (2).ЦБУ_слейв_МК_(2).driver.xcl" 
+& "C:\iar\ewarm-9.70.1\common\bin\cspybat" -f "C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\settings\ЦБУ_слейв МК (2).ЦБУ_слейв_МК_(2).general.xcl" --debug_file=$debugfile --backend -f "C:\Users\User\Desktop\Активные проекты\CBU_F103\CBU_3_0_F103_APP\EWARM\settings\ЦБУ_слейв МК (2).ЦБУ_слейв_МК_(2).driver.xcl" 
 }

@@ -48,3 +48,97 @@
 371	450	7914918995751542	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	8baf8c5d0228ed52
 371	450	7914918995751542	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	8baf8c5d0228ed52
 452	469	7914918996561500	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	aca44051d32d8a71
+21	185	7919197326244855	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/mbcrc.o	eb1aa62460b5a4b
+21	185	7919197326244855	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/mbcrc.o	eb1aa62460b5a4b
+25	210	7919197326274844	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	b7742b643ea8072a
+25	210	7919197326274844	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	b7742b643ea8072a
+16	248	7919197326184848	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/ktv.o	fe6d241642cc4b03
+16	248	7919197326184848	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/ktv.o	fe6d241642cc4b03
+186	358	7919197327884848	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	9bb97a11ab40fc05
+186	358	7919197327884848	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	9bb97a11ab40fc05
+212	381	7919197328144864	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/CMSIS_6603591812247902717.dir/system_stm32f1xx.o	b0f99a7354b5e586
+212	381	7919197328144864	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/CMSIS_6603591812247902717.dir/system_stm32f1xx.o	b0f99a7354b5e586
+248	437	7919197328514848	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal.o	57aada36c1c6ead7
+248	437	7919197328514848	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal.o	57aada36c1c6ead7
+19	453	7919197326214845	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	9c4b18ac11aa8aed
+19	453	7919197326214845	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	9c4b18ac11aa8aed
+360	580	7919197329624860	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_cortex.o	7fe9b19cc54ec6b5
+360	580	7919197329624860	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_cortex.o	7fe9b19cc54ec6b5
+383	634	7919197329854854	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_dma.o	2af6559c49e5c6f6
+383	634	7919197329854854	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_dma.o	2af6559c49e5c6f6
+438	638	7919197330414851	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_exti.o	6ccf9e5d00e66f2c
+438	638	7919197330414851	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_exti.o	6ccf9e5d00e66f2c
+455	668	7919197330574845	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_flash.o	9d2adb0f7ca7be72
+455	668	7919197330574845	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_flash.o	9d2adb0f7ca7be72
+639	788	7919197332426111	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_gpio_ex.o	93fe44436a164bca
+639	788	7919197332426111	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_gpio_ex.o	93fe44436a164bca
+581	811	7919197331836109	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_flash_ex.o	ed9135dd2b8d0718
+581	811	7919197331836109	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_flash_ex.o	ed9135dd2b8d0718
+635	843	7919197332376116	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_gpio.o	e9c964b942230a0c
+635	843	7919197332376116	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_gpio.o	e9c964b942230a0c
+789	971	7919197333916118	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_pwr.o	e8879365b8436f74
+789	971	7919197333916118	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_pwr.o	e8879365b8436f74
+844	1039	7919197334466117	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_rcc_ex.o	5d347d9464169199
+844	1039	7919197334466117	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_rcc_ex.o	5d347d9464169199
+812	1118	7919197334146113	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_rcc.o	5e51defa0a701017
+812	1118	7919197334146113	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_rcc.o	5e51defa0a701017
+1040	1447	7919197336417327	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_tim_ex.o	3aee84eb1313e229
+1040	1447	7919197336417327	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_tim_ex.o	3aee84eb1313e229
+1119	1526	7919197337217327	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_uart.o	c1cd317218091555
+1119	1526	7919197337217327	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_uart.o	c1cd317218091555
+669	1545	7919197332716119	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_i2c.o	41dcc07814b51aef
+669	1545	7919197332716119	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_i2c.o	41dcc07814b51aef
+1448	1569	7919197340507320	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/EWARM_18443280873093131863.dir/startup_stm32f103xb.o	c067ae5b249b224c
+972	1713	7919197335746112	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_tim.o	ceedcc709f9f6452
+972	1713	7919197335746112	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_tim.o	ceedcc709f9f6452
+1714	1864	7919197343168757	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	939704975a5867
+1714	1864	7919197343168757	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	939704975a5867
+1714	1864	7919197343168757	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	939704975a5867
+1865	1876	7919197344671512	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	d214e36b90e70577
+14	320	7931177372148107	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	434c63c8abe0cf92
+14	320	7931177372148107	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_hal_msp.o	434c63c8abe0cf92
+8	344	7931177372007492	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/mbcrc.o	bd8f41f3603eb619
+8	344	7931177372007492	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/mbcrc.o	bd8f41f3603eb619
+2	350	7931177372007492	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/ktv.o	e7f29dd6ba5c7323
+2	350	7931177372007492	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/ktv.o	e7f29dd6ba5c7323
+321	518	7931177375220604	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	e8522583984ad23d
+321	518	7931177375220604	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/stm32f1xx_it.o	e8522583984ad23d
+6	524	7931177372007492	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+6	524	7931177372007492	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/Core_13247989168731456611.dir/main.o	24c253ea65c4aa4a
+345	543	7931177375395954	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/CMSIS_6603591812247902717.dir/system_stm32f1xx.o	57a012ce5b62c5ba
+345	543	7931177375395954	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/CMSIS_6603591812247902717.dir/system_stm32f1xx.o	57a012ce5b62c5ba
+351	570	7931177375497702	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal.o	93328b23db9e3417
+351	570	7931177375497702	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal.o	93328b23db9e3417
+519	741	7931177377198730	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_cortex.o	f4b80edd43ac92af
+519	741	7931177377198730	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_cortex.o	f4b80edd43ac92af
+544	763	7931177377447880	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_exti.o	5d7a6f79f6c83e7f
+544	763	7931177377447880	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_exti.o	5d7a6f79f6c83e7f
+571	799	7931177377722805	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_flash.o	e79beef4e957982e
+571	799	7931177377722805	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_flash.o	e79beef4e957982e
+525	817	7931177377258532	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_dma.o	3df86b0c808e98ce
+525	817	7931177377258532	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_dma.o	3df86b0c808e98ce
+764	978	7931177379646520	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_gpio.o	3629dd048e710caa
+764	978	7931177379646520	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_gpio.o	3629dd048e710caa
+801	990	7931177379997811	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_gpio_ex.o	9a1577c0e10cebaa
+801	990	7931177379997811	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_gpio_ex.o	9a1577c0e10cebaa
+742	1031	7931177379397128	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_flash_ex.o	ffffb8ebda9c11ff
+742	1031	7931177379397128	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_flash_ex.o	ffffb8ebda9c11ff
+979	1202	7931177381797703	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_pwr.o	ab964fbd0e5c7c37
+979	1202	7931177381797703	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_pwr.o	ab964fbd0e5c7c37
+1032	1246	7931177382296471	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_rcc_ex.o	eb2da00eb47f792d
+1032	1246	7931177382296471	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_rcc_ex.o	eb2da00eb47f792d
+991	1292	7931177381914583	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_rcc.o	7885b3c1ec1d4d09
+991	1292	7931177381914583	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_rcc.o	7885b3c1ec1d4d09
+1247	1681	7931177384394444	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_tim_ex.o	d7cf64942cb06e35
+1247	1681	7931177384394444	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_tim_ex.o	d7cf64942cb06e35
+1683	1723	7931177388796860	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/EWARM_18443280873093131863.dir/startup_stm32f103xb.o	b5fddcaa9dd7ab03
+818	1751	7931177380098016	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_i2c.o	30767490e31c48b4
+818	1751	7931177380098016	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_i2c.o	30767490e31c48b4
+1293	1773	7931177384944774	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_uart.o	ae2e4b4b9b005bf8
+1293	1773	7931177384944774	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_uart.o	ae2e4b4b9b005bf8
+1203	1946	7931177383997874	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_tim.o	38c2fa3e33792cb8
+1203	1946	7931177383997874	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Obj/STM32F1xx_HAL_Driver_9701002599162248031.dir/stm32f1xx_hal_tim.o	38c2fa3e33792cb8
+1946	2078	7931177391465822	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+1946	2078	7931177391465822	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК (2).out	acdc20a1d4e71ff0
+1946	2078	7931177391465822	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/List/ЦБУ_слейв МК (2).map	acdc20a1d4e71ff0
+2079	2092	7931177392797388	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/Exe/ЦБУ_слейв МК.hex	b1f4429780a12069

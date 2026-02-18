@@ -47,3 +47,47 @@
 107	373	7913933022198013	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/compile_commands.json	d8e35e7e561e215b
 11	97	7914623596921698	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_11643779915794663378.dir/stm32f1xx_hal_uart.c.json	488b6f9cd67b39bf
 97	135	7914623597791115	C:/Users/User/Desktop/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/compile_commands.json	2f0a5770fe6c25ca
+12	163	7919197277914224	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_2760295583687274703.dir/ktv.c.json	d2c8a202477c162
+164	287	7919197279424242	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_9345438667183768884.dir/main.c.json	af32c70dbd618758
+287	418	7919197280658966	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_11554846930842347525.dir/mbcrc.c.json	a9391e6407f27031
+419	507	7919197281984363	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_10453640462813471181.dir/stm32f1xx_hal_msp.c.json	a04452c2e36d7431
+507	638	7919197282859752	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_4418158440502777020.dir/stm32f1xx_it.c.json	6abe42e0a620080e
+639	735	7919197284174290	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_6596634332695065529.dir/system_stm32f1xx.c.json	399542804c4b3dc3
+735	800	7919197285144302	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_7194546058173733607.dir/stm32f1xx_hal.c.json	ade01225f45ea97c
+801	865	7919197285794326	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_1481171258091028686.dir/stm32f1xx_hal_cortex.c.json	98ee938d4c465bce
+865	943	7919197286434306	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_9418967261776065146.dir/stm32f1xx_hal_dma.c.json	c72957706b2b96c2
+943	1024	7919197287214297	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_1434973802458417369.dir/stm32f1xx_hal_exti.c.json	35dbf7f0e7ae7997
+1025	1102	7919197288034302	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_8522399284413268622.dir/stm32f1xx_hal_flash.c.json	79cd96b1106a51a8
+1103	1174	7919197288814294	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_11304044701803077465.dir/stm32f1xx_hal_flash_ex.c.json	2b9953842a2e399b
+1174	1296	7919197289524306	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_9298500936648078987.dir/stm32f1xx_hal_gpio.c.json	d168e23afe6d60e7
+1296	1406	7919197290744304	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_2667170478243439264.dir/stm32f1xx_hal_gpio_ex.c.json	c7865e2b5f0d4234
+1406	1505	7919197291853842	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_2852924911590601199.dir/stm32f1xx_hal_i2c.c.json	3c4670c13b20bb25
+1505	1578	7919197292835375	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_8094086371011482870.dir/stm32f1xx_hal_pwr.c.json	51e8f715770687d3
+1578	1647	7919197293565392	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_5763740417511805307.dir/stm32f1xx_hal_rcc.c.json	5fca8200f08bec97
+1648	1720	7919197294265393	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_4156421304941073795.dir/stm32f1xx_hal_rcc_ex.c.json	ecd07aee0d34c965
+1721	1798	7919197294995402	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_4947243839795554933.dir/stm32f1xx_hal_tim.c.json	ea1bcc03c7853f1c
+1799	1903	7919197295775407	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_15247131560274826905.dir/stm32f1xx_hal_tim_ex.c.json	4c2e8377138dd4da
+1904	1982	7919197296823144	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_11643779915794663378.dir/stm32f1xx_hal_uart.c.json	b78434cf8f513b45
+1982	2018	7919197297613146	C:/Users/User/Desktop/Активные проекты/CBU_3.0/EWARM/ЦБУ_слейв МК (2)/compile_commands.json	ee448bf9b99236cd
+2	150	7931176628650401	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_2760295583687274703.dir/ktv.c.json	cc4cfaca371e5ce5
+151	264	7931176630094389	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_9345438667183768884.dir/main.c.json	4239b2262b5ed90
+265	392	7931176631194437	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_11554846930842347525.dir/mbcrc.c.json	4e3879ae3344e6ee
+392	473	7931176632496789	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_10453640462813471181.dir/stm32f1xx_hal_msp.c.json	411664a822f1d5c1
+474	538	7931176633297674	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_4418158440502777020.dir/stm32f1xx_it.c.json	d9fd1b73333ac60c
+538	609	7931176634006709	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_6596634332695065529.dir/system_stm32f1xx.c.json	4e1b805df2d2cde8
+609	688	7931176634694411	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_7194546058173733607.dir/stm32f1xx_hal.c.json	e64eb0b2d6120a33
+689	780	7931176635496633	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_1481171258091028686.dir/stm32f1xx_hal_cortex.c.json	75a05a9ca39e1d2a
+781	877	7931176636397366	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_9418967261776065146.dir/stm32f1xx_hal_dma.c.json	a77ee15a2a0ea54d
+877	962	7931176637397906	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_1434973802458417369.dir/stm32f1xx_hal_exti.c.json	e1b936dbf219be82
+962	1038	7931176638243889	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_8522399284413268622.dir/stm32f1xx_hal_flash.c.json	803900891a3521a1
+1039	1119	7931176638996603	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_11304044701803077465.dir/stm32f1xx_hal_flash_ex.c.json	fc90c22ae1e71e94
+1119	1192	7931176639796741	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_9298500936648078987.dir/stm32f1xx_hal_gpio.c.json	fd5543a2d1fc06a8
+1192	1262	7931176640550543	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_2667170478243439264.dir/stm32f1xx_hal_gpio_ex.c.json	dd95191501bef0cd
+1262	1341	7931176641222732	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_2852924911590601199.dir/stm32f1xx_hal_i2c.c.json	1e33e9fbad8e9fc7
+1342	1433	7931176641996974	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_8094086371011482870.dir/stm32f1xx_hal_pwr.c.json	b311ee2bbbcbfe00
+1433	1551	7931176642957486	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_5763740417511805307.dir/stm32f1xx_hal_rcc.c.json	8e74e1957669a7fe
+1551	1650	7931176644094514	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_4156421304941073795.dir/stm32f1xx_hal_rcc_ex.c.json	8b71cd6105aacd09
+1650	1737	7931176645094563	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_4947243839795554933.dir/stm32f1xx_hal_tim.c.json	290b6ce5f68d6a0c
+1738	1812	7931176645995024	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_15247131560274826905.dir/stm32f1xx_hal_tim_ex.c.json	fe8a4477aa8a50f0
+1813	1878	7931176646695361	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/BrowseInfo/Src_11643779915794663378.dir/stm32f1xx_hal_uart.c.json	5a8ce37b23334d9c
+1878	1911	7931176647395992	C:/Users/User/Desktop/Активные проекты/CBU_F103/CBU_3_0_F103_APP/EWARM/ЦБУ_слейв МК (2)/compile_commands.json	bc261e1d295a88d1

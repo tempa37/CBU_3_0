@@ -243,6 +243,7 @@ static uint16_t FlashConfig_Read(void)
 }
 
 /* Перезапись конфигурационного слова в выделенной странице флеша. */
+//на данный момент вызывается, но чтение при старте не происходит
 static HAL_StatusTypeDef FlashConfig_Write(uint16_t value)
 {
   uint16_t current = FlashConfig_Read();
@@ -278,6 +279,7 @@ static HAL_StatusTypeDef FlashConfig_Write(uint16_t value)
 }
 
 /* Применение сохранённой в флеше конфигурации после старта. */
+//пока не применяется
 static void FlashConfig_ApplyOnBoot(void)
 {
   uint16_t stored = FlashConfig_Read();
@@ -476,6 +478,7 @@ static void ApplyExpander8State(uint8_t value)  //------------------------------
 
   expander8_state = value;
 }
+
 
 /* Подготовка ответного буфера I2C для выбранного экспандера. */
 static void PrepareExpanderTx(uint8_t address)
