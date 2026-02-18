@@ -62,6 +62,11 @@ extern volatile uint16_t modbus_write_register;
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
+#define BOOTLOADER_START_ADDR (0x08000000U)
+#define BOOTLOADER_END_ADDR   (0x08001FFFU)
+#define APP_START_ADDR        (0x08002000U)
+#define APP_FLASH_CFG_START   (0x0801FC00U)
+#define APP_FLASH_CFG_END     (0x0801FFFFU)
 
 /* USER CODE END EC */
 

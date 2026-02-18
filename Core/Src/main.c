@@ -169,7 +169,6 @@ static volatile uint16_t modbus_rx_frame_len = 0U;
 static volatile uint8_t modbus_rx_ready = 0U;
 static volatile uint8_t modbus_last_error = 0U;
 
-#define FLASH_CFG_START_ADDR    0x0801FC00U
 #define FLASH_CFG_EMPTY_VALUE   0xFFFFU
 
 #pragma location = ".flash_cfg"
@@ -221,6 +220,26 @@ volatile uint8_t kontur2_obryv = 0U;
 volatile uint8_t KTV_poll_start = 0;
 static uint8_t tim2_running = 0U;
 
+/* Копирует таблицу векторов приложения в SRAM и выполняет remap памяти. */
+static void Remap_Table(void)
+{
+  volatile uint32_t *VectorTable = (volatile uint32_t *)0x20000000U;
+  uint32_t ui32_VectorIndex = 0U;
+
+  for (ui32_VectorIndex = 0U; ui32_VectorIndex < 48U; ui32_VectorIndex++)
+  {
+    VectorTable[ui32_VectorIndex] = *(__IO uint32_t *)(APP_START_ADDR + (ui32_VectorIndex << 2));
+  }
+
+  __disable_irq();
+
+  SCB->VTOR = SRAM_BASE;
+
+  __DSB();
+  __ISB();
+  __enable_irq();
+}
+
 /* Управление запуском/остановкой таймера опроса КТВ по флагу KTV_poll_start. */
 static void UpdateKtvTimerState(void)
 {
@@ -239,7 +258,7 @@ static void UpdateKtvTimerState(void)
 /* Чтение сохранённого конфигурационного слова из флеша. */
 static uint16_t FlashConfig_Read(void)
 {
-  return *(const volatile uint16_t *)(FLASH_CFG_START_ADDR);
+  return *(const volatile uint16_t *)(APP_FLASH_CFG_START);
 }
 
 /* Перезапись конфигурационного слова в выделенной странице флеша. */
@@ -264,13 +283,13 @@ static HAL_StatusTypeDef FlashConfig_Write(uint16_t value)
   }
 
   erase.TypeErase = FLASH_TYPEERASE_PAGES;
-  erase.PageAddress = FLASH_CFG_START_ADDR;
+  erase.PageAddress = APP_FLASH_CFG_START;
   erase.NbPages = 1U;
   status = HAL_FLASHEx_Erase(&erase, &page_error);
   if (status == HAL_OK)
   {
     status = HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD,
-                               FLASH_CFG_START_ADDR,
+                               APP_FLASH_CFG_START,
                                value);
   }
 
@@ -1026,6 +1045,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+  Remap_Table();
 
   /* USER CODE END Init */
 
