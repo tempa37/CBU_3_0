@@ -238,8 +238,6 @@ volatile uint8_t kontur2_obryv = 0U;
 volatile uint8_t KTV_poll_start = 0;
 static uint8_t tim2_running = 0U;
 
-#define DEBUG_TX_PATTERN_ENABLE   1
-#define DEBUG_TX_PERIOD_MS        1000U   // период, можно 10..500 мс
 
 /* Управление запуском/остановкой таймера опроса КТВ по флагу KTV_poll_start. */
 static void UpdateKtvTimerState(void)
@@ -263,29 +261,7 @@ static uint16_t FlashConfig_Read(void)
 }
 
 
-static void Debug_TxPattern_Task(void)
-{
-#if DEBUG_TX_PATTERN_ENABLE
-  static uint32_t last_ms = 0U;
-  static const uint8_t pkt[4] = {0x0F, 0x0F, 0x0F, 0x0F};
 
-  uint32_t now = HAL_GetTick();
-  if ((now - last_ms) >= DEBUG_TX_PERIOD_MS)
-  {
-    last_ms = now;
-
-    HAL_UART_StateTypeDef st = HAL_UART_GetState(&huart2);
-    
-    // чтобы не стартовать передачу, пока предыдущая не закончилась
-    if (st == HAL_UART_STATE_READY)
-    {
-      (void)HAL_UART_Transmit_IT(&huart2, (uint8_t*)pkt, sizeof(pkt));
-      // если хотите блокирующе (проще, но может тормозить цикл):
-      // (void)HAL_UART_Transmit(&huart2, (uint8_t*)pkt, sizeof(pkt), 10);
-    }
-  }
-#endif
-}
 
 
 /* Обработка окна выборки оптронов и вычисление состояний контуров. */
@@ -1106,7 +1082,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    Debug_TxPattern_Task();
     
     Optron_ProcessFrame();
     UpdateKtvTimerState();
